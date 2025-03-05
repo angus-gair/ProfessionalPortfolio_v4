@@ -88,7 +88,7 @@ function initializeTableauDashboard(containerId, url) {
         new tableau.Viz(containerElement, url, options);
         
     } catch (error) {
-        console.error('Error creating Tableau visualization:', error);
+        console.error('Error creating Tableau visualisation:', error);
         displayTableauError(containerElement);
     }
 }
@@ -108,15 +108,15 @@ function handleTableauError() {
  * @param {HTMLElement} container - The Tableau container element
  * @param {string} message - Error message to display
  */
-function displayTableauError(container, message = 'Unable to load Tableau visualization. Please check your connection or try again later.') {
+function displayTableauError(container, message = 'Unable to load Tableau visualisation. Please check your connection or try again later.') {
     container.innerHTML = `
         <div class="alert alert-warning" role="alert">
-            <h4 class="alert-heading">Visualization Unavailable</h4>
+            <h4 class="alert-heading">Visualisation Unavailable</h4>
             <p>${message}</p>
             <hr>
             <p class="mb-0">
                 <small>
-                    Note: For this demo, Tableau visualizations are placeholders. 
+                    Note: For this demo, Tableau visualisations are placeholders. 
                     In a production environment, these would connect to actual Tableau dashboards.
                 </small>
             </p>
