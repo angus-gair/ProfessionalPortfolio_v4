@@ -1,0 +1,69 @@
+Project Summary: Angus Gair's Data Analyst Portfolio
+Project Goal
+This project creates a professional, static portfolio website for Angus Gair, a senior data analyst with extensive experience in retail, transportation, and finance sectors. The portfolio is designed to showcase technical skills, project work, professional experience, and certifications in a clean, accessible format that works reliably within Replit's environment.
+
+Technology Stack
+Frontend: Pure HTML5 and CSS3 (no JavaScript frameworks)
+Server: Simple Python HTTP server (serve.py) for local development
+Deployment: Static site hosting via Replit
+Structure: Static file architecture for maximum compatibility and reliability
+File Structure
+├── index.html             # Main portfolio content and structure
+├── serve.py               # Simple Python HTTP server for local testing
+├── .replit.workflow       # Replit workflow configuration
+├── attached_assets/       # Directory containing portfolio resources
+    ├── SQL files          # Example work (BIGW_Rewards SQL queries)
+    ├── Jupyter notebooks  # Data analysis examples
+    └── Other documents    # Resume and supporting materials
+Page Structure
+The portfolio website is organized into the following sections:
+
+Header: Navigation menu and name
+About: Professional summary highlighting experience and expertise
+Projects: Detailed case studies of data analysis work including:
+Christmas Campaign Budget Optimization (XGBoost ML model)
+BigW Rewards Monthly Performance Metrics
+Media Mix Model for BIGW
+Train Punctuality Optimization
+Customer Retention Model
+Skills: Comprehensive breakdown of technical and soft skills:
+Data Analysis & Databases
+Data Visualization
+Machine Learning & Statistics
+Cloud & Tools
+Communication & Leadership
+Problem Solving
+Experience: Professional work history with key achievements:
+WooliesX: Senior Performance & Optimization Analyst
+Sydney Trains: Senior Data Analyst
+Woolworths Group: Senior Tableau Developer
+Equifax: Data Scientist
+Education: Academic credentials
+Certifications: Industry certifications with skills validation
+Contact: Professional contact information
+Current Status
+We have successfully built a complete, static portfolio website with the following achievements:
+
+✅ Comprehensive portfolio structure with all key sections
+✅ Detailed project descriptions based on actual work
+✅ Organized skills section with technical and soft skills
+✅ Professional experience with key achievements
+✅ Education and certification information
+✅ Clean, professional design using CSS
+✅ Mobile-responsive layout
+
+Technical Approach
+The project deliberately uses a minimalist technical approach that maximizes compatibility and reliability:
+
+Static-First Design: Avoiding complex frameworks or build tools to ensure the site works reliably on Replit's platform
+Content Focus: Emphasizing high-quality, detailed content over complex interactions
+Responsive Design: Using CSS media queries to ensure the site works well on all device sizes
+Progressive Enhancement: Starting with a basic, functional experience that works everywhere
+Next Steps
+The website is essentially complete and ready for sharing. Potential future enhancements could include:
+
+Adding a downloadable resume PDF
+Incorporating a blog or articles section for data analysis insights
+Adding a simple contact form
+Including interactive data visualizations as portfolio examples
+The current implementation prioritizes reliability and compatibility while presenting Angus's professional qualifications effectively.
