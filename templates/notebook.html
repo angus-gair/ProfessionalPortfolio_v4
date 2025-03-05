@@ -1,0 +1,347 @@
+{% extends "base.html" %}
+
+{% block title %}{{ notebook_name }} - Jupyter Notebook{% endblock %}
+
+{% block head %}
+{{ super() }}
+<!-- Required libraries for notebook rendering -->
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+<style>
+    .notebook-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: var(--bs-dark);
+        border-radius: 6px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .cell {
+        margin-bottom: 20px;
+        border-left: 3px solid transparent;
+        padding-left: 10px;
+    }
+
+    .cell:hover {
+        border-left-color: var(--bs-info);
+    }
+
+    .cell-markdown {
+        padding: 10px;
+    }
+
+    .cell-code {
+        position: relative;
+    }
+
+    .code-input {
+        margin-bottom: 5px;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .code-input pre {
+        margin: 0;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    .code-output {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 5px;
+        font-family: monospace;
+        white-space: pre-wrap;
+    }
+
+    .execute-count {
+        position: absolute;
+        left: -50px;
+        color: var(--bs-secondary);
+        font-family: monospace;
+    }
+
+    .notebook-header {
+        margin-bottom: 30px;
+    }
+
+    .notebook-metadata {
+        color: var(--bs-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .notebook-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+    }
+
+    /* Output styling */
+    .output-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .output-error {
+        color: #ff6b6b;
+        background-color: rgba(255, 107, 107, 0.1);
+        padding: 10px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+
+    /* KaTeX styling */
+    .katex-display {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    /* Jupyter style for tables */
+    table.dataframe {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    table.dataframe th, table.dataframe td {
+        padding: 8px;
+        border: 1px solid #444;
+    }
+
+    table.dataframe th {
+        background-color: #333;
+    }
+
+    table.dataframe tr:nth-child(even) {
+        background-color: #2c2c2c;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
+            <li class="breadcrumb-item active">{{ notebook_name }}</li>
+        </ol>
+    </nav>
+
+    <div class="notebook-container">
+        <div class="notebook-header">
+            <h1 id="notebook-title">Loading notebook...</h1>
+            <div class="notebook-metadata">
+                <span id="notebook-language"></span>
+                <span id="notebook-kernel"></span>
+            </div>
+        </div>
+
+        <div id="notebook-loading" class="notebook-loading">
+            <div class="spinner-border text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div id="notebook-content" style="display: none;"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadNotebook('{{ notebook_path }}');
+    });
+
+    async function loadNotebook(notebookPath) {
+        try {
+            const response = await fetch(`/api/notebook/${notebookPath}`);
+            if (!response.ok) {
+                throw new Error(`Failed to load notebook: ${response.statusText}`);
+            }
+            
+            const notebook = await response.json();
+            renderNotebook(notebook);
+        } catch (error) {
+            console.error('Error loading notebook:', error);
+            document.getElementById('notebook-loading').innerHTML = `
+                <div class="alert alert-danger">
+                    <h4>Error Loading Notebook</h4>
+                    <p>${error.message}</p>
+                </div>
+            `;
+        }
+    }
+
+    function renderNotebook(notebook) {
+        const contentEl = document.getElementById('notebook-content');
+        const loadingEl = document.getElementById('notebook-loading');
+        
+        // Set notebook title and metadata
+        if (notebook.metadata && notebook.metadata.kernelspec) {
+            document.getElementById('notebook-title').textContent = getNotebookTitle(notebook);
+            document.getElementById('notebook-language').textContent = `Language: ${notebook.metadata.kernelspec.language || 'Unknown'}`;
+            document.getElementById('notebook-kernel').textContent = `Kernel: ${notebook.metadata.kernelspec.display_name || 'Unknown'}`;
+        }
+        
+        // Render each cell
+        notebook.cells.forEach((cell, index) => {
+            const cellElement = document.createElement('div');
+            cellElement.className = `cell cell-${cell.cell_type}`;
+            
+            switch (cell.cell_type) {
+                case 'markdown':
+                    cellElement.innerHTML = renderMarkdownCell(cell);
+                    break;
+                case 'code':
+                    cellElement.innerHTML = renderCodeCell(cell, index + 1);
+                    break;
+                default:
+                    cellElement.innerHTML = `<div class="alert alert-warning">Unsupported cell type: ${cell.cell_type}</div>`;
+            }
+            
+            contentEl.appendChild(cellElement);
+        });
+        
+        // Apply syntax highlighting
+        Prism.highlightAllUnder(contentEl);
+        
+        // Render LaTeX equations
+        renderMathInElement(contentEl, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ],
+            throwOnError: false
+        });
+        
+        // Hide loading spinner and show content
+        loadingEl.style.display = 'none';
+        contentEl.style.display = 'block';
+    }
+
+    function getNotebookTitle(notebook) {
+        // Extract title from first markdown cell if it starts with # (heading)
+        for (const cell of notebook.cells) {
+            if (cell.cell_type === 'markdown') {
+                const source = Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+                const match = source.match(/^#\s+(.+)$/m);
+                if (match) {
+                    return match[1];
+                }
+            }
+        }
+        
+        // Fallback to notebook file name
+        return '{{ notebook_name }}';
+    }
+
+    function renderMarkdownCell(cell) {
+        const source = Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+        return `<div class="cell-markdown">${marked.parse(source)}</div>`;
+    }
+
+    function renderCodeCell(cell, index) {
+        const source = Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+        const executionCount = cell.execution_count !== null ? cell.execution_count : '';
+        
+        let html = `
+            <div class="cell-code">
+                <span class="execute-count">In [${executionCount}]:</span>
+                <div class="code-input">
+                    <pre><code class="language-python">${source}</code></pre>
+                </div>
+        `;
+        
+        // Add outputs if they exist
+        if (cell.outputs && cell.outputs.length > 0) {
+            html += '<div class="code-output">';
+            cell.outputs.forEach(output => {
+                html += renderCellOutput(output);
+            });
+            html += '</div>';
+        }
+        
+        html += '</div>';
+        return html;
+    }
+
+    function renderCellOutput(output) {
+        switch (output.output_type) {
+            case 'execute_result':
+                return renderExecuteResult(output);
+            case 'display_data':
+                return renderDisplayData(output);
+            case 'stream':
+                return renderStream(output);
+            case 'error':
+                return renderError(output);
+            default:
+                return `<div>Unsupported output type: ${output.output_type}</div>`;
+        }
+    }
+
+    function renderExecuteResult(output) {
+        const executionCount = output.execution_count !== null ? output.execution_count : '';
+        let html = `<span class="execute-count">Out[${executionCount}]:</span>`;
+        
+        if (output.data) {
+            html += renderOutputData(output.data);
+        }
+        
+        return html;
+    }
+
+    function renderDisplayData(output) {
+        return renderOutputData(output.data);
+    }
+
+    function renderStream(output) {
+        const text = Array.isArray(output.text) ? output.text.join('') : output.text;
+        return `<pre>${text}</pre>`;
+    }
+
+    function renderError(output) {
+        const traceback = Array.isArray(output.traceback) ? output.traceback.join('\n') : output.traceback;
+        return `<div class="output-error"><pre>${traceback}</pre></div>`;
+    }
+
+    function renderOutputData(data) {
+        // Handle different mime types
+        if (data['text/html']) {
+            return Array.isArray(data['text/html']) ? data['text/html'].join('') : data['text/html'];
+        }
+        
+        if (data['image/png']) {
+            const imageData = Array.isArray(data['image/png']) ? data['image/png'].join('') : data['image/png'];
+            return `<img src="data:image/png;base64,${imageData}" class="output-image">`;
+        }
+        
+        if (data['text/latex']) {
+            const latex = Array.isArray(data['text/latex']) ? data['text/latex'].join('') : data['text/latex'];
+            return `<div class="latex-output">$$${latex}$$</div>`;
+        }
+        
+        if (data['text/plain']) {
+            const text = Array.isArray(data['text/plain']) ? data['text/plain'].join('') : data['text/plain'];
+            return `<pre>${text}</pre>`;
+        }
+        
+        return '<div>Unsupported output format</div>';
+    }
+</script>
+{% endblock %}

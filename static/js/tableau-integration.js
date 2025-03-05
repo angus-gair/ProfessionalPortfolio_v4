@@ -4,34 +4,31 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Look for tableau dashboard containers
-    const tableauContainers = document.querySelectorAll('.tableau-container');
-    
-    if (tableauContainers.length === 0) return;
-    
-    // Check if the Tableau JavaScript API is loaded
-    if (typeof tableau === 'undefined') {
-        // Load the Tableau JavaScript API if not already loaded
-        loadTableauAPI();
-    } else {
-        // Initialize dashboards if API is already loaded
-        initializeTableauDashboards();
-    }
+    loadTableauAPI();
 });
 
 /**
  * Loads the Tableau JavaScript API
  */
 function loadTableauAPI() {
+    // Check if Tableau is already loaded
+    if (window.tableau && window.tableau.Viz) {
+        initializeTableauDashboards();
+        return;
+    }
+
+    // Create script element to load Tableau JavaScript API
     const script = document.createElement('script');
     script.src = 'https://public.tableau.com/javascripts/api/tableau-2.min.js';
     script.onload = function() {
+        console.log('Tableau API loaded successfully');
         initializeTableauDashboards();
     };
     script.onerror = function() {
-        console.error('Failed to load Tableau JavaScript API');
+        console.error('Error loading Tableau API');
         handleTableauError();
     };
+    
     document.head.appendChild(script);
 }
 
@@ -39,23 +36,20 @@ function loadTableauAPI() {
  * Initializes all Tableau dashboards on the page
  */
 function initializeTableauDashboards() {
+    // Find all dashboard containers
     const tableauContainers = document.querySelectorAll('.tableau-container');
     
+    if (tableauContainers.length === 0) {
+        console.log('No Tableau containers found on page');
+        return;
+    }
+    
+    // Initialize each dashboard
     tableauContainers.forEach(container => {
-        const url = container.dataset.tableauUrl;
-        const dashboardId = container.id;
-        
-        if (!url) {
-            console.error('Tableau URL not provided for container:', dashboardId);
-            return;
-        }
-        
-        try {
-            // Initialize the dashboard
-            initializeTableauDashboard(dashboardId, url);
-        } catch (error) {
-            console.error('Error initializing Tableau dashboard:', error);
-            displayTableauError(container, error.message);
+        const url = container.getAttribute('data-tableau-url');
+        if (url) {
+            const containerId = container.id;
+            initializeTableauDashboard(containerId, url);
         }
     });
 }
@@ -66,33 +60,36 @@ function initializeTableauDashboards() {
  * @param {string} url - URL of the Tableau dashboard
  */
 function initializeTableauDashboard(containerId, url) {
-    const containerDiv = document.getElementById(containerId);
-    
-    if (!containerDiv) {
-        console.error('Container not found:', containerId);
+    const containerElement = document.getElementById(containerId);
+    if (!containerElement) {
+        console.error(`Container element with ID "${containerId}" not found`);
         return;
     }
     
-    // Clear the container
-    containerDiv.innerHTML = '';
-    
-    // Define dashboard options
-    const options = {
-        hideTabs: true,
-        hideToolbar: false,
-        width: '100%',
-        height: '100%',
-        onFirstInteractive: function() {
-            console.log('Dashboard loaded successfully:', containerId);
-        }
-    };
-    
     try {
-        // Create a new Tableau Viz object
-        new tableau.Viz(containerDiv, url, options);
+        // Clear container
+        containerElement.innerHTML = '';
+        
+        // Set container height
+        containerElement.style.height = '500px';
+        
+        // Create viz options
+        const options = {
+            hideTabs: true,
+            hideToolbar: true,
+            width: '100%',
+            height: '100%',
+            onFirstInteractive: function() {
+                console.log(`Tableau dashboard in container ${containerId} loaded successfully`);
+            }
+        };
+        
+        // Create the viz
+        new tableau.Viz(containerElement, url, options);
+        
     } catch (error) {
         console.error('Error creating Tableau visualization:', error);
-        displayTableauError(containerDiv, error.message);
+        displayTableauError(containerElement);
     }
 }
 
@@ -101,9 +98,8 @@ function initializeTableauDashboard(containerId, url) {
  */
 function handleTableauError() {
     const tableauContainers = document.querySelectorAll('.tableau-container');
-    
     tableauContainers.forEach(container => {
-        displayTableauError(container, 'Failed to load Tableau JavaScript API');
+        displayTableauError(container);
     });
 }
 
@@ -112,13 +108,18 @@ function handleTableauError() {
  * @param {HTMLElement} container - The Tableau container element
  * @param {string} message - Error message to display
  */
-function displayTableauError(container, message) {
+function displayTableauError(container, message = 'Unable to load Tableau visualization. Please check your connection or try again later.') {
     container.innerHTML = `
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Dashboard Error</h4>
-            <p>There was an error loading the Tableau dashboard.</p>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Visualization Unavailable</h4>
+            <p>${message}</p>
             <hr>
-            <p class="mb-0">Error details: ${message}</p>
+            <p class="mb-0">
+                <small>
+                    Note: For this demo, Tableau visualizations are placeholders. 
+                    In a production environment, these would connect to actual Tableau dashboards.
+                </small>
+            </p>
         </div>
     `;
 }
