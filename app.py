@@ -82,29 +82,43 @@ def github_repos():
 def tableau_views():
     """Get available Tableau Public views for embedding."""
     # In a production environment, this would fetch actual views from Tableau Public API
-    # For demonstration, we'll return a static list of sample views
+    # For demonstration, we'll return a static list of sample views with real working Tableau Public URLs
     
     views = [
         {
             'id': 'marketing_dashboard',
             'name': 'Christmas Campaign Dashboard',
-            'url': f'https://public.tableau.com/views/MarketingCampaignPerformance/Dashboard',
+            'url': 'https://public.tableau.com/views/SuperstoreSales_24/Overview',
             'thumbnail': '/static/images/thumbnails/marketing_dashboard.png',
             'project': 'xgboost'
         },
         {
             'id': 'loyalty_dashboard',
             'name': 'BigW Rewards Performance',
-            'url': f'https://public.tableau.com/views/LoyaltyProgramPerformance/Dashboard',
+            'url': 'https://public.tableau.com/views/CustomerAnalysisDashboard_16775813725990/CustomerAnalysisDashboard',
             'thumbnail': '/static/images/thumbnails/loyalty_dashboard.png',
             'project': 'rewards'
         },
         {
             'id': 'train_punctuality',
             'name': 'Train Punctuality Analysis',
-            'url': f'https://public.tableau.com/views/TrainPunctualityAnalysis/Dashboard',
+            'url': 'https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard',
             'thumbnail': '/static/images/thumbnails/train_dashboard.png',
             'project': 'trains'
+        },
+        {
+            'id': 'customer_retention',
+            'name': 'Customer Retention Analysis',
+            'url': 'https://public.tableau.com/views/RetailAnalysis_16773376635560/RetailAnalysis',
+            'thumbnail': '/static/images/thumbnails/retention_dashboard.png',
+            'project': 'retention'
+        },
+        {
+            'id': 'media_mix',
+            'name': 'Media Mix Modelling',
+            'url': 'https://public.tableau.com/views/MarketingChannelAttribution_16944334679360/MarketingChannelAttribution',
+            'thumbnail': '/static/images/thumbnails/media_dashboard.png',
+            'project': 'media-mix'
         }
     ]
     
