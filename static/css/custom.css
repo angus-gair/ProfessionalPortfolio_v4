@@ -1,0 +1,152 @@
+/* Custom styles to supplement Bootstrap */
+
+/* General styling */
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+}
+
+/* Header styling */
+.site-header {
+    padding: 2rem 0;
+}
+
+/* Hero section styling */
+.hero-section {
+    padding: 4rem 0;
+    background: var(--bs-dark);
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.hero-image {
+    border-radius: 50%;
+    max-width: 300px;
+}
+
+/* Section headers */
+.section-header {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    width: 80px;
+    height: 3px;
+    background: var(--bs-primary);
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+}
+
+/* Project cards */
+.project-card {
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Skills */
+.skill-badge {
+    margin: 0.25rem;
+    font-size: 0.9rem;
+}
+
+/* Timeline styling for experience */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: var(--bs-primary);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--bs-primary);
+}
+
+/* GitHub repository cards */
+.repo-card {
+    transition: transform 0.3s ease;
+}
+
+.repo-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Tableau dashboard container */
+.tableau-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.tableau-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Footer styling */
+.footer {
+    padding: 3rem 0;
+    margin-top: 4rem;
+}
+
+/* Social media icons */
+.social-icon {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--bs-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-header {
+        margin-bottom: 2rem;
+    }
+}

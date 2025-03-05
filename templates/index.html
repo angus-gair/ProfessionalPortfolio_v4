@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section bg-dark text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Angus Gair</h1>
+                    <h2 class="mb-4">Senior Data Analyst</h2>
+                    <p class="lead mb-4">
+                        Transforming complex data into actionable insights with over 10 years of experience
+                        in retail, transportation, and finance sectors.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="{{ url_for('projects') }}" class="btn btn-primary">View Projects</a>
+                        <a href="{{ url_for('contact') }}" class="btn btn-outline-light">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                    <!-- A placeholder for profile image using an SVG avatar -->
+                    <svg class="hero-image bg-light p-3" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="70" r="40" fill="#6c757d" />
+                        <rect x="60" y="120" width="80" height="80" rx="10" fill="#6c757d" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="section-header">About Me</h2>
+                    <p class="lead">
+                        I am a Senior Data Analyst with expertise in translating business questions into data-driven solutions. 
+                        My analytical approach combines technical skills with business acumen to deliver impactful insights.
+                    </p>
+                    <p>
+                        With extensive experience across retail, transportation, and finance sectors, I specialize in:
+                    </p>
+                    <ul>
+                        <li>Building predictive models for customer behavior and operational optimization</li>
+                        <li>Developing comprehensive dashboards and visualization solutions</li>
+                        <li>Leading data-driven initiatives that deliver tangible business value</li>
+                        <li>Transforming complex datasets into actionable insights for stakeholders</li>
+                    </ul>
+                    <p>
+                        My approach combines technical excellence with strong communication skills, ensuring
+                        that insights are not only accurate but also accessible and actionable for business stakeholders.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-header text-center mb-5">Featured Projects</h2>
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Christmas Campaign Budget Optimization</h5>
+                            <p class="card-text">Developed an XGBoost machine learning model to optimize marketing budget allocation across channels, resulting in 15% increased ROI.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{ url_for('projects') }}#xgboost" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </div>
+                                <small class="text-muted">Retail Analytics</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">BigW Rewards Monthly Performance</h5>
+                            <p class="card-text">Created an automated dashboard system to track customer loyalty metrics, providing insights that increased program engagement by 22%.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{ url_for('projects') }}#rewards" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </div>
+                                <small class="text-muted">Customer Analytics</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Train Punctuality Optimization</h5>
+                            <p class="card-text">Developed a predictive model for identifying factors affecting train punctuality, contributing to a 7% improvement in on-time performance.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{ url_for('projects') }}#trains" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </div>
+                                <small class="text-muted">Transportation Analytics</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{{ url_for('projects') }}" class="btn btn-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Highlight Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-header text-center mb-5">Core Competencies</h2>
+            <div class="row">
+                <!-- Technical Skills -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-4">Technical Skills</h3>
+                            <div class="d-flex flex-wrap justify-content-center">
+                                <span class="badge bg-primary skill-badge">Python</span>
+                                <span class="badge bg-primary skill-badge">SQL</span>
+                                <span class="badge bg-primary skill-badge">Tableau</span>
+                                <span class="badge bg-primary skill-badge">R</span>
+                                <span class="badge bg-primary skill-badge">Machine Learning</span>
+                                <span class="badge bg-primary skill-badge">Statistical Analysis</span>
+                                <span class="badge bg-primary skill-badge">Data Visualization</span>
+                                <span class="badge bg-primary skill-badge">ETL Processes</span>
+                                <span class="badge bg-primary skill-badge">Big Data</span>
+                                <span class="badge bg-primary skill-badge">Predictive Modeling</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Domain Expertise -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-4">Domain Expertise</h3>
+                            <div class="d-flex flex-wrap justify-content-center">
+                                <span class="badge bg-success skill-badge">Retail Analytics</span>
+                                <span class="badge bg-success skill-badge">Transportation Optimization</span>
+                                <span class="badge bg-success skill-badge">Financial Analysis</span>
+                                <span class="badge bg-success skill-badge">Customer Segmentation</span>
+                                <span class="badge bg-success skill-badge">Campaign Measurement</span>
+                                <span class="badge bg-success skill-badge">Operational Efficiency</span>
+                                <span class="badge bg-success skill-badge">Performance Metrics</span>
+                                <span class="badge bg-success skill-badge">Business Intelligence</span>
+                                <span class="badge bg-success skill-badge">Market Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{{ url_for('skills') }}" class="btn btn-primary">View All Skills</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Highlight Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-header text-center mb-5">Professional Experience</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="timeline">
+                        <!-- WooliesX -->
+                        <div class="timeline-item">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title">Senior Performance & Optimization Analyst</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">WooliesX</h5>
+                                    <p class="card-text">Led data analysis initiatives to optimize marketing campaigns and improve customer engagement metrics across digital channels.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sydney Trains -->
+                        <div class="timeline-item">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title">Senior Data Analyst</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Sydney Trains</h5>
+                                    <p class="card-text">Developed analytical models to improve operational efficiency and service reliability across the rail network.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Woolworths Group -->
+                        <div class="timeline-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Senior Tableau Developer</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Woolworths Group</h5>
+                                    <p class="card-text">Created enterprise-level dashboards and visualizations to support decision-making across multiple business units.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('experience') }}" class="btn btn-primary">View Full Experience</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">Interested in working together?</h2>
+                    <p class="lead mb-4">Whether you need data analysis expertise, dashboard development, or predictive modeling, I'm here to help.</p>
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

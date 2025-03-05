@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - Angus Gair{% endblock %}
+
+{% block content %}
+    <!-- Header Section -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Contact Me</h1>
+            <p class="lead">Let's connect and discuss how I can help with your data analytics needs.</p>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h2 class="section-header mb-4">Get in Touch</h2>
+                    <p class="lead mb-4">
+                        I'm always interested in new opportunities, collaborations, and data challenges. 
+                        Feel free to reach out through any of the following channels:
+                    </p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Contact Information</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="bi bi-envelope me-2"></i>
+                                    <a href="mailto:contact@angusgair.com">contact@angusgair.com</a>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-telephone me-2"></i>
+                                    <a href="tel:+61400000000">+61 400 000 000</a>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-geo-alt me-2"></i>
+                                    Sydney, Australia
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mb-3">Connect on Social Media</h4>
+                    <div class="d-flex mb-4">
+                        <a href="https://linkedin.com/" target="_blank" class="btn btn-outline-primary me-2">
+                            <i class="bi bi-linkedin me-2"></i>LinkedIn
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="btn btn-outline-dark me-2">
+                            <i class="bi bi-github me-2"></i>GitHub
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="btn btn-outline-info">
+                            <i class="bi bi-twitter-x me-2"></i>Twitter
+                        </a>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Availability</h5>
+                            <p class="card-text">
+                                I'm currently available for:
+                            </p>
+                            <ul>
+                                <li>Consulting projects</li>
+                                <li>Data analysis and visualization work</li>
+                                <li>Dashboard development</li>
+                                <li>Speaking engagements</li>
+                                <li>Workshop facilitation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Send Me a Message</h3>
+                            <form id="contact-form">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Your name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Your email address" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Message subject">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="6" placeholder="Your message" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h4 class="card-title mb-3">Frequently Asked Questions</h4>
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            What types of data analysis projects do you work on?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" 
+                                         data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            I specialize in projects involving predictive modeling, customer analytics, marketing 
+                                            optimization, operational efficiency, and data visualization. My experience spans 
+                                            retail, transportation, and financial services industries.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Do you offer remote consulting services?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" 
+                                         data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Yes, I work with clients globally and provide remote consulting services. I use 
+                                            collaborative tools to ensure seamless communication and project delivery regardless 
+                                            of location.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            What is your typical project process?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" 
+                                         data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            My process typically includes: initial consultation to understand requirements, data 
+                                            discovery and assessment, analysis plan development, execution of analysis, results 
+                                            presentation, and follow-up support. I prioritize clear communication throughout the 
+                                            project lifecycle.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Form submission handler
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // In a real implementation, this would send the form data to a server
+        // For now, we'll just show an alert
+        alert(`Thank you for your message, ${name}! This is a placeholder for form submission functionality.`);
+        
+        // Reset the form
+        this.reset();
+    });
+</script>
+{% endblock %}
