@@ -4,43 +4,34 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    const repoContainer = document.getElementById('github-repos');
+    // Get the GitHub repositories container
+    const reposContainer = document.getElementById('github-repos');
     
-    if (!repoContainer) return;
-    
-    // Show loading indicator
-    repoContainer.innerHTML = `
-        <div class="text-center py-5">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p class="mt-3">Loading GitHub repositories...</p>
-        </div>
-    `;
-    
-    // Fetch repositories from our API endpoint
+    if (reposContainer) {
+        fetchGitHubRepositories(reposContainer);
+    }
+});
+
+/**
+ * Fetch repositories from GitHub API via our backend endpoint
+ * @param {HTMLElement} container - Container element to display repositories
+ */
+function fetchGitHubRepositories(container) {
     fetch('/api/github/repos')
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
             return response.json();
         })
         .then(repos => {
-            displayRepositories(repos, repoContainer);
+            displayRepositories(repos, container);
         })
         .catch(error => {
             console.error('Error fetching GitHub repositories:', error);
-            repoContainer.innerHTML = `
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Failed to load repositories</h4>
-                    <p>There was an error fetching GitHub repositories. Please try again later.</p>
-                    <hr>
-                    <p class="mb-0">Error details: ${error.message}</p>
-                </div>
-            `;
+            displayError(container, error.message);
         });
-});
+}
 
 /**
  * Displays GitHub repositories in the container
@@ -48,91 +39,86 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param {HTMLElement} container - Container element to display repositories
  */
 function displayRepositories(repos, container) {
+    // Clear loading indicator
+    container.innerHTML = '';
+    
     if (!repos || repos.length === 0) {
         container.innerHTML = `
-            <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">No repositories found</h4>
-                <p>No public repositories were found for this account.</p>
+            <div class="alert alert-info">
+                <p>No public repositories found.</p>
             </div>
         `;
         return;
     }
     
-    // Sort repos by last updated date
+    // Create repositories grid
+    const reposGrid = document.createElement('div');
+    reposGrid.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4';
+    
+    // Sort repositories by most recently updated
     repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
     
-    // Create HTML for repos
-    const reposHTML = repos.map(repo => {
-        // Format the date
-        const updatedDate = new Date(repo.updated_at);
-        const formattedDate = updatedDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
-        
-        // Determine the language badge color
-        let languageClass = 'bg-secondary';
-        if (repo.language) {
-            switch(repo.language.toLowerCase()) {
-                case 'python':
-                    languageClass = 'bg-primary';
-                    break;
-                case 'javascript':
-                    languageClass = 'bg-warning text-dark';
-                    break;
-                case 'html':
-                    languageClass = 'bg-danger';
-                    break;
-                case 'css':
-                    languageClass = 'bg-info text-dark';
-                    break;
-                case 'r':
-                    languageClass = 'bg-success';
-                    break;
-                case 'sql':
-                    languageClass = 'bg-info';
-                    break;
-            }
-        }
-        
-        return `
-            <div class="col-lg-6 mb-4">
-                <div class="card repo-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="${repo.html_url}" target="_blank" class="text-decoration-none">
-                                ${repo.name}
-                            </a>
-                        </h5>
-                        <p class="card-text text-muted">
-                            ${repo.description || 'No description provided'}
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                ${repo.language ? 
-                                    `<span class="badge ${languageClass}">${repo.language}</span>` : 
-                                    '<span class="badge bg-secondary">No language specified</span>'}
-                            </div>
-                            <div>
-                                <small class="text-muted">
-                                    <i class="bi bi-star me-1"></i>${repo.stargazers_count} 
-                                    <i class="bi bi-diagram-2 ms-2 me-1"></i>${repo.forks_count}
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <small>Updated: ${formattedDate}</small>
-                    </div>
+    // Create cards for each repository
+    repos.forEach(repo => {
+        const repoCard = createRepositoryCard(repo);
+        reposGrid.appendChild(repoCard);
+    });
+    
+    container.appendChild(reposGrid);
+}
+
+/**
+ * Creates a card element for a repository
+ * @param {Object} repo - Repository object
+ * @returns {HTMLElement} - Card element
+ */
+function createRepositoryCard(repo) {
+    // Create card column
+    const col = document.createElement('div');
+    col.className = 'col';
+    
+    // Get language badge
+    const languageBadge = repo.language 
+        ? `<span class="badge bg-primary">${repo.language}</span>` 
+        : '';
+    
+    // Format the updated date
+    const updatedDate = new Date(repo.updated_at).toLocaleDateString();
+    
+    // HTML for repository card
+    col.innerHTML = `
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">${repo.name}</h5>
+                <p class="card-text text-muted small mb-2">Last updated: ${updatedDate}</p>
+                <p class="card-text">${repo.description || 'No description available.'}</p>
+                <div class="mb-3">
+                    ${languageBadge}
+                    <span class="badge bg-secondary"><i class="bi bi-star-fill me-1"></i>${repo.stargazers_count}</span>
+                    <span class="badge bg-secondary"><i class="bi bi-diagram-2-fill me-1"></i>${repo.forks_count}</span>
                 </div>
             </div>
-        `;
-    }).join('');
+            <div class="card-footer bg-transparent border-top-0">
+                <a href="${repo.html_url}" target="_blank" class="btn btn-sm btn-outline-primary">View on GitHub</a>
+            </div>
+        </div>
+    `;
     
+    return col;
+}
+
+/**
+ * Displays an error message in the container
+ * @param {HTMLElement} container - Container element
+ * @param {string} message - Error message to display
+ */
+function displayError(container, message) {
     container.innerHTML = `
-        <div class="row">
-            ${reposHTML}
+        <div class="alert alert-warning">
+            <h4 class="alert-heading">Unable to load GitHub repositories</h4>
+            <p>${message}</p>
+            <hr>
+            <p class="mb-0">Please check your internet connection or try again later.</p>
         </div>
     `;
 }
