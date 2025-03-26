@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'gtm.start': new Date().getTime(),
     'event': 'gtm.js',
     'google_analytics': {
-      'measurement_id': 'G-XXXXXXXXXX', // Replace with your actual GA4 measurement ID when available
+      'measurement_id': 'G-3P8MK7MHQF', // GA4 measurement ID for analytics tracking
       'config': {
         'cookie_domain': 'auto',
         'send_page_view': false, // We'll handle this manually for better control
