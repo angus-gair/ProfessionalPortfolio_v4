@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gair-com-au",
+  "private_key_id": "153c7f6062f4b6cdec5b233b97f0b5a4dcc33e7b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCXo2LfkYt2eZ4y\nUfM2A3ZC9a3IJBciHPAXEqsoOESTVXL4Y9VaW5qHYf/ev0bggdwsNqMaftJ+BusZ\nQFuZ3iIXkJUbGDT52dBq2YWgMp/dO8mqC10ImocbDF2ICIkxSy21gU0navTcBwH1\nwRetctEt6JDd+aKMuH4kq1e7CJelBomdCZbj60fS5bQvFHShhAC9iccBj+utXr7D\nCgHLPb35g2fuCVSZs99zJAMV1YF/b5zR5q0glQmGGAz1JblEpYcSieuYVWN1wiNJ\nLD8K44x/Fp0Gj1A04BIEpSzACYb+toLwqAir7avmz7dSnkIcMWOHmsdVJByWtOFu\n1u+8keT5AgMBAAECggEAMaCK5OFk077ky9IvN0+1vh9aoyRQn9z5pIt7EZwssU1n\nZayCsGJHdiRYEcXnA+XsMVomUi8MY6uO+MIr2HUvEihC7E2lVNn40GdlSLMYx9Zf\n3zN93Kl6KxuGZtVoVQYmLP9myU5DWdk/RndN8PmhRRWWh9dB4C0nN4gOG8upmZvD\nlkYGM/ZnGG0NSC+ziQd+Tv/leA/tiXkyL8/yAW+a3UuyVrT3bCmqS9jK4MJYG7hl\nwLGyT/g7OggW8pAiETDRzwqAX62ddd1lefI1P2Mg8y+VsOyLAadEdD/LNcQB10e4\n9wAtI7pN87lzBd0fYkVyrYj8FIcKky9TbvdfNZ9EUwKBgQDL8ZVEKWmbAU5FuXGo\nwH164XXgknHhGIl5uFSZk9SmVYsk1oPyP4J5ws0OP5GLjV0Q9NaO6xJgyw4KTWz8\nXca9BXEyL4KTBU8xsYppgDAR7R08znCYwGx4k6HyCQ2i3UJII68o8QeUXt1Tl9X/\nkSFqDeVIqnh1s0J5uUOmfMfJOwKBgQC+V/nH7hQwfnJVUHyWh7261G45EIFeMPKQ\nSh1fv+R0bD3sIu8K0LlZi1OQYvooopr55XvukPRHAtDZ58LN0pZN+H35hOuB2xCu\nGsKTulr16iE67Sr1FnrFeLhUBHkYDYz7K2SLAzeRYwmKp1r7HDBfzJsCJhOs1GW3\nWIo4DlpHWwKBgQCHWfsttKpg9FnlTnEPhUkCD7Yy6B5qPOWogdyr3H/qMKXbOf9x\n/BJ1CwMabLgEvTpB8aygR4T39muIDODDEN3AP2dj3kIznvdzTJhG8ot0qkCYRY5W\n4oZa8+gsATQqndvKktxCOM1F/Du5qfCd380kXLqKIpE11FXPAVTTnsbdVwKBgAt3\naUiuAvFY7LJPAvJegwN6QJmXcPOnpzUiAdr+yFhrHN/YyuWv5TqLtiEAlWlVQljD\nhk+807pjZQl7eLTFduCDk7MwWq+b7slOO2KC22/tBstx9iCFlifHOfN1wYW9azzG\nRGxLaVGM0cpUgpqV/CQJQ11BxfWnZelBoDH4S1/5AoGBAIHRWBeb7ZR1M0grFGJ+\nqXP33BdGUd3hnyWW1ZZIP8/+074vjrNC1ledVUWcu/o4TNkgyvDW4jrvcDGEITVa\nGqs9XFdD7vwSH5TyxcwwR5tqT5tlQMggqeDReoBqbZKay6T+JjMTjxX/mvp3WBW9\nrSBg9376LPvMFk9Fy2U5Kp96\n-----END PRIVATE KEY-----\n",
+  "client_email": "replit@gair-com-au.iam.gserviceaccount.com",
+  "client_id": "106594471228121047599",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/replit%40gair-com-au.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
