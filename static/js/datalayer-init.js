@@ -261,4 +261,21 @@ window.addEventListener('error', function(event) {
   });
 });
 
+// Output debug information to console
+console.group('%c🔍 GTM DataLayer Initialization', 'color: #4285f4; font-weight: bold; font-size: 14px;');
+console.log('%cPage Category:', 'font-weight: bold;', pageCategory);
+console.log('%cBrowser:', 'font-weight: bold;', browserInfo.browser, browserInfo.browserVersion);
+console.log('%cDevice:', 'font-weight: bold;', deviceInfo.deviceType, `${deviceInfo.screenWidth}x${deviceInfo.screenHeight}`);
+console.log('%cReferrer:', 'font-weight: bold;', referrerInfo.referrer, referrerInfo.referrerDomain || '');
+console.log('%cSession:', 'font-weight: bold;', `#${sessionInfo.sessionCount}`, sessionInfo.isNewSession ? '(New)' : '(Returning)');
+console.log('%cDataLayer Object:', 'font-weight: bold;', window.dataLayer);
+console.groupEnd();
+
+// For non-dev environments, this could be set to only show when a debug parameter is present
+// e.g., ?gtm_debug=true
+if (window.location.search.includes('gtm_debug=true')) {
+  window.gtmDebug = true;
+  console.log('%c🔄 GTM Debug Mode Enabled', 'color: #4285f4; font-weight: bold;');
+}
+
 console.log('DataLayer initialized for GTM with comprehensive tracking data');
