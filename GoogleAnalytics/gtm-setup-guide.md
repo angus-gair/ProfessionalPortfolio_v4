@@ -1,206 +1,236 @@
 # Google Tag Manager Setup Guide
 
-This document provides instructions for setting up Google Tag Manager (GTM) for tracking user behavior on your portfolio website.
+## Overview
 
-## Container Details
-- **GTM Container ID**: GTM-PC9Q9VC3
-- **GA4 Measurement ID**: G-3P8MK7MHQF
+This document provides detailed setup instructions for configuring Google Tag Manager (GTM) to properly track user interactions on your portfolio website. Since automatic configuration via the GTM API requires additional permissions, these instructions will walk through manual setup steps.
 
-## Implementation Overview
+## Prerequisites
 
-GTM has been implemented on the website with the following components:
+1. Access to Google Tag Manager account with container ID: **GTM-PC9Q9VC3**
+2. Access to Google Analytics 4 property with Measurement ID: **G-3P8MK7MHQF**
 
-1. **GTM Container Code**: Installed in the `<head>` section of the base template
-2. **GTM No-Script Fallback**: Installed immediately after the opening `<body>` tag
-3. **DataLayer Initialization**: Custom JavaScript that populates the dataLayer with user and page information
-4. **Custom Event Tracking**: JavaScript that pushes events to the dataLayer when users interact with the site
+## GTM Installation Status
 
-## Required Tag Manager Configuration
+The website already has GTM correctly installed with:
 
-Log in to [Google Tag Manager](https://tagmanager.google.com/) and complete the following configuration:
+1. Container snippet in the `<head>` of the HTML
+2. No-script fallback in the `<body>` of the HTML
 
-### 1. Variables Setup
+## Setup Instructions
 
-#### Built-in Variables
-Enable the following built-in variables:
+### 1. Verify GTM Installation
 
-- **Page Variables**:
-  - Page URL
-  - Page Hostname
-  - Page Path
-  - Referrer
+First, let's verify the current installation:
 
-- **Utility Variables**:
-  - Event
-  - Container ID
-  - Container Version
-  - Environment Name
-  - Debug Mode
+1. Visit the website and open your browser developer tools (F12)
+2. Go to the Network tab and filter for "gtm"
+3. Reload the page
+4. You should see a request to `gtm.js` with your container ID
 
-- **Click Variables**:
-  - Click Element
-  - Click Classes
-  - Click ID
-  - Click Target
-  - Click URL
-  - Click Text
+### 2. Configure Basic Settings
 
-- **Form Variables**:
-  - Form Element
-  - Form Classes
-  - Form ID
-  - Form Target
-  - Form URL
-  - Form Text
+#### Create a GA4 Configuration Tag
 
-#### Custom Variables
+1. Go to [Google Tag Manager](https://tagmanager.google.com/)
+2. Select your container (GTM-PC9Q9VC3)
+3. Click **Tags** in the left sidebar
+4. Click **New** to create a new tag
+5. Name it "**GA4 Configuration**"
+6. Click the tag type and select **Google Analytics: GA4 Configuration**
+7. Enter your Measurement ID: **G-3P8MK7MHQF**
+8. Under **Advanced Settings** > **Tag Firing Options**, select **Once per page**
+9. In the Triggering section, add the **All Pages** trigger
+10. Save the tag
 
-Create the following **Data Layer Variables**:
+### 3. Enable Built-in Variables
 
-| Name                  | Data Layer Variable Name | Description                       |
-|-----------------------|--------------------------|-----------------------------------|
-| dlv_project_name      | project_name             | Project being clicked/viewed      |
-| dlv_page_category     | pageCategory             | Category of current page          |
-| dlv_link_url          | link_url                 | URL of clicked external link      |
-| dlv_link_text         | link_text                | Text of clicked link              |
-| dlv_form_name         | form_name                | Name of submitted form            |
-| dlv_event_category    | event_category           | Category for custom events        |
-| dlv_event_label       | event_label              | Label for custom events           |
-| dlv_device_type       | deviceType               | User's device type                |
-| dlv_browser           | browser                  | User's browser                    |
-| dlv_screen_resolution | screenWidth + "x" + screenHeight | Screen resolution        |
+1. Click **Variables** in the left sidebar
+2. Under **Built-in Variables**, click **Configure**
+3. Enable the following variable groups:
+   - Page Variables
+   - Clicks Variables
+   - Form Variables
+   - Utility Variables
+4. Click **Save**
 
-### 2. Triggers Setup
+### 4. Create Custom Variables
 
-Create the following **custom event triggers**:
+Create the following DataLayer variables:
 
-| Trigger Name                | Event Name          | Description                      |
-|-----------------------------|---------------------|----------------------------------|
-| CE - Page View              | page_view           | When a page view occurs          |
-| CE - Project Click          | project_click       | When a project card is clicked   |
-| CE - External Link Click    | external_link_click | When an external link is clicked |
-| CE - Form Submission        | form_submission     | When a form is submitted         |
-| CE - Tableau View Loaded    | tableau_view_loaded | When a Tableau view loads        |
-| CE - GitHub Repo View       | github_repo_view    | When a GitHub repo card is viewed |
-| CE - Tableau Interaction    | tableau_interaction | Interactions with Tableau views  |
-| CE - GitHub Repo Click      | github_repo_click   | When a GitHub repo link is clicked |
-| CE - Skill Badge Click      | skill_badge_click   | When a skill badge is clicked    |
-| CE - Resume Download        | resume_download     | When the resume is downloaded    |
-| CE - Scroll Depth           | scroll_depth        | When user scrolls to key depths  |
-| CE - Time On Page           | time_on_page        | Time spent on page metrics       |
-| CE - Debug Event            | debug_test_event    | For testing GTM configuration    |
+| Variable Name | Data Layer Variable Name | Description |
+|---------------|--------------------------|-------------|
+| dlv_project_name | project_name | Captures clicked project name |
+| dlv_page_category | pageCategory | Captures page category from meta tag |
+| dlv_link_url | link_url | Captures clicked external link URL |
+| dlv_link_text | link_text | Captures clicked external link text |
+| dlv_form_name | form_name | Captures form name on submission |
+| dlv_device_type | deviceType | Captures user's device type |
+| dlv_browser | browser | Captures user's browser |
 
-### 3. Google Analytics Setup
+For each variable:
 
-First, create a **GA4 Configuration Tag**:
+1. Go to **Variables** > **User-Defined Variables**
+2. Click **New**
+3. Name the variable (e.g., "dlv_project_name")
+4. Select **Data Layer Variable** as the type
+5. Enter the Data Layer Variable Name (e.g., "project_name")
+6. Set Version to "Version 2"
+7. Click **Save**
 
-| Setting              | Value                 |
-|----------------------|-----------------------|
-| Tag Name             | GA4 Configuration     |
-| Tag Type             | Google Analytics: GA4 Configuration |
-| Measurement ID       | G-3P8MK7MHQF          |
-| Send Page View       | No (handled separately) |
-| Triggering           | All Pages             |
+### 5. Create Custom Triggers
 
-Then, create **GA4 Event Tags** for each event:
+Create the following triggers for each custom event:
 
-#### Page View Event Tag
+| Trigger Name | Event Name | Description |
+|--------------|------------|-------------|
+| CE - Page View | page_view | Fires on page view events |
+| CE - Project Click | project_click | Fires when a project is clicked |
+| CE - External Link Click | external_link_click | Fires when an external link is clicked |
+| CE - Form Submission | form_submission | Fires when a form is submitted |
+| CE - Tableau View Loaded | tableau_view_loaded | Fires when a Tableau view loads |
+| CE - GitHub Repo View | github_repo_view | Fires when GitHub repos are viewed |
+| CE - Debug Event | debug_test_event | For testing event tracking |
 
-| Setting              | Value                                  |
-|----------------------|----------------------------------------|
-| Tag Name             | GA4 Event - Page View                  |
-| Tag Type             | Google Analytics: GA4 Event            |
-| Event Name           | page_view                              |
-| Event Parameters     | page_category: {{dlv_page_category}}   |
-|                      | page_path: {{Page Path}}               |
-|                      | page_title: {{Page Title}}             |
-| Triggering           | CE - Page View or All Pages             |
+For each trigger:
 
-#### Project Click Event Tag
+1. Go to **Triggers** in the left sidebar
+2. Click **New**
+3. Name the trigger (e.g., "CE - Page View")
+4. Click to configure the trigger
+5. Select **Custom Event**
+6. Enter the corresponding event name (e.g., "page_view") 
+7. Set "This trigger fires on" to "All Custom Events"
+8. Click **Save**
 
-| Setting              | Value                                  |
-|----------------------|----------------------------------------|
-| Tag Name             | GA4 Event - Project Click              |
-| Tag Type             | Google Analytics: GA4 Event            |
-| Event Name           | project_click                          |
-| Event Parameters     | project_name: {{dlv_project_name}}     |
-|                      | page_location: {{Page URL}}            |
-| Triggering           | CE - Project Click                     |
+### 6. Create GA4 Event Tags
 
-#### External Link Event Tag
+For each event, create a corresponding GA4 event tag:
 
-| Setting              | Value                                  |
-|----------------------|----------------------------------------|
-| Tag Name             | GA4 Event - External Link Click        |
-| Tag Type             | Google Analytics: GA4 Event            |
-| Event Name           | outbound_click                         |
-| Event Parameters     | link_url: {{dlv_link_url}}             |
-|                      | link_text: {{dlv_link_text}}           |
-| Triggering           | CE - External Link Click               |
+#### Page View Tag
 
-#### Form Submission Event Tag
+1. Create a new tag
+2. Name it "**GA4 Event - Page View**"
+3. Select **Google Analytics: GA4 Event** as the tag type
+4. Enter "page_view" as the Event Name
+5. Add these parameters:
+   - page_title: {{Page Title}}
+   - page_location: {{Page URL}}
+   - page_path: {{Page Path}}
+   - page_category: {{dlv_page_category}}
+6. Under Configuration Tag, select your GA4 Configuration tag
+7. Add the "CE - Page View" trigger
+8. Save the tag
 
-| Setting              | Value                                  |
-|----------------------|----------------------------------------|
-| Tag Name             | GA4 Event - Form Submission            |
-| Tag Type             | Google Analytics: GA4 Event            |
-| Event Name           | form_submit                            |
-| Event Parameters     | form_name: {{dlv_form_name}}           |
-| Triggering           | CE - Form Submission                   |
+#### Project Click Tag
 
-#### Create similar tags for other events following the same pattern
+1. Create a new tag
+2. Name it "**GA4 Event - Project Click**"
+3. Select **Google Analytics: GA4 Event** as the tag type
+4. Enter "project_click" as the Event Name
+5. Add these parameters:
+   - project_name: {{dlv_project_name}}
+   - page_location: {{Page URL}}
+6. Under Configuration Tag, select your GA4 Configuration tag
+7. Add the "CE - Project Click" trigger
+8. Save the tag
 
-### 4. Testing Your Configuration
+#### External Link Click Tag
 
-1. Use the GTM Preview mode to test your setup
-2. Visit the website's `/analytics-debug` page
-3. Click the various test buttons to generate events
-4. Verify in GTM Preview that the events are being received and tags are firing
-5. Check the GA4 DebugView in your Google Analytics property to confirm events are being recorded
+1. Create a new tag
+2. Name it "**GA4 Event - External Link Click**"
+3. Select **Google Analytics: GA4 Event** as the tag type
+4. Enter "outbound_click" as the Event Name
+5. Add these parameters:
+   - link_url: {{dlv_link_url}}
+   - link_text: {{dlv_link_text}}
+6. Under Configuration Tag, select your GA4 Configuration tag
+7. Add the "CE - External Link Click" trigger
+8. Save the tag
 
-### 5. Publishing
+#### Form Submission Tag
 
-After testing and confirming all tags, triggers, and variables are working:
+1. Create a new tag
+2. Name it "**GA4 Event - Form Submission**"
+3. Select **Google Analytics: GA4 Event** as the tag type
+4. Enter "form_submit" as the Event Name 
+5. Add these parameters:
+   - form_name: {{dlv_form_name}}
+6. Under Configuration Tag, select your GA4 Configuration tag
+7. Add the "CE - Form Submission" trigger
+8. Save the tag
 
-1. Click "Submit" in the top right corner
-2. Name your version (e.g., "Initial GTM Setup with GA4 Events")
-3. Add a description of the changes
-4. Click "Publish"
+Create similar tags for the other custom events.
 
-## Event References
+### 7. Test Your Configuration
 
-The website tracks the following events via dataLayer pushes:
+1. Click the **Preview** button in GTM
+2. Enter your website URL
+3. Test each interaction:
+   - Load different pages
+   - Click on projects
+   - Click external links
+   - Submit the contact form
+   - View Tableau dashboards
+   - View GitHub repositories
+4. Check the GTM Preview panel to see if events are firing correctly
 
-- **Basic Page Events**:
-  - page_view - On page load
-  - scroll_depth - When user scrolls to 25%, 50%, 75%, 90% of page
-  - time_on_page - After 30s, 60s, 120s, 300s on page
-  - page_exit - When user leaves page
+### 8. Use the Debug Panel
 
-- **Interaction Events**:
-  - project_click - When a project card/link is clicked
-  - external_link_click - When external link clicked
-  - form_submission - When contact form submitted
-  - tableau_view_loaded - When Tableau visualization loads
-  - tableau_interaction - When user interacts with Tableau
-  - github_repo_view - When GitHub repo card is viewed
-  - github_repo_click - When GitHub repo link is clicked
-  - skill_badge_click - When skill badge is clicked
-  - resume_download - When resume is downloaded
+Visit the `/analytics-debug` page on your website, which provides a testing interface for:
 
-## Debugging
+- Viewing the current dataLayer state
+- Sending test events
+- Checking if GTM is loaded correctly
+- Verifying cookie presence
 
-If you encounter issues with tracking:
+### 9. Publish Your Container
 
-1. Visit the `/analytics-debug` page
-2. Use the testing tools to check if events are properly pushed to dataLayer
-3. Check for any JavaScript console errors
-4. Verify GTM container code installation
-5. Use GTM Preview mode for detailed debugging
+When everything is working correctly:
 
-## Important Notes
+1. Click **Submit** in the top right corner
+2. Add a version name (e.g., "Initial GA4 Events Setup")
+3. Add a description of the changes made
+4. Click **Publish**
 
-- Google Analytics data may take 24-48 hours to fully process
-- Ad blockers and privacy extensions may block Google Tag Manager
-- If using a VPN, your IP may be filtered in Google Analytics settings
-- GTM preview mode requires you to be logged into your Google Tag Manager account
+## Verification and Troubleshooting
+
+### Verify in Google Analytics
+
+After publishing, check if data is flowing into Google Analytics:
+
+1. Log in to [Google Analytics](https://analytics.google.com/)
+2. Navigate to your GA4 property
+3. Go to **Reports** > **Realtime**
+4. Visit your website and perform various interactions
+5. Verify that events are appearing in the Realtime report
+
+### Common Issues and Solutions
+
+1. **No data in Google Analytics**
+   - Data can take 24-48 hours to appear in standard reports
+   - Try using DebugView for immediate validation
+   - Ensure your IP address isn't excluded in GA
+
+2. **Events not firing**
+   - Check browser console for JavaScript errors
+   - Verify triggers are set up correctly in GTM
+   - Test with the `/analytics-debug` page
+
+3. **GTM Preview not working**
+   - Clear browser cache and cookies
+   - Try a different browser
+   - Disable any ad blockers or privacy extensions
+
+4. **DataLayer not detecting events**
+   - Verify the dataLayer initialization script is loading before GTM
+   - Check for JavaScript errors that might prevent event pushes
+   - Use console.log to debug dataLayer pushes
+
+## Next Steps
+
+Once your basic tracking is working, consider enhancing your implementation with:
+
+1. Enhanced e-commerce tracking for download clicks
+2. User engagement metrics (scroll depth, time on page)
+3. Custom dimensions for user segmentation
+4. Setting up goals and conversions in GA4
