@@ -2,6 +2,13 @@
 """
 Google Tag Manager Configurator Script
 This script uses the GTM API to set up variables, triggers, and tags for the portfolio website.
+
+It configures:
+1. Built-in variables needed for tracking
+2. Custom data layer variables for event tracking
+3. Triggers for page view and custom events
+4. GA4 configuration tag
+5. Event tags for all tracked events (scroll depth, time on page, etc.)
 """
 
 import os
