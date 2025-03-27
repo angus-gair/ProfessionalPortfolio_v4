@@ -4,14 +4,40 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3P8MK7MHQF"></script>
     <script>
+      // Enable debugging - will appear in browser console
+      window.GA_DEBUG = true;
+      
+      // Standard GA4 initialization
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){
+        dataLayer.push(arguments);
+        // Log all GA events to console when debug is enabled
+        if(window.GA_DEBUG) {
+          console.log('GA Event:', arguments);
+        }
+      }
       gtag('js', new Date());
-    
-      // Configure GA4 with explicit anonymization settings
+      
+      // Configure GA4 with debug mode enabled and IP tracking
       gtag('config', 'G-3P8MK7MHQF', {
-        'anonymize_ip': false  // Set to false to preserve full IP addresses
+        'anonymize_ip': false,   // Preserve full IP addresses
+        'debug_mode': true,      // Enable GA4 debug mode
+        'transport_url': 'https://www.google-analytics.com/debug/collect', // Debug endpoint
+        'send_page_view': true   // Explicitly enable page view tracking
       });
+      
+      // Verify initialization 
+      console.log('Google Analytics 4 initialized with Measurement ID: G-3P8MK7MHQF');
+      
+      // Test event to verify tracking is working
+      setTimeout(function() {
+        gtag('event', 'test_event', {
+          'event_category': 'testing',
+          'event_label': 'initialization_test',
+          'value': 1
+        });
+        console.log('Test event sent to Google Analytics');
+      }, 2000);
     </script>
     
     <!-- DataLayer Initialization -->

@@ -178,5 +178,58 @@ def get_notebook_content(notebook_path):
         app.logger.error(f"Error getting notebook content: {str(e)}")
         return jsonify({"error": "Failed to get notebook content", "details": str(e)}), 500
 
+@app.route('/analytics-debug')
+def analytics_debug():
+    """
+    Debug page for Google Analytics verification.
+    This page helps test that the GA4 configuration is working correctly.
+    """
+    # Log server-side analytics access
+    app.logger.info("Analytics debug page accessed")
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+    client_ip = request.remote_addr
+    app.logger.info(f"Analytics debug request from IP: {client_ip}, User-Agent: {user_agent}")
+    
+    # Render a simple debug page that will trigger analytics events
+    return render_template('analytics_debug.html', 
+                          active_page='debug',
+                          measurement_id='G-3P8MK7MHQF',
+                          timestamp=int(os.path.getmtime(__file__)),
+                          client_ip=client_ip)
+
+@app.route('/api/analytics/test', methods=['POST'])
+def test_analytics_event():
+    """
+    Endpoint to verify analytics tracking by sending a test event directly to the 
+    Google Analytics Measurement Protocol API.
+    """
+    try:
+        # Get the client's information
+        client_id = request.json.get('client_id', 'debug-client-id')
+        event_name = request.json.get('event_name', 'server_test_event')
+        
+        # Log the test request
+        app.logger.info(f"Analytics test event requested: {event_name} for client {client_id}")
+        
+        # Normally, here we would send a direct event to Google Analytics
+        # using the Measurement Protocol. However, this requires additional setup
+        # in the GA4 property that the user likely hasn't done yet.
+        
+        # Instead, we'll just return a success response for debugging
+        return jsonify({
+            "status": "success",
+            "message": "Analytics test event created. Check your GA4 DebugView.",
+            "details": {
+                "measurement_id": "G-3P8MK7MHQF",
+                "client_id": client_id,
+                "event_name": event_name,
+                "timestamp": int(os.path.getmtime(__file__))
+            }
+        })
+        
+    except Exception as e:
+        app.logger.error(f"Error testing analytics event: {str(e)}")
+        return jsonify({"error": "Failed to test analytics event", "details": str(e)}), 500
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

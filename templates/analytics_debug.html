@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block page_category %}debug{% endblock %}
+
+{% block title %}Google Analytics Debugging - Angus Gair{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="mb-4">Google Analytics Debug</h1>
+            <div class="alert alert-info">
+                <p><strong>Connecting from IP:</strong> {{ client_ip }}</p>
+                <p><strong>GA4 Measurement ID:</strong> {{ measurement_id }}</p>
+                <p><strong>Last Server Update:</strong> {{ timestamp }}</p>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Analytics Test Panel</h5>
+                </div>
+                <div class="card-body">
+                    <p>This page helps diagnose issues with Google Analytics integration. The debug logs displayed below should show events being sent to Google Analytics.</p>
+                    
+                    <div class="mb-4">
+                        <h6>Testing Actions</h6>
+                        <button id="test-pageview" class="btn btn-primary me-2">Test Page View</button>
+                        <button id="test-event" class="btn btn-secondary me-2">Send Test Event</button>
+                        <button id="debug-cookie" class="btn btn-info me-2">Check GA Cookie</button>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6>GA4 Debug Console</h6>
+                        <div id="ga-debug-log" class="border p-3 bg-dark text-light" style="height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.85rem;">
+                            <div>Initializing GA4 Debug Console...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="card-title mb-0">Troubleshooting Guide</h5>
+                </div>
+                <div class="card-body">
+                    <h6>Common Issues</h6>
+                    <ul>
+                        <li><strong>No data in Google Analytics:</strong> 
+                            <ul>
+                                <li>Google Analytics may take 24-48 hours to display complete data</li>
+                                <li>Check for adblockers or privacy extensions in your browser</li>
+                                <li>Verify you're looking at the right GA4 property (G-3P8MK7MHQF)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Missing events:</strong> Check the debug console on this page to see if events are being sent</li>
+                        <li><strong>IP address issues:</strong> 
+                            <ul>
+                                <li>Ensure you're not filtering out your own traffic in GA4</li>
+                                <li>Check if your organization uses a VPN (traffic might appear from a single IP)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h6 class="mt-4">Checking Google Analytics Setup</h6>
+                    <ol>
+                        <li>Sign in to <a href="https://analytics.google.com/" target="_blank">Google Analytics</a></li>
+                        <li>Navigate to your GA4 property (G-3P8MK7MHQF)</li>
+                        <li>Check the Real-Time reports to see if current traffic is tracked</li>
+                        <li>Use the DebugView to see detailed events during testing</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Debug log utility
+const debugLog = document.getElementById('ga-debug-log');
+function logToDebug(message, type = 'info') {
+    const timestamp = new Date().toLocaleTimeString();
+    const logClass = type === 'error' ? 'text-danger' : 
+                     type === 'success' ? 'text-success' : 'text-info';
+    
+    debugLog.innerHTML += `<div class="${logClass}">[${timestamp}] ${message}</div>`;
+    debugLog.scrollTop = debugLog.scrollHeight;
+}
+
+// Check if Google Analytics is loaded
+function checkGA() {
+    if (typeof gtag === 'function') {
+        logToDebug('✓ Google Analytics (gtag) is loaded correctly', 'success');
+        return true;
+    } else {
+        logToDebug('✗ Google Analytics (gtag) not found - check for blockers or script errors', 'error');
+        return false;
+    }
+}
+
+// Get client ID from GA cookie
+function getGAClientId() {
+    // GA4 stores client ID in _ga cookie
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === '_ga') {
+            // Extract client ID from cookie value (format: GA1.1.XXXXXXXXXX.YYYYYYYYYY)
+            const parts = value.split('.');
+            if (parts.length >= 4) {
+                return parts.slice(2).join('.');
+            }
+            return value;
+        }
+    }
+    return null;
+}
+
+// Test functions
+document.getElementById('test-pageview').addEventListener('click', function() {
+    if (!checkGA()) return;
+    
+    logToDebug('Sending manual pageview event...');
+    gtag('event', 'page_view', {
+        'page_title': document.title,
+        'page_location': window.location.href,
+        'page_path': window.location.pathname,
+        'debug_mode': true
+    });
+    logToDebug('✓ Pageview event sent - check GA4 DebugView', 'success');
+});
+
+document.getElementById('test-event').addEventListener('click', function() {
+    if (!checkGA()) return;
+    
+    const testEventName = 'debug_test_event';
+    logToDebug(`Sending test event: ${testEventName}...`);
+    
+    gtag('event', testEventName, {
+        'event_category': 'testing',
+        'event_label': 'manual_test',
+        'debug_mode': true,
+        'timestamp': new Date().toISOString()
+    });
+    
+    // Also send a server-side test event
+    const clientId = getGAClientId() || 'unknown-client';
+    fetch('/api/analytics/test', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            client_id: clientId,
+            event_name: 'server_test_event'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        logToDebug(`✓ Server response: ${data.message}`, 'success');
+    })
+    .catch(error => {
+        logToDebug(`✗ Server test error: ${error.message}`, 'error');
+    });
+    
+    logToDebug('✓ Client-side test event sent - check GA4 DebugView', 'success');
+});
+
+document.getElementById('debug-cookie').addEventListener('click', function() {
+    const clientId = getGAClientId();
+    if (clientId) {
+        logToDebug(`✓ GA Client ID found: ${clientId}`, 'success');
+    } else {
+        logToDebug('✗ No GA Client ID cookie found - GA may be blocked', 'error');
+    }
+});
+
+// Initial checks
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        checkGA();
+        const clientId = getGAClientId();
+        if (clientId) {
+            logToDebug(`✓ GA Client ID: ${clientId}`, 'success');
+        } else {
+            logToDebug('No GA Client ID cookie found. This could mean:', 'error');
+            logToDebug('- GA is blocked by browser extensions', 'error');
+            logToDebug('- GA hasn\'t initialized properly', 'error');
+            logToDebug('- Cookie consent might be required', 'error');
+        }
+    }, 1500);
+});
+</script>
+{% endblock %}
