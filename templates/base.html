@@ -8,7 +8,10 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
     
-      gtag('config', 'G-3P8MK7MHQF');
+      // Configure GA4 with explicit anonymization settings
+      gtag('config', 'G-3P8MK7MHQF', {
+        'anonymize_ip': false  // Set to false to preserve full IP addresses
+      });
     </script>
     
     <!-- DataLayer Initialization -->
