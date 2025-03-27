@@ -179,6 +179,7 @@ def get_notebook_content(notebook_path):
         return jsonify({"error": "Failed to get notebook content", "details": str(e)}), 500
 
 @app.route('/analytics-debug')
+@app.route('/analytics_debug')  # Add a route with underscore for consistency
 def analytics_debug():
     """
     Debug page for Google Analytics verification.
