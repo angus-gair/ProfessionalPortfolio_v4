@@ -2,37 +2,38 @@
 
 {% block page_category %}debug{% endblock %}
 
-{% block title %}Google Analytics Debugging - Angus Gair{% endblock %}
+{% block title %}Google Tag Manager & Analytics Debugging - Angus Gair{% endblock %}
 
 {% block content %}
 <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="mb-4">Google Analytics Debug</h1>
+            <h1 class="mb-4">Google Tag Manager Debug</h1>
             <div class="alert alert-info">
+                <p><strong>GTM Container ID:</strong> GTM-PC9Q9VC3</p>
                 <p><strong>Connecting from IP:</strong> {{ client_ip }}</p>
-                <p><strong>GA4 Measurement ID:</strong> {{ measurement_id }}</p>
                 <p><strong>Last Server Update:</strong> {{ timestamp }}</p>
             </div>
             
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="card-title mb-0">Analytics Test Panel</h5>
+                    <h5 class="card-title mb-0">Tag Manager Test Panel</h5>
                 </div>
                 <div class="card-body">
-                    <p>This page helps diagnose issues with Google Analytics integration. The debug logs displayed below should show events being sent to Google Analytics.</p>
+                    <p>This page helps diagnose issues with Google Tag Manager integration. The debug logs displayed below should show events being pushed to the dataLayer.</p>
                     
                     <div class="mb-4">
                         <h6>Testing Actions</h6>
-                        <button id="test-pageview" class="btn btn-primary me-2">Test Page View</button>
+                        <button id="test-pageview" class="btn btn-primary me-2">Test Page View Event</button>
                         <button id="test-event" class="btn btn-secondary me-2">Send Test Event</button>
-                        <button id="debug-cookie" class="btn btn-info me-2">Check GA Cookie</button>
+                        <button id="gtm-debug" class="btn btn-warning me-2">Open GTM Preview</button>
+                        <button id="debug-cookie" class="btn btn-info me-2">Check Cookies</button>
                     </div>
                     
                     <div class="mb-4">
-                        <h6>GA4 Debug Console</h6>
-                        <div id="ga-debug-log" class="border p-3 bg-dark text-light" style="height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.85rem;">
-                            <div>Initializing GA4 Debug Console...</div>
+                        <h6>DataLayer Debug Console</h6>
+                        <div id="gtm-debug-log" class="border p-3 bg-dark text-light" style="height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.85rem;">
+                            <div>Initializing DataLayer Debug Console...</div>
                         </div>
                     </div>
                 </div>
@@ -40,6 +41,28 @@
             
             <div class="card mb-4">
                 <div class="card-header bg-secondary text-white">
+                    <h5 class="card-title mb-0">GTM Status</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>DataLayer Contents</h6>
+                            <pre id="datalayer-contents" class="p-3 bg-dark text-light rounded" style="max-height: 200px; overflow-y: auto;"></pre>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Active GTM Information</h6>
+                            <ul id="gtm-info" class="list-group">
+                                <li class="list-group-item"><strong>Container Status:</strong> <span id="gtm-status">Checking...</span></li>
+                                <li class="list-group-item"><strong>DataLayer Events:</strong> <span id="datalayer-count">0</span></li>
+                                <li class="list-group-item"><strong>Last Event:</strong> <span id="last-event">None</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
                     <h5 class="card-title mb-0">Troubleshooting Guide</h5>
                 </div>
                 <div class="card-body">
@@ -49,24 +72,42 @@
                             <ul>
                                 <li>Google Analytics may take 24-48 hours to display complete data</li>
                                 <li>Check for adblockers or privacy extensions in your browser</li>
-                                <li>Verify you're looking at the right GA4 property (G-3P8MK7MHQF)</li>
+                                <li>Verify you've set up the correct tags in Google Tag Manager</li>
+                                <li>Check that your GTM container is published</li>
                             </ul>
                         </li>
-                        <li><strong>Missing events:</strong> Check the debug console on this page to see if events are being sent</li>
-                        <li><strong>IP address issues:</strong> 
+                        <li><strong>GTM container not loading:</strong> 
                             <ul>
-                                <li>Ensure you're not filtering out your own traffic in GA4</li>
-                                <li>Check if your organization uses a VPN (traffic might appear from a single IP)</li>
+                                <li>Verify the GTM container ID (GTM-PC9Q9VC3) is correctly installed</li>
+                                <li>Check both the <head> and <body> installations</li>
+                                <li>Ensure no JavaScript errors are preventing GTM from loading</li>
+                            </ul>
+                        </li>
+                        <li><strong>Events not firing:</strong> 
+                            <ul>
+                                <li>Use the GTM Preview mode to check triggers and conditions</li>
+                                <li>Verify that events are being pushed to the dataLayer correctly</li>
+                                <li>Check browser console for any JavaScript errors</li>
                             </ul>
                         </li>
                     </ul>
                     
-                    <h6 class="mt-4">Checking Google Analytics Setup</h6>
+                    <h6 class="mt-4">Configure Google Tag Manager</h6>
                     <ol>
-                        <li>Sign in to <a href="https://analytics.google.com/" target="_blank">Google Analytics</a></li>
-                        <li>Navigate to your GA4 property (G-3P8MK7MHQF)</li>
-                        <li>Check the Real-Time reports to see if current traffic is tracked</li>
-                        <li>Use the DebugView to see detailed events during testing</li>
+                        <li>Sign in to <a href="https://tagmanager.google.com/" target="_blank">Google Tag Manager</a></li>
+                        <li>Navigate to your GTM container (GTM-PC9Q9VC3)</li>
+                        <li>Create tags for the events we're tracking:</li>
+                        <ul>
+                            <li>page_view - GA4 event tag triggered on all pages</li>
+                            <li>project_click - GA4 event tag triggered by custom event</li>
+                            <li>external_link_click - GA4 event tag triggered by custom event</li>
+                            <li>form_submission - GA4 event tag triggered by custom event</li>
+                            <li>tableau_view_loaded - GA4 event tag triggered by custom event</li>
+                            <li>github_repo_view - GA4 event tag triggered by custom event</li>
+                        </ul>
+                        <li>Set up a GA4 Configuration tag with your Measurement ID (G-3P8MK7MHQF)</li>
+                        <li>Use the Preview mode to test your configuration</li>
+                        <li>Publish your changes when everything is working correctly</li>
                     </ol>
                 </div>
             </div>
@@ -78,7 +119,7 @@
 {% block scripts %}
 <script>
 // Debug log utility
-const debugLog = document.getElementById('ga-debug-log');
+const debugLog = document.getElementById('gtm-debug-log');
 function logToDebug(message, type = 'info') {
     const timestamp = new Date().toLocaleTimeString();
     const logClass = type === 'error' ? 'text-danger' : 
@@ -88,71 +129,123 @@ function logToDebug(message, type = 'info') {
     debugLog.scrollTop = debugLog.scrollHeight;
 }
 
-// Check if Google Analytics is loaded
-function checkGA() {
-    if (typeof gtag === 'function') {
-        logToDebug('✓ Google Analytics (gtag) is loaded correctly', 'success');
+// Track dataLayer pushes by overriding the push method
+let datalayerEventCount = 0;
+let originalPush;
+
+// Capture original dataLayer push method and override it
+function setupDataLayerTracking() {
+    window.dataLayer = window.dataLayer || [];
+    
+    // Only override if not already done
+    if (!window.dataLayer._monitored) {
+        originalPush = window.dataLayer.push;
+        
+        window.dataLayer.push = function() {
+            // Call the original method
+            const result = originalPush.apply(this, arguments);
+            
+            // Log the push event
+            datalayerEventCount++;
+            document.getElementById('datalayer-count').textContent = datalayerEventCount;
+            
+            // Update last event
+            if (arguments[0] && arguments[0].event) {
+                document.getElementById('last-event').textContent = arguments[0].event;
+                logToDebug(`DataLayer event pushed: ${arguments[0].event}`, 'success');
+            } else {
+                logToDebug(`DataLayer data pushed: ${JSON.stringify(arguments[0]).substring(0, 50)}...`, 'info');
+            }
+            
+            // Update dataLayer contents display
+            refreshDataLayerContents();
+            
+            return result;
+        };
+        
+        window.dataLayer._monitored = true;
+        logToDebug('DataLayer push method has been instrumented for debugging', 'success');
+    }
+}
+
+// Check if Google Tag Manager is loaded
+function checkGTM() {
+    // Check for GTM's main global object
+    if (window.google_tag_manager && window.google_tag_manager['GTM-PC9Q9VC3']) {
+        document.getElementById('gtm-status').textContent = 'Loaded';
+        document.getElementById('gtm-status').className = 'text-success';
+        logToDebug('✓ Google Tag Manager is loaded correctly', 'success');
         return true;
     } else {
-        logToDebug('✗ Google Analytics (gtag) not found - check for blockers or script errors', 'error');
+        document.getElementById('gtm-status').textContent = 'Not Detected';
+        document.getElementById('gtm-status').className = 'text-danger';
+        logToDebug('✗ Google Tag Manager not detected - check installation', 'error');
         return false;
     }
 }
 
-// Get client ID from GA cookie
-function getGAClientId() {
-    // GA4 stores client ID in _ga cookie
+// Refresh dataLayer contents display
+function refreshDataLayerContents() {
+    const container = document.getElementById('datalayer-contents');
+    window.dataLayer = window.dataLayer || [];
+    
+    // Limit the display to avoid overloading
+    const displayData = window.dataLayer.slice(-5);
+    container.textContent = JSON.stringify(displayData, null, 2);
+}
+
+// Get cookies
+function getCookies() {
     const cookies = document.cookie.split(';');
+    const cookieObj = {};
+    
     for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split('=');
-        if (name === '_ga') {
-            // Extract client ID from cookie value (format: GA1.1.XXXXXXXXXX.YYYYYYYYYY)
-            const parts = value.split('.');
-            if (parts.length >= 4) {
-                return parts.slice(2).join('.');
-            }
-            return value;
+        if (cookie.trim()) {
+            const [name, value] = cookie.trim().split('=');
+            cookieObj[name] = value;
         }
     }
-    return null;
+    
+    return cookieObj;
 }
 
 // Test functions
 document.getElementById('test-pageview').addEventListener('click', function() {
-    if (!checkGA()) return;
+    logToDebug('Pushing pageview event to dataLayer...');
     
-    logToDebug('Sending manual pageview event...');
-    gtag('event', 'page_view', {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'event': 'page_view_test',
         'page_title': document.title,
         'page_location': window.location.href,
         'page_path': window.location.pathname,
-        'debug_mode': true
+        'test_timestamp': new Date().toISOString()
     });
-    logToDebug('✓ Pageview event sent - check GA4 DebugView', 'success');
+    
+    logToDebug('✓ Pageview event pushed to dataLayer', 'success');
 });
 
 document.getElementById('test-event').addEventListener('click', function() {
-    if (!checkGA()) return;
-    
     const testEventName = 'debug_test_event';
-    logToDebug(`Sending test event: ${testEventName}...`);
+    logToDebug(`Pushing test event: ${testEventName} to dataLayer...`);
     
-    gtag('event', testEventName, {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'event': testEventName,
         'event_category': 'testing',
         'event_label': 'manual_test',
-        'debug_mode': true,
-        'timestamp': new Date().toISOString()
+        'test_value': Math.floor(Math.random() * 100),
+        'test_timestamp': new Date().toISOString()
     });
     
     // Also send a server-side test event
-    const clientId = getGAClientId() || 'unknown-client';
     fetch('/api/analytics/test', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            client_id: clientId,
+            client_id: 'gtm-debug-client',
             event_name: 'server_test_event'
         })
     })
@@ -164,32 +257,59 @@ document.getElementById('test-event').addEventListener('click', function() {
         logToDebug(`✗ Server test error: ${error.message}`, 'error');
     });
     
-    logToDebug('✓ Client-side test event sent - check GA4 DebugView', 'success');
+    logToDebug('✓ Test event pushed to dataLayer', 'success');
+});
+
+document.getElementById('gtm-debug').addEventListener('click', function() {
+    logToDebug('Opening GTM Preview mode in a new tab...');
+    window.open(`https://tagmanager.google.com/#/container/accounts/6201424974/containers/147315136/workspaces/1?gtm_debug=x`, '_blank');
+    logToDebug('⚠️ You must be logged in to Google Tag Manager to access preview mode', 'info');
 });
 
 document.getElementById('debug-cookie').addEventListener('click', function() {
-    const clientId = getGAClientId();
-    if (clientId) {
-        logToDebug(`✓ GA Client ID found: ${clientId}`, 'success');
-    } else {
-        logToDebug('✗ No GA Client ID cookie found - GA may be blocked', 'error');
+    const cookies = getCookies();
+    logToDebug('Checking cookies...', 'info');
+    
+    // Format nicely for display
+    let foundAnalyticsCookies = false;
+    for (const [name, value] of Object.entries(cookies)) {
+        if (name.startsWith('_ga') || name.startsWith('_gid') || name.startsWith('_gat')) {
+            logToDebug(`✓ Found GA cookie: ${name}`, 'success');
+            foundAnalyticsCookies = true;
+        }
     }
+    
+    if (!foundAnalyticsCookies) {
+        logToDebug('✗ No Google Analytics cookies found - GA may be blocked', 'error');
+    }
+    
+    logToDebug(`Total cookies: ${Object.keys(cookies).length}`, 'info');
 });
 
-// Initial checks
+// Initial setup and checks
 document.addEventListener('DOMContentLoaded', function() {
+    setupDataLayerTracking();
+    
     setTimeout(function() {
-        checkGA();
-        const clientId = getGAClientId();
-        if (clientId) {
-            logToDebug(`✓ GA Client ID: ${clientId}`, 'success');
-        } else {
-            logToDebug('No GA Client ID cookie found. This could mean:', 'error');
-            logToDebug('- GA is blocked by browser extensions', 'error');
-            logToDebug('- GA hasn\'t initialized properly', 'error');
-            logToDebug('- Cookie consent might be required', 'error');
-        }
-    }, 1500);
+        checkGTM();
+        refreshDataLayerContents();
+        
+        // Send an initial debug event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'gtm_debug_page_loaded',
+            'debug_timestamp': new Date().toISOString(),
+            'debug_referrer': document.referrer || 'direct'
+        });
+        
+        logToDebug('Debug page initialization complete', 'success');
+    }, 1000);
 });
+
+// Periodically refresh GTM status
+setInterval(function() {
+    checkGTM();
+    refreshDataLayerContents();
+}, 5000);
 </script>
 {% endblock %}

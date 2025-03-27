@@ -1,46 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3P8MK7MHQF"></script>
-    <script>
-      // Enable debugging - will appear in browser console
-      window.GA_DEBUG = true;
-      
-      // Standard GA4 initialization
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){
-        dataLayer.push(arguments);
-        // Log all GA events to console when debug is enabled
-        if(window.GA_DEBUG) {
-          console.log('GA Event:', arguments);
-        }
-      }
-      gtag('js', new Date());
-      
-      // Configure GA4 with debug mode enabled and IP tracking
-      gtag('config', 'G-3P8MK7MHQF', {
-        'anonymize_ip': false,   // Preserve full IP addresses
-        'debug_mode': true,      // Enable GA4 debug mode
-        'transport_url': 'https://www.google-analytics.com/debug/collect', // Debug endpoint
-        'send_page_view': true   // Explicitly enable page view tracking
-      });
-      
-      // Verify initialization 
-      console.log('Google Analytics 4 initialized with Measurement ID: G-3P8MK7MHQF');
-      
-      // Test event to verify tracking is working
-      setTimeout(function() {
-        gtag('event', 'test_event', {
-          'event_category': 'testing',
-          'event_label': 'initialization_test',
-          'value': 1
-        });
-        console.log('Test event sent to Google Analytics');
-      }, 2000);
-    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PC9Q9VC3');</script>
+    <!-- End Google Tag Manager -->
     
-    <!-- DataLayer Initialization -->
+    <!-- DataLayer Initialization - Must be before GTM script -->
     <script src="{{ url_for('static', filename='js/datalayer-init.js') }}"></script>
     
     <meta charset="UTF-8">
@@ -65,6 +34,10 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body data-page-category="{{ self.page_category() }}">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC9Q9VC3"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -146,20 +119,26 @@
         document.querySelectorAll('.project-card, .project-item').forEach(function(card) {
             card.addEventListener('click', function(e) {
                 const projectTitle = this.querySelector('h3, .card-title')?.textContent || 'Unknown Project';
-                gtag('event', 'project_click', {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'project_click',
                     'project_name': projectTitle,
                     'page_location': window.location.href
                 });
+                console.log('Project click event tracked:', projectTitle);
             });
         });
         
         // Track clicks on external links
         document.querySelectorAll('a[target="_blank"]').forEach(function(link) {
             link.addEventListener('click', function() {
-                gtag('event', 'external_link_click', {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'external_link_click',
                     'link_url': this.href,
                     'link_text': this.textContent || 'Unknown Link'
                 });
+                console.log('External link click tracked:', this.href);
             });
         });
         
@@ -167,13 +146,27 @@
         const contactForm = document.querySelector('form');
         if (contactForm) {
             contactForm.addEventListener('submit', function() {
-                gtag('event', 'form_submission', {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'form_submission',
                     'form_name': 'contact_form'
                 });
+                console.log('Form submission tracked: contact_form');
             });
         }
         
-        console.log('Enhanced analytics event tracking initialized.');
+        // Send a debug event to verify GTM setup
+        setTimeout(function() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'debug_event',
+                'debug_time': new Date().toISOString(),
+                'debug_page': window.location.pathname
+            });
+            console.log('GTM debug event pushed to dataLayer');
+        }, 1500);
+        
+        console.log('Enhanced analytics event tracking initialized for GTM');
     });
     </script>
     
