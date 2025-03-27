@@ -21,7 +21,14 @@ logger = logging.getLogger('ga4-tag-creator')
 GTM_CONTAINER_ID = 'GTM-PC9Q9VC3'
 GA4_MEASUREMENT_ID = 'G-3P8MK7MHQF'
 SERVICE_ACCOUNT_FILE = 'GoogleAnalytics/gair-com-au-153c7f6062f4.json'
-API_SCOPES = ['https://www.googleapis.com/auth/tagmanager.edit.containers']
+API_SCOPES = [
+    'https://www.googleapis.com/auth/tagmanager.edit.containers',
+    'https://www.googleapis.com/auth/tagmanager.publish',
+    'https://www.googleapis.com/auth/tagmanager.readonly',
+    'https://www.googleapis.com/auth/tagmanager.delete.containers',
+    'https://www.googleapis.com/auth/tagmanager.manage.users',
+    'https://www.googleapis.com/auth/tagmanager.manage.accounts'
+]
 
 # Hardcoded paths from previous runs
 GTM_ACCOUNT_ID = '6275069304'
@@ -142,17 +149,34 @@ def create_ga4_config_tag(service, workspace_path, trigger_id):
             parent=workspace_path
         ).execute()
         
+        # Check for existing GA4 tag
+        existing_ga4_tag = None
+        existing_tag_names = []
         if tags.get('tag'):
             for tag in tags.get('tag'):
+                existing_tag_names.append(tag.get('name', ''))
                 if tag.get('type') == 'gaawc':
+                    existing_ga4_tag = tag
                     logger.info(f"Found existing GA4 tag: {tag.get('name')}")
                     return tag.get('tagId')
+        
+        # Generate a unique name
+        timestamp = time.strftime("%Y%m%d-%H%M%S")
+        tag_name = f"GA4 Configuration {timestamp}"
+        
+        # If we have a name conflict, make it unique
+        counter = 1
+        while tag_name in existing_tag_names:
+            tag_name = f"GA4 Configuration {timestamp} ({counter})"
+            counter += 1
+        
+        logger.info(f"Using tag name: {tag_name}")
         
         # Create a new GA4 Configuration tag
         ga4_tag = service.accounts().containers().workspaces().tags().create(
             parent=workspace_path,
             body={
-                "name": "GA4 Configuration",
+                "name": tag_name,
                 "type": "gaawc",
                 "parameter": [
                     {"type": "template", "key": "measurementId", "value": GA4_MEASUREMENT_ID},
@@ -171,10 +195,12 @@ def create_ga4_config_tag(service, workspace_path, trigger_id):
             logger.warning("Rate limit hit. Waiting 60 seconds before retry...")
             time.sleep(60)
             try:
+                # Generate a unique retry name
+                retry_timestamp = time.strftime("%Y%m%d-%H%M%S")
                 ga4_tag = service.accounts().containers().workspaces().tags().create(
                     parent=workspace_path,
                     body={
-                        "name": "GA4 Configuration (Retry)",
+                        "name": f"GA4 Configuration Retry {retry_timestamp}",
                         "type": "gaawc",
                         "parameter": [
                             {"type": "template", "key": "measurementId", "value": GA4_MEASUREMENT_ID},
