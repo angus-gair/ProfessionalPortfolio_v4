@@ -4,16 +4,42 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadTableauAPI();
+    initializeRemainingTableauDashboards();
 });
 
 /**
- * Loads the Tableau JavaScript API
+ * Initializes tableau dashboards that aren't directly embedded
  */
-function loadTableauAPI() {
+function initializeRemainingTableauDashboards() {
+    // Find dashboard containers with data-tableau-url attribute (older method)
+    const tableauContainers = document.querySelectorAll('.tableau-container[data-tableau-url]');
+    
+    if (tableauContainers.length === 0) {
+        console.log('No legacy Tableau containers found on page');
+        return;
+    }
+    
+    // Load Tableau API if needed
+    loadTableauAPI(function() {
+        // Initialize each dashboard with the legacy approach
+        tableauContainers.forEach(container => {
+            const url = container.getAttribute('data-tableau-url');
+            if (url) {
+                const containerId = container.id;
+                initializeTableauDashboard(containerId, url);
+            }
+        });
+    });
+}
+
+/**
+ * Loads the Tableau JavaScript API
+ * @param {Function} callback - Function to call when API is loaded
+ */
+function loadTableauAPI(callback) {
     // Check if Tableau is already loaded
     if (window.tableau && window.tableau.Viz) {
-        initializeTableauDashboards();
+        if (callback) callback();
         return;
     }
 
@@ -22,7 +48,7 @@ function loadTableauAPI() {
     script.src = 'https://public.tableau.com/javascripts/api/tableau-2.min.js';
     script.onload = function() {
         console.log('Tableau API loaded successfully');
-        initializeTableauDashboards();
+        if (callback) callback();
     };
     script.onerror = function() {
         console.error('Error loading Tableau API');
@@ -30,28 +56,6 @@ function loadTableauAPI() {
     };
     
     document.head.appendChild(script);
-}
-
-/**
- * Initializes all Tableau dashboards on the page
- */
-function initializeTableauDashboards() {
-    // Find all dashboard containers
-    const tableauContainers = document.querySelectorAll('.tableau-container');
-    
-    if (tableauContainers.length === 0) {
-        console.log('No Tableau containers found on page');
-        return;
-    }
-    
-    // Initialize each dashboard
-    tableauContainers.forEach(container => {
-        const url = container.getAttribute('data-tableau-url');
-        if (url) {
-            const containerId = container.id;
-            initializeTableauDashboard(containerId, url);
-        }
-    });
 }
 
 /**
@@ -97,7 +101,7 @@ function initializeTableauDashboard(containerId, url) {
  * Displays an error message when Tableau fails to load
  */
 function handleTableauError() {
-    const tableauContainers = document.querySelectorAll('.tableau-container');
+    const tableauContainers = document.querySelectorAll('.tableau-container[data-tableau-url]');
     tableauContainers.forEach(container => {
         displayTableauError(container);
     });

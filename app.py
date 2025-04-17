@@ -4,6 +4,10 @@ import json
 from flask import Flask, render_template, send_file, jsonify, request, abort, Response
 import requests
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -38,6 +42,26 @@ def experience():
 @app.route('/contact')
 def contact():
     return render_template('contact.html', active_page='contact')
+
+@app.route('/optimisation')
+def optimisation():
+    """Serve the Christmas budget optimisation HTML file directly with collapsible sections."""
+    try:
+        # First check if we have the collapsible version
+        file_path = "static/historical_projects/WooliesX-CampaignOptimisation/xmas_budget_optimisation2_collapsible.html"
+        
+        if not os.path.exists(file_path):
+            # Fall back to the original if collapsible version doesn't exist
+            file_path = "/home/gairforce/ProfessionalPortfolio_v4/historical-projects/WooliesX-CampaignOptimisation/xmas_budget_optimisation2.html"
+            
+            if not os.path.exists(file_path):
+                app.logger.error(f"Optimisation file not found at: {file_path}")
+                abort(404)
+                
+        return send_file(file_path)
+    except Exception as e:
+        app.logger.error(f"Error serving optimisation file: {str(e)}")
+        abort(500)
 
 @app.route('/resume')
 def resume():

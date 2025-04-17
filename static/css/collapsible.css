@@ -1,0 +1,85 @@
+.collapsible-section {
+    margin: 15px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background: #fff;
+}
+
+.collapsible-header {
+    background: #f5f5f5;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #444;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.collapsible-header:hover {
+    background: #e9ecef;
+}
+
+.toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: 12px;
+    transition: transform 0.2s;
+}
+
+.header-text {
+    flex-grow: 1;
+}
+
+.preview-text {
+    color: #6c757d;
+    font-size: 0.85rem;
+    font-weight: normal;
+    font-style: italic;
+    margin-left: 8px;
+}
+
+.collapsible-content {
+    transition: max-height 0.3s ease-out;
+    overflow: auto;
+    max-height: 2000px; /* Adjust as needed */
+}
+
+.collapsible-content.collapsed {
+    max-height: 0;
+    overflow: hidden;
+}
+
+.collapsible-content pre {
+    margin: 0;
+    padding: 15px;
+    border: none;
+    border-radius: 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+    font-size: 13px;
+    background: #fff;
+    color: #212529;
+    overflow-x: auto;
+}
+
+/* Style for plots and visualizations */
+.collapsible-content img,
+.collapsible-content svg,
+.collapsible-content iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+} 

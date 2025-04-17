@@ -1,0 +1,41 @@
+# Cursor Rules for Professional Portfolio v4
+
+## Project Structure
+- `app.py` - Main application file containing Flask routes and API endpoints
+- `templates/` - Directory containing HTML templates using Jinja2
+- `static/` - Directory for static assets (CSS, JS, images)
+- `memory-bank/` - Documentation directory following the Cursor Memory Bank system
+
+## Key Implementation Paths
+1. **Flask Application Setup**: 
+   - Import modules, configure logging, create Flask app
+   - Set secret key from environment variable or default
+   - Configure API tokens from environment variables
+
+2. **Route Definitions**:
+   - Main routes for pages (/home, /projects, /skills, /experience, /contact)
+   - API endpoints (/api/github/repos, /api/tableau/views, etc.)
+   - Static asset serving
+
+3. **External API Integration**:
+   - GitHub API for repository data
+   - Tableau Public for visualization embedding
+   - Google Analytics for usage tracking
+
+## User Preferences
+- Minimize console output unless significant errors occur
+- Maintain responsive design across all devices
+- Keep UI clean and professional
+- Preserve existing functionality when migrating
+
+## Project-Specific Patterns
+- Use of Flask app routes for page rendering and API endpoints
+- Template inheritance from base.html for consistent layout
+- Environment variables for configuration and secrets
+- API integrations for dynamic content
+
+## Known Challenges
+- Setting up environment variables in local environment
+- Configuring URL access for local development
+- Ensuring proper paths for static assets and templates
+- Managing GitHub API rate limits 
