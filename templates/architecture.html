@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Architecture Diagrams - Angus Gair{% endblock %}
+{% block page_category %}architecture{% endblock %}
+
+{% block extra_css %}
+<style>
+  .architecture-section {
+    margin-bottom: 5rem;
+  }
+  .diagram-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    margin-top: 1.5rem;
+  }
+  .component-list {
+    background-color: rgba(59, 130, 246, 0.1);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    margin-top: 4rem;
+  }
+  .component-list h3 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+  }
+  .component-list ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+  }
+  .component-list li {
+    margin-bottom: 0.5rem;
+    color: #374151;
+  }
+  .component-name {
+    font-weight: 600;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <!-- Elegant header section -->
+  <header class="text-center mb-5">
+    <h1 class="display-4 fw-bold mb-4">System Architecture</h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <p class="lead text-muted">
+          These diagrams illustrate the structure and flow of our system architecture, 
+          showcasing both our current implementation and our future roadmap. Understanding 
+          these diagrams provides insight into how different components interact to deliver 
+          a cohesive experience.
+        </p>
+      </div>
+    </div>
+  </header>
+  
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- Current Architecture Section -->
+      <section class="architecture-section">
+        <h2 class="h2 fw-bold mb-3">Current Architecture</h2>
+        <p class="text-muted mb-4">
+          Our current system architecture implements a client-server model where the client website
+          interfaces with the SuiteCRM API to serve content to both administrative users and end users.
+          Static assets are managed through a dedicated file server to ensure optimal performance and
+          reliability.
+        </p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+              A[Client Website] -->|API Requests| B[SuiteCRM API]
+              B --> C[SuiteCRM Database]
+              A -->|Static Assets| D[Static File Server]
+              E[Admin Users] -->|Manage| A
+              F[End Users] -->|View| A
+          </div>
+        </div>
+      </section>
+
+      <!-- Future Architecture Section -->
+      <section class="architecture-section">
+        <h2 class="h2 fw-bold mb-3">Future Architecture</h2>
+        <p class="text-muted mb-4">
+          Our planned improvements include the integration of an analytics platform that will collect
+          data from user interactions with the client website. This data will be processed to provide
+          valuable insights through a dedicated dashboard accessible to administrators, enabling
+          data-driven decision making and improved user experience.
+        </p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+              A[Client Website] -->|API Requests| B[SuiteCRM API]
+              B --> C[SuiteCRM Database]
+              A -->|Static Assets| D[Static File Server]
+              E[Admin Users] -->|Manage| A
+              F[End Users] -->|View| A
+              A -->|Analytics Data| G[Analytics Platform]
+              G -->|Insights| H[Dashboard]
+              H -->|View| E
+          </div>
+        </div>
+      </section>
+      
+      <!-- Additional Information -->
+      <section class="component-list">
+        <h3 class="h3 fw-bold">Key Components</h3>
+        <ul>
+          <li><span class="component-name">Client Website:</span> The main interface for users and administrators</li>
+          <li><span class="component-name">SuiteCRM API:</span> Handles data operations and business logic</li>
+          <li><span class="component-name">Static File Server:</span> Delivers images, stylesheets, and other static assets</li>
+          <li><span class="component-name">Analytics Platform:</span> Collects and processes user interaction data</li>
+          <li><span class="component-name">Dashboard:</span> Visualizes insights from the analytics platform</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Mermaid.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+  });
+</script>
+{% endblock %} 

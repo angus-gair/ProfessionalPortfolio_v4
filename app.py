@@ -43,6 +43,10 @@ def experience():
 def contact():
     return render_template('contact.html', active_page='contact')
 
+@app.route('/architecture')
+def architecture():
+    return render_template('architecture.html', active_page='architecture')
+
 @app.route('/optimisation')
 def optimisation():
     """Serve the Christmas budget optimisation HTML file directly with collapsible sections."""
