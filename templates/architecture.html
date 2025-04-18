@@ -38,6 +38,11 @@
   .component-name {
     font-weight: 600;
   }
+  .tech-details {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-left: 1.5rem;
+  }
 </style>
 {% endblock %}
 
@@ -52,7 +57,7 @@
           These diagrams illustrate the structure and flow of our system architecture, 
           showcasing both our current implementation and our future roadmap. Understanding 
           these diagrams provides insight into how different components interact to deliver 
-          a cohesive experience.
+          a cohesive experience for small to medium businesses seeking comprehensive data solutions.
         </p>
       </div>
     </div>
@@ -66,54 +71,207 @@
         <p class="text-muted mb-4">
           Our current system architecture implements a client-server model where the client website
           interfaces with the SuiteCRM API to serve content to both administrative users and end users.
-          Static assets are managed through a dedicated file server to ensure optimal performance and
-          reliability.
+          The architecture uses MySQL databases for the CRM and static assets are managed through a 
+          dedicated file server to ensure optimal performance and reliability.
         </p>
         <div class="diagram-container">
           <div class="mermaid">
             graph TD
-              A[Client Website] -->|API Requests| B[SuiteCRM API]
-              B --> C[SuiteCRM Database]
-              A -->|Static Assets| D[Static File Server]
+              %% Client Side
+              A[Client Website<br>ReactJS] -->|API Requests| B[SuiteCRM API<br>PHP/REST]
+              
+              %% Backend Systems
+              B --> C[(SuiteCRM Database<br>MySQL)]
+              A -->|Static Assets| D[Static File Server<br>AWS S3]
+              
+              %% User Types
               E[Admin Users] -->|Manage| A
               F[End Users] -->|View| A
+              
+              %% Communication Channels
+              A -->|Email Notifications| G[Email Service<br>SendGrid]
+              
+              %% Basic Analytics
+              A -->|Page Views| H[Basic Analytics<br>Google Analytics]
+              
+              %% DevOps
+              I[CI/CD Pipeline<br>Jenkins] -->|Deploy| A
+              I -->|Deploy| B
+              
+              %% Style definitions
+              classDef database fill:#f9f,stroke:#333,stroke-width:2px
+              classDef frontend fill:#bbf,stroke:#333,stroke-width:1px
+              classDef backend fill:#bfb,stroke:#333,stroke-width:1px
+              classDef users fill:#fbb,stroke:#333,stroke-width:1px
+              classDef devops fill:#fcf,stroke:#333,stroke-width:1px
+              
+              %% Apply styles
+              class A frontend
+              class B,G backend
+              class C,D database
+              class E,F users
+              class H,I devops
           </div>
         </div>
       </section>
 
       <!-- Future Architecture Section -->
       <section class="architecture-section">
-        <h2 class="h2 fw-bold mb-3">Future Architecture</h2>
+        <h2 class="h2 fw-bold mb-3">Future Architecture: Integrated Data & AI Platform</h2>
         <p class="text-muted mb-4">
-          Our planned improvements include the integration of an analytics platform that will collect
-          data from user interactions with the client website. This data will be processed to provide
-          valuable insights through a dedicated dashboard accessible to administrators, enabling
-          data-driven decision making and improved user experience.
+          Our advanced architecture creates a comprehensive data ecosystem that integrates client websites, 
+          CRM systems, analytics platforms, and AI-driven insights. This modern workflow orchestration enables 
+          small to medium businesses to leverage enterprise-grade data solutions with seamless flow between 
+          all components. The platform captures data from multiple sources including website interactions, 
+          CRM activities, third-party systems, and public data repositories.
         </p>
         <div class="diagram-container">
           <div class="mermaid">
             graph TD
-              A[Client Website] -->|API Requests| B[SuiteCRM API]
-              B --> C[SuiteCRM Database]
-              A -->|Static Assets| D[Static File Server]
+              %% Client-Facing Systems
+              A[Client Website<br>ReactJS/NextJS] -->|API Gateway| B[SuiteCRM API<br>REST/GraphQL]
+              B --> C[(SuiteCRM Database<br>PostgreSQL)]
+              A -->|Static Assets| D[CDN<br>CloudFront]
+              
+              %% User Types & Communication
               E[Admin Users] -->|Manage| A
               F[End Users] -->|View| A
-              A -->|Analytics Data| G[Analytics Platform]
-              G -->|Insights| H[Dashboard]
-              H -->|View| E
+              K[SMS Gateway<br>Twilio] <-->|Bidirectional| B
+              L[Email Service<br>AWS SES] <-->|Bidirectional| B
+              
+              %% Data Collection Layer
+              A -->|Client Events| M[Web Analytics<br>Google Analytics 4]
+              A -->|Server Events| N[Event Stream<br>Kafka]
+              B -->|CRM Events| N
+              
+              %% Data Storage & Processing
+              N -->|ETL Pipeline| O[Data Lake<br>AWS S3]
+              P[External Sources<br>ABS Data] -->|ETL Pipeline| O
+              O -->|Stream Processing| Q[Data Warehouse<br>Snowflake]
+              
+              %% AI & Analytics Platform
+              Q -->|Structured Data| R[Analytics Platform<br>Custom Dashboard]
+              Q -->|Training Data| S[ML Pipeline<br>TensorFlow/PyTorch]
+              O -->|Unstructured Data| T[AI Processing<br>LLMs/NLP]
+              
+              %% Insights Delivery
+              R -->|Business Insights| E
+              S -->|Predictions| R
+              T -->|Enrichment| R
+              T -->|Content Generation| A
+              
+              %% DevOps & CI/CD
+              U[Infrastructure as Code<br>Terraform] -->|Provision| V[Kubernetes Cluster]
+              W[CI/CD Pipeline<br>GitHub Actions] -->|Deploy| V
+              V -->|Orchestrate| X[Microservices<br>Docker Containers]
+              X --->|Serve| A
+              X --->|Serve| B
+              X --->|Serve| R
+              
+              %% Monitoring & Observability
+              Y[Monitoring<br>Prometheus/Grafana] -->|Alert| Z[DevOps Team]
+              V -->|Metrics| Y
+              
+              %% Style definitions
+              classDef database fill:#f9f,stroke:#333,stroke-width:2px
+              classDef frontend fill:#bbf,stroke:#333,stroke-width:1px
+              classDef backend fill:#bfb,stroke:#333,stroke-width:1px
+              classDef users fill:#fbb,stroke:#333,stroke-width:1px
+              classDef dataProcessing fill:#fcf,stroke:#333,stroke-width:1px
+              classDef aiServices fill:#ffc,stroke:#333,stroke-width:1px
+              classDef devops fill:#cff,stroke:#333,stroke-width:1px
+              
+              %% Apply styles
+              class A,R frontend
+              class B,K,L,X backend
+              class C,Q,O database
+              class E,F,Z users
+              class M,N,P dataProcessing
+              class S,T aiServices
+              class U,V,W,Y devops
           </div>
         </div>
       </section>
       
       <!-- Additional Information -->
       <section class="component-list">
-        <h3 class="h3 fw-bold">Key Components</h3>
+        <h3 class="h3 fw-bold">Key Components & Technical Details</h3>
         <ul>
-          <li><span class="component-name">Client Website:</span> The main interface for users and administrators</li>
-          <li><span class="component-name">SuiteCRM API:</span> Handles data operations and business logic</li>
-          <li><span class="component-name">Static File Server:</span> Delivers images, stylesheets, and other static assets</li>
-          <li><span class="component-name">Analytics Platform:</span> Collects and processes user interaction data</li>
-          <li><span class="component-name">Dashboard:</span> Visualizes insights from the analytics platform</li>
+          <li>
+            <span class="component-name">Client Website:</span> React/NextJS frontend with server-side rendering
+            <div class="tech-details">Modern JavaScript framework with TypeScript, TailwindCSS, and responsive design</div>
+          </li>
+          <li>
+            <span class="component-name">SuiteCRM:</span> Open-source Customer Relationship Management
+            <div class="tech-details">Customized PHP application with PostgreSQL database for ACID compliance</div>
+          </li>
+          <li>
+            <span class="component-name">API Gateway:</span> Central entry point for all API requests
+            <div class="tech-details">AWS API Gateway or Kong with JWT authentication and rate limiting</div>
+          </li>
+          <li>
+            <span class="component-name">Data Lake:</span> Raw data storage for all system data
+            <div class="tech-details">S3-compatible object storage with partitioning and compression</div>
+          </li>
+          <li>
+            <span class="component-name">Data Warehouse:</span> Structured analytical storage
+            <div class="tech-details">Snowflake with dimensional modeling for fast analytical queries</div>
+          </li>
+          <li>
+            <span class="component-name">Event Stream:</span> Real-time data processing pipeline
+            <div class="tech-details">Apache Kafka for high-throughput, fault-tolerant event processing</div>
+          </li>
+          <li>
+            <span class="component-name">Machine Learning Pipeline:</span> Self-hosted ML tools
+            <div class="tech-details">TensorFlow/PyTorch with MLflow for experiment tracking</div>
+          </li>
+          <li>
+            <span class="component-name">AI Processing:</span> Advanced AI capabilities
+            <div class="tech-details">Containerized LLMs, NLP services, and customized AI models</div>
+          </li>
+          <li>
+            <span class="component-name">DevOps Infrastructure:</span> Modern deployment pipeline
+            <div class="tech-details">Kubernetes orchestration with Terraform IaC and GitHub Actions</div>
+          </li>
+          <li>
+            <span class="component-name">External Data Integration:</span> ABS and other data sources
+            <div class="tech-details">Scheduled ETL jobs with data validation and transformation</div>
+          </li>
+          <li>
+            <span class="component-name">Analytics Platform:</span> Custom interactive dashboards
+            <div class="tech-details">React-based dashboards with D3.js visualizations and real-time updates</div>
+          </li>
+          <li>
+            <span class="component-name">Communication Channels:</span> Multi-channel customer engagement
+            <div class="tech-details">SMS via Twilio, Email via AWS SES with templating and tracking</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Business Value Section -->
+      <section class="component-list mt-5">
+        <h3 class="h3 fw-bold">Business Value for SMBs</h3>
+        <ul>
+          <li>
+            <span class="component-name">360° Customer View:</span> Integrate all customer touchpoints
+            <div class="tech-details">Website behavior, purchase history, support interactions, and communication preferences</div>
+          </li>
+          <li>
+            <span class="component-name">Automated Intelligence:</span> AI-driven insights without technical expertise
+            <div class="tech-details">Predictive analytics, anomaly detection, and recommendation engines</div>
+          </li>
+          <li>
+            <span class="component-name">Scalable Infrastructure:</span> Enterprise-grade platform that grows with business
+            <div class="tech-details">Auto-scaling resources, pay-per-use pricing model, and flexible storage</div>
+          </li>
+          <li>
+            <span class="component-name">Integrated Communication:</span> Omnichannel customer engagement
+            <div class="tech-details">Triggered communications based on customer behavior and preferences</div>
+          </li>
+          <li>
+            <span class="component-name">External Data Enrichment:</span> Market context for better decisions
+            <div class="tech-details">ABS demographic data, industry benchmarks, and economic indicators</div>
+          </li>
         </ul>
       </section>
     </div>
@@ -129,7 +287,11 @@
     mermaid.initialize({
       startOnLoad: true,
       theme: 'default',
-      securityLevel: 'loose'
+      securityLevel: 'loose',
+      flowchart: {
+        curve: 'basis',
+        useMaxWidth: false
+      }
     });
   });
 </script>
