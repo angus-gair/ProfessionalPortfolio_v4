@@ -1,0 +1,29 @@
+                            <div class="mermaid" style="height: 380px;">
+                                flowchart TB
+                                    linkStyle default stroke-width:1px;
+                                    subgraph "Source Layer"
+                                        A1["Customer Database"]
+                                        A2["Transaction Data"]
+                                        A3["Campaign Data"]
+                                        A4["Geographic Data"]
+                                    end
+
+                                    subgraph "Integration Layer"
+                                        B1["Geographic Mapping"]
+                                        B2["Customer Integration"]
+                                        B3["Data Model"]
+                                    end
+
+                                    subgraph "Analytics Layer"
+                                        C1["Loyalty Analytics"]
+                                        C2["Segmentation"]
+                                        C3["Marketing Mix Model"]
+                                    end
+
+                                    A1 & A2 & A3 & A4 --> B1 & B2
+                                    B1 & B2 --> B3
+                                    B3 --> C1 & C2 & C3
+                            </div>
+                            <div class="mt-3 text-center">
+                                <a href="{{ url_for('mmm_viz') }}" class="btn btn-sm btn-primary">View Full Data Pipeline Visualization</a>
+                            </div>
