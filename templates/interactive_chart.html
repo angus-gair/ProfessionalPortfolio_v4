@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Interactive Chart - Angus Gair{% endblock %}
+
+{% block page_category %}projects{% endblock %}
+
+{% block content %}
+    <!-- Header Section -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Interactive Campaign Chart</h1>
+            <p class="lead">Explore the data visualization for the Christmas Campaign Budget Optimization project.</p>
+        </div>
+    </section>
+
+    <!-- Interactive Chart Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="interactive-chart" style="width: 100%; height: 600px;">
+                                <!-- The interactive chart will be embedded here -->
+                                <iframe id="plotly-chart" src="{{ url_for('static', filename='interactive_chart.html') }}" 
+                                        width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h4>About This Visualization</h4>
+                                <p>
+                                    This interactive chart demonstrates the XGBoost model's predictions for marketing 
+                                    channel performance across different budget allocations. Use the interactive controls 
+                                    to explore different scenarios and see how changing allocations affects expected ROI.
+                                </p>
+                                <p>
+                                    The visualization uses Plotly.js to render real-time performance metrics based on the 
+                                    trained campaign optimization model.
+                                </p>
+                            </div>
+                            
+                            <div class="mt-4 text-center">
+                                <a href="{{ url_for('projects') }}" class="btn btn-primary">Back to Projects</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
