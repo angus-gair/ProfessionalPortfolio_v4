@@ -1,0 +1,51 @@
+                            <h2 class="card-title mb-3">Comprehensive Data Pipeline for BIGW</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">ETL</span>
+                                <span class="badge bg-success">Data Integration</span>
+                                <span class="badge bg-info">Marketing Analytics</span>
+                                <span class="badge bg-warning text-dark">Business Intelligence</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: BIGW Marketing Team</h5>
+                            <p class="card-text">
+                                Developed a comprehensive data pipeline and analytics solution to integrate marketing campaign data, 
+                                customer behavior, and sales performance across multiple business units, enabling data-driven 
+                                decision making for marketing strategy.
+                            </p>
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li>Designed and implemented a sophisticated ETL pipeline integrating multiple data sources:
+                                    <ul>
+                                        <li>Customer transaction data across 5 business destinations</li>
+                                        <li>Marketing campaign performance metrics (ATL/BTL)</li>
+                                        <li>Subscription program data (Everyday Extra)</li>
+                                        <li>Geographic market segmentation</li>
+                                        <li>Customer loyalty metrics</li>
+                                    </ul>
+                                </li>
+                                <li>Created a unified data model that:
+                                    <ul>
+                                        <li>Maps customer behavior across different geographic markets</li>
+                                        <li>Tracks campaign effectiveness by business unit</li>
+                                        <li>Monitors subscription program performance</li>
+                                        <li>Measures loyalty program engagement</li>
+                                    </ul>
+                                </li>
+                                <li>Built a scalable analytics framework that:
+                                    <ul>
+                                        <li>Processes over 170M customer transactions</li>
+                                        <li>Handles complex geographic segmentation (Metro/Regional markets)</li>
+                                        <li>Supports multiple business units (Clothing, Home Living, Toys & Leisure, etc.)</li>
+                                        <li>Enables granular analysis at store/postcode level</li>
+                                    </ul>
+                                </li>
+                                <li>Delivered actionable insights:
+                                    <ul>
+                                        <li>Identified key performance drivers by business unit</li>
+                                        <li>Tracked subscription program growth and impact</li>
+                                        <li>Measured campaign effectiveness across different market segments</li>
+                                        <li>Enabled data-driven marketing budget allocation</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h5>Tools & Technologies:</h5>
+                            <p>SQL, Python (pandas, numpy), Tableau, Power BI, AWS</p>

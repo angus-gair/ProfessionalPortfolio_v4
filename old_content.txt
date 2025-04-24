@@ -1,0 +1,23 @@
+                            <h2 class="card-title mb-3">Media Mix Model for BIGW</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">R</span>
+                                <span class="badge bg-success">Time Series Analysis</span>
+                                <span class="badge bg-info">Marketing ROI</span>
+                                <span class="badge bg-warning text-dark">Regression</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: BIGW Marketing Team</h5>
+                            <p class="card-text">
+                                Developed a sophisticated media mix model to quantify the impact of different marketing 
+                                channels on sales performance, allowing for optimised budget allocation across TV, digital, 
+                                radio, print, and promotional activities.
+                            </p>
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li>Built time series models incorporating seasonality, trend, and promotional effects</li>
+                                <li>Analyzed 3 years of weekly marketing spend and sales data</li>
+                                <li>Quantified ROI for each marketing channel and campaign type</li>
+                                <li>Created scenario planning tool that identified 18% potential improvement in marketing ROI</li>
+                                <li>Presented findings to C-level executives with clear, actionable recommendations</li>
+                            </ul>
+                            <h5>Tools & Technologies:</h5>
+                            <p>R (tidyverse, forecast, prophet), SQL, Tableau, Excel</p>
