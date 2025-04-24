@@ -205,6 +205,11 @@ def get_notebook_content(notebook_path):
     except Exception as e:
         app.logger.error(f"Error getting notebook content: {str(e)}")
         return jsonify({"error": "Failed to get notebook content", "details": str(e)}), 500
+@app.route("/mmm-viz")
+def mmm_viz():
+    """Serve the Marketing Mix Modeling visualization page."""
+    return render_template("mmm_viz.html", active_page="projects")
+
 
 @app.route('/analytics-debug')
 @app.route('/analytics_debug')  # Add a route with underscore for consistency

@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+
+{% block title %}Marketing Mix Modeling Pipeline - Angus Gair{% endblock %}
+
+{% block page_category %}projects{% endblock %}
+
+{% block content %}
+    <!-- Header Section -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Marketing Mix Modeling Pipeline</h1>
+            <p class="lead">A sophisticated data pipeline that processes customer data, transactions, and marketing campaigns to create a comprehensive marketing mix model.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="lead text-center mb-4">
+                                This system integrates geographic segmentation with customer behavior analysis for targeted marketing insights.
+                            </p>
+
+                            <!-- System Architecture Section -->
+                            <h2 class="card-title mt-5 mb-4">System Architecture Overview</h2>
+                            <div class="alert alert-info">
+                                This diagram shows the high-level data flow from source systems through transformation stages to final model output.
+                            </div>
+                            <div class="mermaid">
+                                flowchart TB
+                                    linkStyle default stroke-width:1px;
+                                    subgraph "Source Layer"
+                                        A1["Customer Database"]
+                                        A2["Transaction Data"]
+                                        A3["Marketing Campaign Data"]
+                                        A4["Geographic Data"]
+                                        A5["Location Data"]
+                                    end
+
+                                    subgraph "Integration Layer"
+                                        B1["Geographic Mapping"]
+                                        B2["Customer Location"]
+                                        B3["Customer Base"]
+                                        B4["Product Categories"]
+                                        B5["Time Series Data"]
+                                    end
+
+                                    subgraph "Analytics Layer"
+                                        C1["Loyalty Analytics"]
+                                        C2["Membership Analysis"]
+                                        C3["Customer Segmentation"]
+                                        C4["Growth Metrics"]
+                                    end
+
+                                    subgraph "Campaign Layer"
+                                        D1["Campaign Setup"]
+                                        D2["Response Tracking"]
+                                        D3["Geographic Analysis"]
+                                        D4["Performance Analytics"]
+                                    end
+
+                                    Z["Marketing Mix Model"]
+
+                                    A1 & A2 & A3 & A4 & A5 --> B1 & B2
+                                    B1 & B2 --> B3 --> B4 --> B5
+                                    B5 --> C1 & C2 & C3 & C4
+                                    B5 --> D1 --> D2 --> D3 --> D4
+                                    C1 & C2 & C3 & C4 & D4 --> Z
+                            </div>
+
+                            <!-- Data Model Section -->
+                            <h2 class="card-title mt-5 mb-4">Data Model Relationships</h2>
+                            <div class="alert alert-info">
+                                Entity relationship diagram showing the core data model and key relationships between components.
+                            </div>
+                            <div class="mermaid">
+                                %%{ init: { 
+                                    "theme": "base",
+                                    "themeVariables": {
+                                        "primaryColor": "#E3F2FD",
+                                        "primaryTextColor": "#1565C0",
+                                        "primaryBorderColor": "#90CAF9",
+                                        "lineColor": "#1565C0",
+                                        "nodeBorder": "#1565C0",
+                                        "mainBkg": "#FFFFFF",
+                                        "clusterBkg": "#F8F9FA",
+                                        "edgeLabelBackground": "#FFFFFF"
+                                    },
+                                    "er": { 
+                                        "linkStyle": { "stroke-width": 1 } 
+                                    }
+                                } }%%
+                                erDiagram
+                                    LOCATION_MAPPING ||--o{ CUSTOMER_LOCATION : "defines"
+                                    CUSTOMER_LOCATION ||--o{ CUSTOMER_BASE : "belongs to"
+                                    CUSTOMER_BASE ||--|{ PRODUCT_CATEGORIES : "purchases in"
+                                    PRODUCT_CATEGORIES ||--|{ TIME_SERIES : "tracked over"
+                                    TRANSACTION_DATA }|--|| MEMBER_BENEFITS : "earns"
+                                    LOYALTY_BASE }|--|| MODEL_OUTPUT : "influences"
+                                    MEMBER_METRICS }|--|| MODEL_OUTPUT : "contributes to"
+                                    CUSTOMER_STATUS }|--|| MODEL_OUTPUT : "affects"
+                                    CAMPAIGN_METRICS }|--|| MODEL_OUTPUT : "drives"
+                            </div>
+
+                            <!-- ETL Process Flow Section -->
+                            <h2 class="card-title mt-5 mb-4">ETL Process Flow</h2>
+                            <div class="alert alert-info">
+                                Detailed transformation pipeline showing data processing stages and dependencies.
+                            </div>
+                            <div class="mermaid">
+                                flowchart TD
+                                    linkStyle default stroke-width:1px;
+                                    subgraph "Data Integration"
+                                        S1["Geographic Processing"] --> S2["Customer Integration"]
+                                        S2 --> S3["Product Mapping"]
+                                        S3 --> S4["Time Series Creation"]
+                                    end
+
+                                    subgraph "Metrics Processing"
+                                        M1["Transaction Analysis"] --> M2["Loyalty Calculations"]
+                                        M2 --> M3["Customer Metrics"]
+                                        M3 --> M4["Growth Analytics"]
+                                    end
+
+                                    subgraph "Campaign Analysis"
+                                        C1["Campaign Setup"] --> C2["Response Tracking"]
+                                        C2 --> C3["Performance Metrics"]
+                                        C3 --> C4["ROI Analysis"]
+                                    end
+
+                                    S4 --> M1
+                                    M4 --> F1["Model Input Preparation"]
+                                    C4 --> F1
+                                    F1 --> F2["Final Model"]
+                            </div>
+
+                            <!-- Geographic Segmentation Section -->
+                            <h2 class="card-title mt-5 mb-4">Geographic Segmentation</h2>
+                            <div class="alert alert-info">
+                                Market structure showing geographic hierarchy and segmentation approach.
+                            </div>
+                            <div class="mermaid">
+                                flowchart TD
+                                    linkStyle default stroke-width:1px;
+                                    Market["Market Segments"] --> Market1["Urban Markets"] & Market2["Rural Markets"]
+                                    Market1 --> Cities["Major Metropolitan Areas"]
+                                    Market2 --> Regions["Regional Zones"]
+                                    Cities & Regions --> Sub["Local Market Areas"]
+                            </div>
+
+                            <!-- Key Components Section -->
+                            <h2 class="card-title mt-5 mb-4">Key Components</h2>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Integration Layer</h3>
+                                            <p class="card-text">Combines customer data with geographic and product information to create a unified view of customer behavior across markets.</p>
+                                            <p class="card-text"><strong>Key processes:</strong> Location mapping, customer profiling, product categorization</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Analytics Layer</h3>
+                                            <p class="card-text">Processes customer interactions and campaign responses to generate insights on marketing effectiveness.</p>
+                                            <p class="card-text"><strong>Key metrics:</strong> Response rates, conversion metrics, customer lifetime value</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Campaign Layer</h3>
+                                            <p class="card-text">Tracks and analyzes marketing campaign performance across different channels and segments.</p>
+                                            <p class="card-text"><strong>Focus areas:</strong> Channel effectiveness, segment response, ROI analysis</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Model Metrics Section -->
+                            <h2 class="card-title mt-5 mb-4">Model Metrics</h2>
+                            <div class="row">
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Customer Metrics</h4>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Loyalty Program Engagement</li>
+                                                <li class="list-group-item">Customer Lifetime Value</li>
+                                                <li class="list-group-item">Purchase Frequency</li>
+                                                <li class="list-group-item">Category Penetration</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Campaign Metrics</h4>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Response Rates</li>
+                                                <li class="list-group-item">Channel Performance</li>
+                                                <li class="list-group-item">Geographic Response</li>
+                                                <li class="list-group-item">Campaign ROI</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Business Metrics</h4>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Category Performance</li>
+                                                <li class="list-group-item">Market Share</li>
+                                                <li class="list-group-item">Revenue Growth</li>
+                                                <li class="list-group-item">Customer Acquisition Cost</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 text-center">
+                                <a href="{{ url_for('projects') }}" class="btn btn-primary">Back to Projects</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        mermaid.initialize({
+            theme: 'base',
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            },
+            themeVariables: {
+                primaryColor: '#E3F2FD',
+                primaryTextColor: '#1565C0',
+                primaryBorderColor: '#90CAF9',
+                lineColor: '#1565C0',
+                secondaryColor: '#F3E5F5',
+                tertiaryColor: '#FFF3E0',
+                mainBkg: '#FFFFFF',
+                nodeBorder: '#1565C0',
+                clusterBkg: '#F8F9FA',
+                clusterBorder: '#E3F2FD',
+                titleColor: '#1565C0',
+                edgeLabelBackground: '#FFFFFF',
+                link: {
+                    stroke: '#1565C0',
+                    'stroke-width': 1
+                }
+            },
+            securityLevel: 'loose',
+            fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial'
+        });
+    });
+</script>
+{% endblock %}
