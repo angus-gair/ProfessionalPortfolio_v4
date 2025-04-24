@@ -208,6 +208,7 @@ def get_notebook_content(notebook_path):
 @app.route("/mmm-viz")
 def mmm_viz():
     """Serve the Marketing Mix Modeling visualization page."""
+    return render_template("mmm_viz.html", active_page="projects")
 
 @app.route("/interactive-chart")
 def interactive_chart():
