@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Interactive Chart - Angus Gair{% endblock %}
+{% block title %}Campaign Budget Optimization - Angus Gair{% endblock %}
 
 {% block page_category %}projects{% endblock %}
 
@@ -8,41 +8,60 @@
     <!-- Header Section -->
     <section class="py-5 bg-dark text-white">
         <div class="container">
-            <h1 class="display-4 fw-bold">Interactive Campaign Chart</h1>
-            <p class="lead">Explore the data visualization for the Christmas Campaign Budget Optimization project.</p>
+            <h1 class="display-4 fw-bold">Christmas Campaign Budget Optimization</h1>
+            <p class="lead">Marketing channel allocation model using XGBoost to maximize ROI.</p>
         </div>
     </section>
 
-    <!-- Interactive Chart Section -->
+    <!-- Visualization Section -->
     <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="iframe-container" style="position: relative; width: 100%; height: 0; padding-bottom: 60%; overflow: hidden; border: 1px solid #dee2e6; border-radius: 4px;">
-                                <!-- The interactive chart will be embedded here -->
-                                <iframe 
-                                    src="{{ url_for('static', filename='interactive_chart.html') }}" 
-                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
-                                    frameborder="0" 
-                                    scrolling="no" 
-                                    allowfullscreen>
-                                </iframe>
+                            <div class="visualization-container text-center mb-4">
+                                <img src="{{ url_for('static', filename='images/xgboost_chart.png') }}" 
+                                     alt="XGBoost Budget Optimization Chart" 
+                                     class="img-fluid rounded" 
+                                     style="max-width: 100%; border: 1px solid #dee2e6; max-height: 600px;">
                             </div>
                             
-                            <div class="mt-4">
-                                <h4>About This Visualization</h4>
-                                <p>
-                                    This interactive chart demonstrates the XGBoost model's predictions for marketing 
-                                    channel performance across different budget allocations. Use the interactive controls 
-                                    to explore different scenarios and see how changing allocations affects expected ROI.
-                                </p>
-                                <p>
-                                    The visualization shows both the allocated budget and predicted revenue for each marketing 
-                                    channel based on the model's analysis of historical campaign data. The greatest ROI is 
-                                    shown in the Email channel, followed by SEM, Social Media, and Display advertising.
-                                </p>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <h4>Model Overview</h4>
+                                    <p>
+                                        This chart shows the results of an XGBoost model trained to optimize a $10M Christmas marketing 
+                                        budget across multiple channels. The model predicts both the optimal budget allocation and 
+                                        the expected revenue for each channel.
+                                    </p>
+                                    <p>
+                                        <strong>Key channels analyzed:</strong>
+                                        <ul>
+                                            <li><strong>Email Marketing:</strong> Highest ROI at 3.7x</li>
+                                            <li><strong>SEM (Search Engine Marketing):</strong> 2.8x ROI</li>
+                                            <li><strong>Social Media:</strong> 2.1x ROI</li>
+                                            <li><strong>Display Advertising:</strong> 1.5x ROI</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>Technical Implementation</h4>
+                                    <p>
+                                        The optimization model was built using:
+                                    </p>
+                                    <ul>
+                                        <li>Python with scikit-learn and XGBoost libraries</li>
+                                        <li>Historical campaign data from previous 3 years</li>
+                                        <li>Automated feature engineering pipeline for predictor selection</li>
+                                        <li>Cross-validation to ensure model robustness</li>
+                                        <li>Hyperparameter tuning via grid search</li>
+                                    </ul>
+                                    <p>
+                                        The model achieved 15% improvement in marketing ROI compared to previous campaigns,
+                                        resulting in approximately $1.5M in additional revenue.
+                                    </p>
+                                </div>
                             </div>
                             
                             <div class="mt-4 text-center">
