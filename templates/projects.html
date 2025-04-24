@@ -48,15 +48,79 @@
                         <div class="col-lg-4">
 
                             <div class="chart-container mb-3" style="width: 100%; height: 380px; border: 1px solid #dee2e6; border-radius: 4px; overflow: hidden;">
-                                <iframe src="{{ url_for('static', filename='interactive_chart.html') }}" 
-                                        style="width: 100%; height: 100%; border: none;"
-                                        frameborder="0" scrolling="no" allowfullscreen></iframe>
+                                <div class="plotly-chart" id="xgboost-chart" style="width: 100%; height: 100%;"></div>
                             </div>
                             <div class="text-center">
                                 <a href="{{ url_for('interactive_chart') }}" class="btn btn-sm btn-primary">
                                     View Full Interactive Chart
                                 </a>
                             </div>
+                            
+                            <!-- Plotly.js Script -->
+                            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const chartData = [
+                                        {
+                                            x: ['Social Media', 'Email', 'Display', 'SEM'],
+                                            y: [350000, 420000, 290000, 390000],
+                                            type: 'bar',
+                                            name: 'Budget Allocation',
+                                            marker: {
+                                                color: 'rgba(65, 105, 225, 0.8)'
+                                            },
+                                            hoverinfo: 'y+text',
+                                            hovertext: ['ROI: 2.1x', 'ROI: 3.7x', 'ROI: 1.5x', 'ROI: 2.8x']
+                                        },
+                                        {
+                                            x: ['Social Media', 'Email', 'Display', 'SEM'],
+                                            y: [735000, 1554000, 435000, 1092000],
+                                            type: 'bar',
+                                            name: 'Predicted Revenue',
+                                            marker: {
+                                                color: 'rgba(72, 209, 204, 0.8)'
+                                            },
+                                            hoverinfo: 'y+text',
+                                            hovertext: ['ROI: 2.1x', 'ROI: 3.7x', 'ROI: 1.5x', 'ROI: 2.8x']
+                                        }
+                                    ];
+
+                                    const layout = {
+                                        title: 'Christmas Campaign Optimization',
+                                        barmode: 'group',
+                                        autosize: true,
+                                        font: {
+                                            family: 'Arial, sans-serif',
+                                            size: 12
+                                        },
+                                        margin: {
+                                            l: 50,
+                                            r: 20,
+                                            t: 50,
+                                            b: 80
+                                        },
+                                        xaxis: {
+                                            title: 'Marketing Channel'
+                                        },
+                                        yaxis: {
+                                            title: 'Amount ($)',
+                                            tickprefix: '$'
+                                        },
+                                        legend: {
+                                            orientation: 'h',
+                                            y: -0.2
+                                        }
+                                    };
+
+                                    const config = {
+                                        responsive: true,
+                                        displayModeBar: false
+                                    };
+
+                                    // Create the chart
+                                    Plotly.newPlot('xgboost-chart', chartData, layout, config);
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
