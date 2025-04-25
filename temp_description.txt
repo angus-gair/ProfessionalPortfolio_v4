@@ -1,0 +1,4 @@
+                            <p class="card-text">
+                                Engineered an end-to-end data pipeline and analytics solution to monitor loyalty program performance, 
+                                enabling data-driven marketing strategy, customer segmentation, and program optimization.
+                            </p>

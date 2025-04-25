@@ -1,0 +1,38 @@
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li><strong>Designed a sophisticated data pipeline architecture that:</strong>
+                                    <ul>
+                                        <li>Integrates multiple data sources (transactions, customer profiles, campaigns, subscriptions)</li>
+                                        <li>Implements custom fiscal calendar mapping for retail-specific time analysis</li>
+                                        <li>Features a multi-stage ETL process with sequential data transformations</li>
+                                        <li>Produces a cohesive set of 18+ key performance metrics with comparative analysis</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Implemented advanced data processing techniques for:</strong>
+                                    <ul>
+                                        <li>Customer segmentation and hierarchical member classification</li>
+                                        <li>Transaction analysis with basket-level data modeling</li>
+                                        <li>Frequency and engagement metrics calculation</li>
+                                        <li>Subscription program performance tracking</li>
+                                        <li>Campaign effectiveness measurement across different customer segments</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Built a scalable analytics framework with:</strong>
+                                    <ul>
+                                        <li>A sophisticated entity-relationship model connecting core business metrics</li>
+                                        <li>Processing capability for millions of monthly customer transactions</li>
+                                        <li>Computationally efficient SQL with optimized window functions and joins</li>
+                                        <li>Automatic generation of month-over-month and year-on-year comparisons</li>
+                                        <li>Quantifiable metrics for program ROI and member value calculations</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Delivered actionable business intelligence:</strong>
+                                    <ul>
+                                        <li>Customer acquisition and retention performance metrics</li>
+                                        <li>Subscription program growth and member engagement analytics</li>
+                                        <li>Transaction value and purchase frequency by member segment</li>
+                                        <li>Program participation optimization opportunities</li>
+                                        <li>Visualized performance trends with drill-down capabilities</li>
+                                    </ul>
+                                </li>
+                            </ul>

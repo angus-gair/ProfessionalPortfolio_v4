@@ -1,0 +1,468 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects - Angus Gair{% endblock %}
+
+{% block page_category %}projects{% endblock %}
+
+{% block content %}
+    <!-- Header Section -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Projects</h1>
+            <p class="lead">A showcase of my data analysis and visualisation work across different industries.</p>
+        </div>
+    </section>
+
+    <!-- Main Projects Section -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Project 1 -->
+            <div id="xgboost" class="card mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h2 class="card-title mb-3">Christmas Campaign Budget Optimisation</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">XGBoost</span>
+                                <span class="badge bg-success">Machine Learning</span>
+                                <span class="badge bg-info">Marketing Analytics</span>
+                                <span class="badge bg-secondary">Python</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: Major Retail Chain</h5>
+                            <p class="card-text">
+                                Developed a sophisticated XGBoost machine learning model to optimise allocation of a $10M marketing 
+                                budget across multiple channels (Social Media, SEM, Email, Display) during the critical 
+                                Christmas campaign period.
+                            </p>
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li>Built prediction models using historical campaign data to forecast channel performance</li>
+                                <li>Implemented automated feature engineering pipeline to process 50+ potential predictors</li>
+                                <li>Created interactive scenario planning tool for marketing teams</li>
+                                <li>Delivered 15% improvement in marketing ROI compared to previous year</li>
+                                <li>Produced weekly performance dashboards to track campaign effectiveness</li>
+                            </ul>
+                            <h5>Tools & Technologies:</h5>
+                            <p>Python (Pandas, Scikit-learn, XGBoost), SQL, Tableau, Git</p>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="chart-container mb-3" style="width: 100%; height: 380px; border: 1px solid #dee2e6; border-radius: 4px; overflow: hidden;">
+                                <div class="plotly-chart" id="xgboost-chart" style="width: 100%; height: 100%;"></div>
+                            </div>
+                            <div class="text-center">
+                                <a href="{{ url_for('interactive_chart') }}" class="btn btn-sm btn-primary">
+                                    View Full Interactive Chart
+                                </a>
+                            </div>
+                            
+                            <!-- Plotly.js Script -->
+                            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const chartData = [
+                                        {
+                                            x: ['Social Media', 'Email', 'Display', 'SEM'],
+                                            y: [350000, 420000, 290000, 390000],
+                                            type: 'bar',
+                                            name: 'Budget Allocation',
+                                            marker: {
+                                                color: 'rgba(65, 105, 225, 0.8)'
+                                            },
+                                            hoverinfo: 'y+text',
+                                            hovertext: ['ROI: 2.1x', 'ROI: 3.7x', 'ROI: 1.5x', 'ROI: 2.8x']
+                                        },
+                                        {
+                                            x: ['Social Media', 'Email', 'Display', 'SEM'],
+                                            y: [735000, 1554000, 435000, 1092000],
+                                            type: 'bar',
+                                            name: 'Predicted Revenue',
+                                            marker: {
+                                                color: 'rgba(72, 209, 204, 0.8)'
+                                            },
+                                            hoverinfo: 'y+text',
+                                            hovertext: ['ROI: 2.1x', 'ROI: 3.7x', 'ROI: 1.5x', 'ROI: 2.8x']
+                                        }
+                                    ];
+
+                                    const layout = {
+                                        title: 'Christmas Campaign Optimization',
+                                        barmode: 'group',
+                                        autosize: true,
+                                        font: {
+                                            family: 'Arial, sans-serif',
+                                            size: 12
+                                        },
+                                        margin: {
+                                            l: 50,
+                                            r: 20,
+                                            t: 50,
+                                            b: 80
+                                        },
+                                        xaxis: {
+                                            title: 'Marketing Channel'
+                                        },
+                                        yaxis: {
+                                            title: 'Amount ($)',
+                                            tickprefix: '$'
+                                        },
+                                        legend: {
+                                            orientation: 'h',
+                                            y: -0.2
+                                        }
+                                    };
+
+                                    const config = {
+                                        responsive: true,
+                                        displayModeBar: false
+                                    };
+
+                                    // Create the chart
+                                    Plotly.newPlot('xgboost-chart', chartData, layout, config);
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div id="rewards" class="card mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h2 class="card-title mb-3">Comprehensive Retail Loyalty Analytics Dashboard</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">Data Engineering</span>
+                                <span class="badge bg-success">Performance Analytics</span>
+                                <span class="badge bg-info">Business Intelligence</span>
+                                <span class="badge bg-warning text-dark">Customer Insights</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: Major Retail Chain Loyalty Team</h5>
+                            <p class="card-text">
+                                Engineered an end-to-end data pipeline and analytics solution to monitor loyalty program performance, 
+                                enabling data-driven marketing strategy, customer segmentation, and program optimization.
+                            </p>
+
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li><strong>Designed a sophisticated data pipeline architecture that:</strong>
+                                    <ul>
+                                        <li>Integrates multiple data sources (transactions, customer profiles, campaigns, subscriptions)</li>
+                                        <li>Implements custom fiscal calendar mapping for retail-specific time analysis</li>
+                                        <li>Features a multi-stage ETL process with sequential data transformations</li>
+                                        <li>Produces a cohesive set of 18+ key performance metrics with comparative analysis</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Implemented advanced data processing techniques for:</strong>
+                                    <ul>
+                                        <li>Customer segmentation and hierarchical member classification</li>
+                                        <li>Transaction analysis with basket-level data modeling</li>
+                                        <li>Frequency and engagement metrics calculation</li>
+                                        <li>Subscription program performance tracking</li>
+                                        <li>Campaign effectiveness measurement across different customer segments</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Built a scalable analytics framework with:</strong>
+                                    <ul>
+                                        <li>A sophisticated entity-relationship model connecting core business metrics</li>
+                                        <li>Processing capability for millions of monthly customer transactions</li>
+                                        <li>Computationally efficient SQL with optimized window functions and joins</li>
+                                        <li>Automatic generation of month-over-month and year-on-year comparisons</li>
+                                        <li>Quantifiable metrics for program ROI and member value calculations</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Delivered actionable business intelligence:</strong>
+                                    <ul>
+                                        <li>Customer acquisition and retention performance metrics</li>
+                                        <li>Subscription program growth and member engagement analytics</li>
+                                        <li>Transaction value and purchase frequency by member segment</li>
+                                        <li>Program participation optimization opportunities</li>
+                                        <li>Visualized performance trends with drill-down capabilities</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h5>SQL Samples:</h5>
+                            <p>The project involved complex SQL queries to analyze customer behavior patterns:</p>
+                            <pre class="bg-dark text-light p-3 rounded"><code>WITH recent_customers AS (
+  SELECT 
+    customer_id,
+    MAX(transaction_date) as last_purchase_date,
+    COUNT(DISTINCT transaction_id) as transaction_count,
+    SUM(transaction_amount) as total_spend
+  FROM transactions
+  WHERE transaction_date >= DATEADD(month, -3, GETDATE())
+  GROUP BY customer_id
+)
+
+SELECT 
+  rc.customer_id,
+  c.segment,
+  rc.last_purchase_date,
+  rc.transaction_count,
+  rc.total_spend,
+  DATEDIFF(day, rc.last_purchase_date, GETDATE()) as days_since_last_purchase
+FROM recent_customers rc
+JOIN customers c ON rc.customer_id = c.customer_id
+WHERE c.segment = 'Premium'
+ORDER BY days_since_last_purchase;</code></pre>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="tableau-container" id="tableau-rewards" data-tableau-url="https://public.tableau.com/views/CustomerAnalysisDashboard_16775813725990/CustomerAnalysisDashboard">
+                                <!-- Tableau dashboard will be loaded here via JavaScript -->
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <div class="text-center">
+                                        <i class="bi bi-bar-chart-fill display-1 text-muted"></i>
+                                        <p class="mt-3">Dashboard visualisation loading...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div id="media-mix" class="card mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+
+                            <h2 class="card-title mb-3">Comprehensive Data Pipeline for BIGW</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">ETL</span>
+                                <span class="badge bg-success">Data Integration</span>
+                                <span class="badge bg-info">Marketing Analytics</span>
+                                <span class="badge bg-warning text-dark">Business Intelligence</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: BIGW Marketing Team</h5>
+                            <p class="card-text">
+                                Developed a comprehensive data pipeline and analytics solution to integrate marketing campaign data, 
+                                customer behavior, and sales performance across multiple business units, enabling data-driven 
+                                decision making for marketing strategy.
+                            </p>
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li>Designed and implemented a sophisticated ETL pipeline integrating multiple data sources:
+                                    <ul>
+                                        <li>Customer transaction data across 5 business destinations</li>
+                                        <li>Marketing campaign performance metrics (ATL/BTL)</li>
+                                        <li>Subscription program data (Everyday Extra)</li>
+                                        <li>Geographic market segmentation</li>
+                                        <li>Customer loyalty metrics</li>
+                                    </ul>
+                                </li>
+                                <li>Created a unified data model that:
+                                    <ul>
+                                        <li>Maps customer behavior across different geographic markets</li>
+                                        <li>Tracks campaign effectiveness by business unit</li>
+                                        <li>Monitors subscription program performance</li>
+                                        <li>Measures loyalty program engagement</li>
+                                    </ul>
+                                </li>
+                                <li>Built a scalable analytics framework that:
+                                    <ul>
+                                        <li>Processes over 170M customer transactions</li>
+                                        <li>Handles complex geographic segmentation (Metro/Regional markets)</li>
+                                        <li>Supports multiple business units (Clothing, Home Living, Toys & Leisure, etc.)</li>
+                                        <li>Enables granular analysis at store/postcode level</li>
+                                    </ul>
+                                </li>
+                                <li>Delivered actionable insights:
+                                    <ul>
+                                        <li>Identified key performance drivers by business unit</li>
+                                        <li>Tracked subscription program growth and impact</li>
+                                        <li>Measured campaign effectiveness across different market segments</li>
+                                        <li>Enabled data-driven marketing budget allocation</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h5>Tools & Technologies:</h5>
+                            <p>SQL, Python (pandas, numpy), Tableau, Power BI, AWS</p>                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="mermaid" style="height: 380px;">
+                                flowchart TB
+                                    linkStyle default stroke-width:1px;
+                                    subgraph "Source Layer"
+                                        A1["Customer Database"]
+                                        A2["Transaction Data"]
+                                        A3["Campaign Data"]
+                                        A4["Geographic Data"]
+                                    end
+
+                                    subgraph "Integration Layer"
+                                        B1["Geographic Mapping"]
+                                        B2["Customer Integration"]
+                                        B3["Data Model"]
+                                    end
+
+                                    subgraph "Analytics Layer"
+                                        C1["Loyalty Analytics"]
+                                        C2["Segmentation"]
+                                        C3["Marketing Mix Model"]
+                                    end
+
+                                    A1 & A2 & A3 & A4 --> B1 & B2
+                                    B1 & B2 --> B3
+                                    B3 --> C1 & C2 & C3
+                            </div>
+                            <div class="mt-3 text-center">
+                                <a href="{{ url_for('mmm_viz') }}" class="btn btn-sm btn-primary">View Full Data Pipeline Visualization</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div id="trains" class="card mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h2 class="card-title mb-3">Train Punctuality Optimisation</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">Python</span>
+                                <span class="badge bg-success">Predictive Modelling</span>
+                                <span class="badge bg-info">Time Series</span>
+                                <span class="badge bg-secondary">Operations Research</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: Sydney Trains</h5>
+                            <p class="card-text">
+                                Developed analytical models to identify factors affecting train punctuality and 
+                                created a predictive system to forecast potential service disruptions before they occur.
+                            </p>
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li>Analyzed millions of train movement records to identify delay patterns and causes</li>
+                                <li>Built regression models to quantify impact of weather, passenger volume, and maintenance factors</li>
+                                <li>Developed real-time prediction system for potential service disruptions</li>
+                                <li>Created interactive dashboards for operations teams and management</li>
+                                <li>Implemented recommendations led to 7% improvement in on-time performance</li>
+                            </ul>
+                            <h5>Tools & Technologies:</h5>
+                            <p>Python (Pandas, Scikit-learn, StatsModels), SQL, Tableau, PowerBI</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="tableau-container" id="tableau-trains" data-tableau-url="https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard">
+                                <!-- Tableau dashboard will be loaded here via JavaScript -->
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <div class="text-center">
+                                        <i class="bi bi-bar-chart-fill display-1 text-muted"></i>
+                                        <p class="mt-3">Dashboard visualisation loading...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div id="retention" class="card mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h2 class="card-title mb-3">Customer Retention Model</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">Machine Learning</span>
+                                <span class="badge bg-success">Classification</span>
+                                <span class="badge bg-info">Customer Analytics</span>
+                                <span class="badge bg-warning text-dark">Python</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: Financial Services Provider</h5>
+                            <p class="card-text">
+                                Built a machine learning model to predict customer churn probability and developed 
+                                targeted retention strategies for high-risk customer segments.
+                            </p>
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li>Developed customer churn prediction model with 82% accuracy</li>
+                                <li>Created feature engineering pipeline to process 40+ customer attributes</li>
+                                <li>Implemented automated scoring system for the entire customer base</li>
+                                <li>Designed targeted retention campaigns based on churn drivers</li>
+                                <li>Reduced customer attrition by 14% through proactive interventions</li>
+                            </ul>
+                            <h5>Tools & Technologies:</h5>
+                            <p>Python (Pandas, Scikit-learn, XGBoost, TensorFlow), SQL, Jupyter Notebooks</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="tableau-container" id="tableau-retention" data-tableau-url="https://public.tableau.com/views/CustomerRetentionDashboard/Overview">
+                                <!-- Tableau dashboard will be loaded here via JavaScript -->
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <div class="text-center">
+                                        <i class="bi bi-bar-chart-fill display-1 text-muted"></i>
+                                        <p class="mt-3">Dashboard visualisation will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jupyter Notebooks Section -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="mb-4">Project Notebooks</h2>
+            <p class="lead mb-5">Explore detailed analysis and methodologies through interactive Jupyter notebooks.</p>
+            
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <!-- WooliesX Budget Optimisation Notebook -->
+                <div class="col">
+                    <div class="card h-100 bg-dark border-light">
+                        <div class="card-body">
+                            <h5 class="card-title">WooliesX Budget Optimisation Model</h5>
+                            <p class="card-text">XGBoost machine learning model for optimizing Christmas campaign budget allocation across marketing channels.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/jupyter/wooliesx_budget_optimization/budget_optimization_model.ipynb" class="btn btn-outline-info">View Notebook</a>
+                                </div>
+                                <small class="text-muted">Python | XGBoost | Pandas</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Placeholder for future notebooks -->
+                <div class="col">
+                    <div class="card h-100 bg-dark border-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Train Punctuality Analysis</h5>
+                            <p class="card-text">Time series analysis and predictive modelling for Sydney Trains service optimisation.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary" disabled>Coming Soon</button>
+                                </div>
+                                <small class="text-muted">Python | Time Series | Prophet</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Repositories Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-header text-center mb-5">GitHub Repositories</h2>
+            <div id="github-repos">
+                <!-- GitHub repositories will be loaded here via JavaScript -->
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3">Loading GitHub repositories...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/github-integration.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tableau-integration.js') }}"></script>
+{% endblock %}
