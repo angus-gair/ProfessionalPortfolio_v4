@@ -1,0 +1,29 @@
+                            <div class="mermaid" style="height: 380px;">
+                                flowchart TB
+                                    linkStyle default stroke-width:1px;
+                                    
+                                    subgraph "Data Sources"
+                                        A1["Transaction Data"]
+                                        A2["Customer Data"]
+                                        A3["Campaign Data"]
+                                        A4["Subscription Data"]
+                                    end
+                                    
+                                    subgraph "Processing Layer"
+                                        B1["Fiscal Mapping"]
+                                        B2["Member Classification"]
+                                        B3["Basket Analysis"]
+                                    end
+                                    
+                                    subgraph "Analytics Layer"
+                                        C1["Loyalty Metrics"]
+                                        C2["Subscription Analysis"]
+                                        C3["Performance KPIs"]
+                                    end
+                                    
+                                    A1 & A2 & A3 & A4 --> B1 & B2 & B3
+                                    B1 & B2 & B3 --> C1 & C2 & C3
+                            </div>
+                            <div class="mt-3 text-center">
+                                <a href="/retail-loyalty-analytics" class="btn btn-sm btn-primary open-visualization">View Full Analytics Dashboard</a>
+                            </div>

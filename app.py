@@ -215,7 +215,21 @@ def interactive_chart():
     """Serve the Interactive Chart page for the XGBoost project."""
     return render_template("interactive_chart.html", active_page="projects")
 
-    return render_template("mmm_viz.html", active_page="projects")
+@app.route("/retail-loyalty-analytics")
+def retail_loyalty_analytics():
+    """Serve the Retail Loyalty Analytics visualization page."""
+    try:
+        # Path to the HTML file
+        file_path = "attached_assets/Retail_Loyalty_Program_Analytics.html"
+        
+        if not os.path.exists(file_path):
+            app.logger.error(f"Retail loyalty analytics file not found at: {file_path}")
+            abort(404)
+                
+        return send_file(file_path)
+    except Exception as e:
+        app.logger.error(f"Error serving retail loyalty analytics file: {str(e)}")
+        abort(500)
 
 
 @app.route('/analytics-debug')
