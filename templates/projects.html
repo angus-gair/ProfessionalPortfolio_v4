@@ -189,7 +189,7 @@
                             <div class="mermaid" style="height: 500px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background-color: rgba(255, 255, 255, 0.05); padding: 15px;">
                                 %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#3498db', 'primaryTextColor': '#fff', 'primaryBorderColor': '#1F77B4', 'lineColor': '#64B5F6', 'secondaryColor': '#1F77B4', 'tertiaryColor': '#2E86C1', 'fontSize': '16px', 'nodePadding': 15 }}}%%
                                 flowchart TB
-                                    linkStyle default stroke-width:2px;
+                                    linkStyle default stroke-width:3px,stroke:#64B5F6;
                                     
                                     subgraph "Data Sources" ["Data Sources"]
                                         A1["Transaction Data"]:::dataNode
@@ -213,10 +213,10 @@
                                     A1 & A2 & A3 & A4 --> B1 & B2 & B3
                                     B1 & B2 & B3 --> C1 & C2 & C3
                                     
-                                    classDef dataNode fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white;
-                                    classDef processNode fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white;
-                                    classDef insightNode fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white;
-                                    classDef default color:#fff;
+                                    classDef dataNode fill:#3498db,stroke:#2980b9,stroke-width:3px,color:white,rx:5,ry:5;
+                                    classDef processNode fill:#2ecc71,stroke:#27ae60,stroke-width:3px,color:white,rx:5,ry:5;
+                                    classDef insightNode fill:#e74c3c,stroke:#c0392b,stroke-width:3px,color:white,rx:5,ry:5;
+                                    classDef default color:#fff,font-size:18px,padding:15px;
                             </div>
                             <div class="mt-3 text-center">
                                 <a href="/retail-loyalty-analytics" class="btn btn-sm btn-primary" target="_blank">View Full Analytics Dashboard</a>
@@ -286,7 +286,7 @@
                             <div class="mermaid" style="height: 500px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background-color: rgba(255, 255, 255, 0.05); padding: 15px;">
                                 %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#3498db', 'primaryTextColor': '#fff', 'primaryBorderColor': '#1F77B4', 'lineColor': '#64B5F6', 'secondaryColor': '#1F77B4', 'tertiaryColor': '#2E86C1', 'fontSize': '16px', 'nodePadding': 15 }}}%%
                                 flowchart TB
-                                    linkStyle default stroke-width:2px;
+                                    linkStyle default stroke-width:3px,stroke:#64B5F6;
                                     
                                     subgraph "Source Layer" ["Data Sources"]
                                         A1["Customer Database"]:::dataNode
@@ -311,10 +311,10 @@
                                     B1 & B2 --> B3
                                     B3 --> C1 & C2 & C3
                                     
-                                    classDef dataNode fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white;
-                                    classDef processNode fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white;
-                                    classDef insightNode fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white;
-                                    classDef default color:#fff;
+                                    classDef dataNode fill:#3498db,stroke:#2980b9,stroke-width:3px,color:white,rx:5,ry:5;
+                                    classDef processNode fill:#2ecc71,stroke:#27ae60,stroke-width:3px,color:white,rx:5,ry:5;
+                                    classDef insightNode fill:#e74c3c,stroke:#c0392b,stroke-width:3px,color:white,rx:5,ry:5;
+                                    classDef default color:#fff,font-size:18px,padding:15px;
                             </div>
                             <div class="mt-3 text-center">
                                 <a href="{{ url_for('mmm_viz') }}" class="btn btn-sm btn-primary" target="_blank">View Full Data Pipeline Visualization</a>
