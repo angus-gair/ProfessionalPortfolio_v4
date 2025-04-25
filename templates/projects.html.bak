@@ -133,56 +133,48 @@
                         <div class="col-lg-8">
                             <h2 class="card-title mb-3">Comprehensive Retail Loyalty Analytics Dashboard</h2>
                             <div class="mb-3">
-                                <span class="badge bg-primary">Data Engineering</span>
-                                <span class="badge bg-success">Performance Analytics</span>
-                                <span class="badge bg-info">Business Intelligence</span>
-                                <span class="badge bg-warning text-dark">Customer Insights</span>
+                                <span class="badge bg-primary">SQL</span>
+                                <span class="badge bg-success">Tableau</span>
+                                <span class="badge bg-info">Customer Analytics</span>
+                                <span class="badge bg-warning text-dark">ETL</span>
                             </div>
-                            <h5 class="text-muted mb-3">Client: Major Retail Chain Loyalty Team</h5>
+                            <h5 class="text-muted mb-3">Client: BigW</h5>
                             <p class="card-text">
-                                Engineered an end-to-end data pipeline and analytics solution to monitor loyalty program performance, 
-                                enabling data-driven marketing strategy, customer segmentation, and program optimization.
+                                Designed and implemented a comprehensive analytics solution to track and optimise 
+                                the performance of the BigW Rewards loyalty program, serving over 2 million active members.
                             </p>
                             <h5>Project Highlights:</h5>
                             <ul>
-                                <li><strong>Designed a sophisticated data pipeline architecture that:</strong>
-                                    <ul>
-                                        <li>Integrates multiple data sources (transactions, customer profiles, campaigns, subscriptions)</li>
-                                        <li>Implements custom fiscal calendar mapping for retail-specific time analysis</li>
-                                        <li>Features a multi-stage ETL process with sequential data transformations</li>
-                                        <li>Produces a cohesive set of 18+ key performance metrics with comparative analysis</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Implemented advanced data processing techniques for:</strong>
-                                    <ul>
-                                        <li>Customer segmentation and hierarchical member classification</li>
-                                        <li>Transaction analysis with basket-level data modeling</li>
-                                        <li>Frequency and engagement metrics calculation</li>
-                                        <li>Subscription program performance tracking</li>
-                                        <li>Campaign effectiveness measurement across different customer segments</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Built a scalable analytics framework with:</strong>
-                                    <ul>
-                                        <li>A sophisticated entity-relationship model connecting core business metrics</li>
-                                        <li>Processing capability for millions of monthly customer transactions</li>
-                                        <li>Computationally efficient SQL with optimized window functions and joins</li>
-                                        <li>Automatic generation of month-over-month and year-on-year comparisons</li>
-                                        <li>Quantifiable metrics for program ROI and member value calculations</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Delivered actionable business intelligence:</strong>
-                                    <ul>
-                                        <li>Customer acquisition and retention performance metrics</li>
-                                        <li>Subscription program growth and member engagement analytics</li>
-                                        <li>Transaction value and purchase frequency by member segment</li>
-                                        <li>Program participation optimization opportunities</li>
-                                        <li>Visualized performance trends with drill-down capabilities</li>
-                                    </ul>
-                                </li>
+                                <li>Engineered scalable ETL processes to integrate data from multiple transaction systems</li>
+                                <li>Created segmentation model to identify high-value, at-risk, and growth opportunity customers</li>
+                                <li>Developed executive dashboard for program KPIs and member insights</li>
+                                <li>Implemented A/B testing framework for rewards program enhancements</li>
+                                <li>Delivered monthly analysis that drove 22% increase in program engagement</li>
                             </ul>
-                            <h5>Tools & Technologies:</h5>
-                            <p>BigQuery, SQL, Window Functions, CTEs, Data Modeling, ETL Pipeline Design, Business Intelligence Dashboarding, Customer Analytics, Performance Metrics</p>
+                            <h5>SQL Samples:</h5>
+                            <p>The project involved complex SQL queries to analyze customer behavior patterns:</p>
+                            <pre class="bg-dark text-light p-3 rounded"><code>WITH recent_customers AS (
+  SELECT 
+    customer_id,
+    MAX(transaction_date) as last_purchase_date,
+    COUNT(DISTINCT transaction_id) as transaction_count,
+    SUM(transaction_amount) as total_spend
+  FROM transactions
+  WHERE transaction_date >= DATEADD(month, -3, GETDATE())
+  GROUP BY customer_id
+)
+
+SELECT 
+  rc.customer_id,
+  c.segment,
+  rc.last_purchase_date,
+  rc.transaction_count,
+  rc.total_spend,
+  DATEDIFF(day, rc.last_purchase_date, GETDATE()) as days_since_last_purchase
+FROM recent_customers rc
+JOIN customers c ON rc.customer_id = c.customer_id
+WHERE c.segment = 'Premium'
+ORDER BY days_since_last_purchase;</code></pre>
                         </div>
                         <div class="col-lg-4">
                             <div class="tableau-container" id="tableau-rewards" data-tableau-url="https://public.tableau.com/views/CustomerAnalysisDashboard_16775813725990/CustomerAnalysisDashboard">
@@ -198,6 +190,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Project 3 -->
             <div id="media-mix" class="card mb-5">
                 <div class="card-body">
                     <div class="row">
