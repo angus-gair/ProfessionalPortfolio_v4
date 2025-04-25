@@ -1,0 +1,46 @@
+<div class="col-lg-8">
+                            <h2 class="card-title mb-3">BigW Rewards Monthly Performance Metrics</h2>
+                            <div class="mb-3">
+                                <span class="badge bg-primary">SQL</span>
+                                <span class="badge bg-success">Tableau</span>
+                                <span class="badge bg-info">Customer Analytics</span>
+                                <span class="badge bg-warning text-dark">ETL</span>
+                            </div>
+                            <h5 class="text-muted mb-3">Client: BigW</h5>
+                            <p class="card-text">
+                                Designed and implemented a comprehensive analytics solution to track and optimise 
+                                the performance of the BigW Rewards loyalty program, serving over 2 million active members.
+                            </p>
+                            <h5>Project Highlights:</h5>
+                            <ul>
+                                <li>Engineered scalable ETL processes to integrate data from multiple transaction systems</li>
+                                <li>Created segmentation model to identify high-value, at-risk, and growth opportunity customers</li>
+                                <li>Developed executive dashboard for program KPIs and member insights</li>
+                                <li>Implemented A/B testing framework for rewards program enhancements</li>
+                                <li>Delivered monthly analysis that drove 22% increase in program engagement</li>
+                            </ul>
+                            <h5>SQL Samples:</h5>
+                            <p>The project involved complex SQL queries to analyze customer behavior patterns:</p>
+                            <pre class="bg-dark text-light p-3 rounded"><code>WITH recent_customers AS (
+  SELECT 
+    customer_id,
+    MAX(transaction_date) as last_purchase_date,
+    COUNT(DISTINCT transaction_id) as transaction_count,
+    SUM(transaction_amount) as total_spend
+  FROM transactions
+  WHERE transaction_date &gt;= DATEADD(month, -3, GETDATE())
+  GROUP BY customer_id
+)
+
+SELECT 
+  rc.customer_id,
+  c.segment,
+  rc.last_purchase_date,
+  rc.transaction_count,
+  rc.total_spend,
+  DATEDIFF(day, rc.last_purchase_date, GETDATE()) as days_since_last_purchase
+FROM recent_customers rc
+JOIN customers c ON rc.customer_id = c.customer_id
+WHERE c.segment = 'Premium'
+ORDER BY days_since_last_purchase;</code></pre>
+                        </div>
