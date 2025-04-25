@@ -186,31 +186,37 @@
                         </div>
                         <div class="col-lg-4">
 
-                            <div class="mermaid" style="height: 380px;">
+                            <div class="mermaid" style="height: 380px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background-color: rgba(255, 255, 255, 0.05); padding: 15px;">
+                                %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#3498db', 'primaryTextColor': '#fff', 'primaryBorderColor': '#1F77B4', 'lineColor': '#64B5F6', 'secondaryColor': '#1F77B4', 'tertiaryColor': '#2E86C1' }}}%%
                                 flowchart TB
-                                    linkStyle default stroke-width:1px;
+                                    linkStyle default stroke-width:2px;
                                     
-                                    subgraph "Data Sources"
-                                        A1["Transaction Data"]
-                                        A2["Customer Data"]
-                                        A3["Campaign Data"]
-                                        A4["Subscription Data"]
+                                    subgraph "Data Sources" ["Data Sources"]
+                                        A1["Transaction Data"]:::dataNode
+                                        A2["Customer Data"]:::dataNode
+                                        A3["Campaign Data"]:::dataNode
+                                        A4["Subscription Data"]:::dataNode
                                     end
                                     
-                                    subgraph "Processing Layer"
-                                        B1["Fiscal Mapping"]
-                                        B2["Member Classification"]
-                                        B3["Basket Analysis"]
+                                    subgraph "Processing Layer" ["Processing & Transformation"]
+                                        B1["Fiscal Mapping"]:::processNode
+                                        B2["Member Classification"]:::processNode
+                                        B3["Basket Analysis"]:::processNode
                                     end
                                     
-                                    subgraph "Analytics Layer"
-                                        C1["Loyalty Metrics"]
-                                        C2["Subscription Analysis"]
-                                        C3["Performance KPIs"]
+                                    subgraph "Analytics Layer" ["Analytics & Insights"]
+                                        C1["Loyalty Metrics"]:::insightNode
+                                        C2["Subscription Analysis"]:::insightNode
+                                        C3["Performance KPIs"]:::insightNode
                                     end
                                     
                                     A1 & A2 & A3 & A4 --> B1 & B2 & B3
                                     B1 & B2 & B3 --> C1 & C2 & C3
+                                    
+                                    classDef dataNode fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white;
+                                    classDef processNode fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white;
+                                    classDef insightNode fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white;
+                                    classDef default color:#fff;
                             </div>
                             <div class="mt-3 text-center">
                                 <a href="/retail-loyalty-analytics" class="btn btn-sm btn-primary" target="_blank">View Full Analytics Dashboard</a>
@@ -277,34 +283,41 @@
                             <p>SQL, Python (pandas, numpy), Tableau, Power BI, AWS</p>                        </div>
                         <div class="col-lg-4">
 
-                            <div class="mermaid" style="height: 380px;">
+                            <div class="mermaid" style="height: 380px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background-color: rgba(255, 255, 255, 0.05); padding: 15px;">
+                                %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#3498db', 'primaryTextColor': '#fff', 'primaryBorderColor': '#1F77B4', 'lineColor': '#64B5F6', 'secondaryColor': '#1F77B4', 'tertiaryColor': '#2E86C1' }}}%%
                                 flowchart TB
-                                    linkStyle default stroke-width:1px;
-                                    subgraph "Source Layer"
-                                        A1["Customer Database"]
-                                        A2["Transaction Data"]
-                                        A3["Campaign Data"]
-                                        A4["Geographic Data"]
+                                    linkStyle default stroke-width:2px;
+                                    
+                                    subgraph "Source Layer" ["Data Sources"]
+                                        A1["Customer Database"]:::dataNode
+                                        A2["Transaction Data"]:::dataNode
+                                        A3["Campaign Data"]:::dataNode
+                                        A4["Geographic Data"]:::dataNode
                                     end
 
-                                    subgraph "Integration Layer"
-                                        B1["Geographic Mapping"]
-                                        B2["Customer Integration"]
-                                        B3["Data Model"]
+                                    subgraph "Integration Layer" ["Data Integration"]
+                                        B1["Geographic Mapping"]:::processNode
+                                        B2["Customer Integration"]:::processNode
+                                        B3["Data Model"]:::processNode
                                     end
 
-                                    subgraph "Analytics Layer"
-                                        C1["Loyalty Analytics"]
-                                        C2["Segmentation"]
-                                        C3["Marketing Mix Model"]
+                                    subgraph "Analytics Layer" ["Analytics & Insights"]
+                                        C1["Loyalty Analytics"]:::insightNode
+                                        C2["Segmentation"]:::insightNode
+                                        C3["Marketing Mix Model"]:::insightNode
                                     end
 
                                     A1 & A2 & A3 & A4 --> B1 & B2
                                     B1 & B2 --> B3
                                     B3 --> C1 & C2 & C3
+                                    
+                                    classDef dataNode fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white;
+                                    classDef processNode fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white;
+                                    classDef insightNode fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white;
+                                    classDef default color:#fff;
                             </div>
                             <div class="mt-3 text-center">
-                                <a href="{{ url_for('mmm_viz') }}" class="btn btn-sm btn-primary">View Full Data Pipeline Visualization</a>
+                                <a href="{{ url_for('mmm_viz') }}" class="btn btn-sm btn-primary" target="_blank">View Full Data Pipeline Visualization</a>
                             </div>
                         </div>
                     </div>
