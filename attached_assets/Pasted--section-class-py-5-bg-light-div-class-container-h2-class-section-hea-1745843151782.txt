@@ -1,0 +1,58 @@
+<section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-header text-center mb-5">Featured Projects</h2>
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Christmas Campaign Budget Optimisation</h5>
+                            <p class="card-text">Developed an XGBoost machine learning model to optimise marketing budget allocation across channels, resulting in 15% increased ROI.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/projects#xgboost" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </div>
+                                <small class="text-muted">Retail Analytics</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Comprehensive Retail Loyalty Analytics</h5>
+                            <p class="card-text">Engineered an end-to-end data pipeline and analytics solution to monitor loyalty program performance, enabling data-driven marketing strategy.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/projects#rewards" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </div>
+                                <small class="text-muted">Data Engineering</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card project-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Train Punctuality Optimisation</h5>
+                            <p class="card-text">Developed a predictive model for identifying factors affecting train punctuality, contributing to a 7% improvement in on-time performance.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/projects#trains" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </div>
+                                <small class="text-muted">Transportation Analytics</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="/projects" class="btn btn-primary">View All Projects</a>
+            </div>
+        
+    </section>
