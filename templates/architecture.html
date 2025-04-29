@@ -16,22 +16,11 @@
     border: 1px solid #e5e7eb;
     margin-top: 1.5rem;
   }
-  .component-list {
-    background-color: rgba(59, 130, 246, 0.1);
-    padding: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    margin-top: 4rem;
-  }
-  .component-list h3 {
-    color: #1e40af;
-    margin-bottom: 1rem;
-  }
-  .component-list ul {
+  .diagram-container ul {
     list-style-type: disc;
     margin-left: 1.5rem;
   }
-  .component-list li {
+  .diagram-container li {
     margin-bottom: 0.5rem;
     color: #374151;
   }
@@ -194,85 +183,99 @@
       </section>
       
       <!-- Additional Information -->
-      <section class="component-list">
-        <h3 class="h3 fw-bold">Key Components & Technical Details</h3>
-        <ul>
-          <li>
-            <span class="component-name">Client Website:</span> React/NextJS frontend with server-side rendering
-            <div class="tech-details">Modern JavaScript framework with TypeScript, TailwindCSS, and responsive design</div>
-          </li>
-          <li>
-            <span class="component-name">SuiteCRM:</span> Open-source Customer Relationship Management
-            <div class="tech-details">Customized PHP application with PostgreSQL database for ACID compliance</div>
-          </li>
-          <li>
-            <span class="component-name">API Gateway:</span> Central entry point for all API requests
-            <div class="tech-details">AWS API Gateway or Kong with JWT authentication and rate limiting</div>
-          </li>
-          <li>
-            <span class="component-name">Data Lake:</span> Raw data storage for all system data
-            <div class="tech-details">S3-compatible object storage with partitioning and compression</div>
-          </li>
-          <li>
-            <span class="component-name">Data Warehouse:</span> Structured analytical storage
-            <div class="tech-details">Snowflake with dimensional modeling for fast analytical queries</div>
-          </li>
-          <li>
-            <span class="component-name">Event Stream:</span> Real-time data processing pipeline
-            <div class="tech-details">Apache Kafka for high-throughput, fault-tolerant event processing</div>
-          </li>
-          <li>
-            <span class="component-name">Machine Learning Pipeline:</span> Self-hosted ML tools
-            <div class="tech-details">TensorFlow/PyTorch with MLflow for experiment tracking</div>
-          </li>
-          <li>
-            <span class="component-name">AI Processing:</span> Advanced AI capabilities
-            <div class="tech-details">Containerized LLMs, NLP services, and customized AI models</div>
-          </li>
-          <li>
-            <span class="component-name">DevOps Infrastructure:</span> Modern deployment pipeline
-            <div class="tech-details">Kubernetes orchestration with Terraform IaC and GitHub Actions</div>
-          </li>
-          <li>
-            <span class="component-name">External Data Integration:</span> ABS and other data sources
-            <div class="tech-details">Scheduled ETL jobs with data validation and transformation</div>
-          </li>
-          <li>
-            <span class="component-name">Analytics Platform:</span> Custom interactive dashboards
-            <div class="tech-details">React-based dashboards with D3.js visualizations and real-time updates</div>
-          </li>
-          <li>
-            <span class="component-name">Communication Channels:</span> Multi-channel customer engagement
-            <div class="tech-details">SMS via Twilio, Email via AWS SES with templating and tracking</div>
-          </li>
-        </ul>
+      <section class="architecture-section">
+        <h2 class="h2 fw-bold mb-3">Key Components & Technical Details</h2>
+        <p class="text-muted mb-4">
+          The architecture incorporates several critical components that work together to provide a comprehensive 
+          data solution. Each component has been selected for its technical capabilities, scalability, and 
+          integration potential to ensure a reliable and efficient system.
+        </p>
+        <div class="diagram-container">
+          <ul>
+            <li>
+              <span class="component-name">Client Website:</span> React/NextJS frontend with server-side rendering
+              <div class="tech-details">Modern JavaScript framework with TypeScript, TailwindCSS, and responsive design</div>
+            </li>
+            <li>
+              <span class="component-name">SuiteCRM:</span> Open-source Customer Relationship Management
+              <div class="tech-details">Customized PHP application with PostgreSQL database for ACID compliance</div>
+            </li>
+            <li>
+              <span class="component-name">API Gateway:</span> Central entry point for all API requests
+              <div class="tech-details">AWS API Gateway or Kong with JWT authentication and rate limiting</div>
+            </li>
+            <li>
+              <span class="component-name">Data Lake:</span> Raw data storage for all system data
+              <div class="tech-details">S3-compatible object storage with partitioning and compression</div>
+            </li>
+            <li>
+              <span class="component-name">Data Warehouse:</span> Structured analytical storage
+              <div class="tech-details">Snowflake with dimensional modeling for fast analytical queries</div>
+            </li>
+            <li>
+              <span class="component-name">Event Stream:</span> Real-time data processing pipeline
+              <div class="tech-details">Apache Kafka for high-throughput, fault-tolerant event processing</div>
+            </li>
+            <li>
+              <span class="component-name">Machine Learning Pipeline:</span> Self-hosted ML tools
+              <div class="tech-details">TensorFlow/PyTorch with MLflow for experiment tracking</div>
+            </li>
+            <li>
+              <span class="component-name">AI Processing:</span> Advanced AI capabilities
+              <div class="tech-details">Containerized LLMs, NLP services, and customized AI models</div>
+            </li>
+            <li>
+              <span class="component-name">DevOps Infrastructure:</span> Modern deployment pipeline
+              <div class="tech-details">Kubernetes orchestration with Terraform IaC and GitHub Actions</div>
+            </li>
+            <li>
+              <span class="component-name">External Data Integration:</span> ABS and other data sources
+              <div class="tech-details">Scheduled ETL jobs with data validation and transformation</div>
+            </li>
+            <li>
+              <span class="component-name">Analytics Platform:</span> Custom interactive dashboards
+              <div class="tech-details">React-based dashboards with D3.js visualizations and real-time updates</div>
+            </li>
+            <li>
+              <span class="component-name">Communication Channels:</span> Multi-channel customer engagement
+              <div class="tech-details">SMS via Twilio, Email via AWS SES with templating and tracking</div>
+            </li>
+          </ul>
+        </div>
       </section>
 
       <!-- Business Value Section -->
-      <section class="component-list mt-5">
-        <h3 class="h3 fw-bold">Business Value for SMBs</h3>
-        <ul>
-          <li>
-            <span class="component-name">360° Customer View:</span> Integrate all customer touchpoints
-            <div class="tech-details">Website behavior, purchase history, support interactions, and communication preferences</div>
-          </li>
-          <li>
-            <span class="component-name">Automated Intelligence:</span> AI-driven insights without technical expertise
-            <div class="tech-details">Predictive analytics, anomaly detection, and recommendation engines</div>
-          </li>
-          <li>
-            <span class="component-name">Scalable Infrastructure:</span> Enterprise-grade platform that grows with business
-            <div class="tech-details">Auto-scaling resources, pay-per-use pricing model, and flexible storage</div>
-          </li>
-          <li>
-            <span class="component-name">Integrated Communication:</span> Omnichannel customer engagement
-            <div class="tech-details">Triggered communications based on customer behavior and preferences</div>
-          </li>
-          <li>
-            <span class="component-name">External Data Enrichment:</span> Market context for better decisions
-            <div class="tech-details">ABS demographic data, industry benchmarks, and economic indicators</div>
-          </li>
-        </ul>
+      <section class="architecture-section">
+        <h2 class="h2 fw-bold mb-3">Business Value for SMBs</h2>
+        <p class="text-muted mb-4">
+          Our architecture is designed to deliver tangible business benefits specifically for small and medium businesses.
+          By implementing this integrated solution, organizations can achieve significant improvements in customer
+          understanding, operational efficiency, and strategic decision-making without the cost of building custom solutions.
+        </p>
+        <div class="diagram-container">
+          <ul>
+            <li>
+              <span class="component-name">360° Customer View:</span> Integrate all customer touchpoints
+              <div class="tech-details">Website behavior, purchase history, support interactions, and communication preferences</div>
+            </li>
+            <li>
+              <span class="component-name">Automated Intelligence:</span> AI-driven insights without technical expertise
+              <div class="tech-details">Predictive analytics, anomaly detection, and recommendation engines</div>
+            </li>
+            <li>
+              <span class="component-name">Scalable Infrastructure:</span> Enterprise-grade platform that grows with business
+              <div class="tech-details">Auto-scaling resources, pay-per-use pricing model, and flexible storage</div>
+            </li>
+            <li>
+              <span class="component-name">Integrated Communication:</span> Omnichannel customer engagement
+              <div class="tech-details">Triggered communications based on customer behavior and preferences</div>
+            </li>
+            <li>
+              <span class="component-name">External Data Enrichment:</span> Market context for better decisions
+              <div class="tech-details">ABS demographic data, industry benchmarks, and economic indicators</div>
+            </li>
+          </ul>
+        </div>
       </section>
     </div>
   </div>
