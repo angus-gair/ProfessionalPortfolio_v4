@@ -303,5 +303,37 @@ def ecosystem():
     """
     return render_template('ecosystem.html', active_page='projects')
 
+@app.route('/listing.html')
+def job_listing():
+    """
+    Serve the Data Analyst job listing from Charterhouse.
+    """
+    try:
+        job_listing_path = 'attached_assets/Data Analyst Job in Canberra at Charterhouse - SEEK.html'
+        
+        if not os.path.exists(job_listing_path):
+            app.logger.error("Job listing HTML file not found")
+            return "Job listing not found", 404
+            
+        # Extract relevant content from the job listing HTML
+        with open(job_listing_path, 'r') as f:
+            content = f.read()
+        
+        # Get the job title using regex
+        title_match = re.search(r'<title>(.*?)</title>', content)
+        job_title = title_match.group(1) if title_match else "Data Analyst Job Listing"
+        
+        # Get the job description by extracting from content
+        # For simplicity, we'll render a structured version in a template
+        
+        return render_template('job_listing.html', 
+                               active_page='resources',
+                               job_title=job_title,
+                               source="SEEK",
+                               company="Charterhouse")
+    except Exception as e:
+        app.logger.error(f"Error serving job listing: {str(e)}")
+        return str(e), 500
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
