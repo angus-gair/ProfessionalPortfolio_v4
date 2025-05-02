@@ -55,12 +55,8 @@ def optimisation():
         file_path = "static/historical_projects/WooliesX-CampaignOptimisation/xmas_budget_optimisation2_collapsible.html"
         
         if not os.path.exists(file_path):
-            # Fall back to the original if collapsible version doesn't exist
-            file_path = "/home/gairforce/ProfessionalPortfolio_v4/historical-projects/WooliesX-CampaignOptimisation/xmas_budget_optimisation2.html"
-            
-            if not os.path.exists(file_path):
-                app.logger.error(f"Optimisation file not found at: {file_path}")
-                abort(404)
+            app.logger.error(f"Optimisation file not found at: {file_path}")
+            abort(404)
                 
         return send_file(file_path)
     except Exception as e:
