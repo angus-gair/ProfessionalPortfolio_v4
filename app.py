@@ -301,7 +301,7 @@ def ecosystem():
     """
     Serve the ecosystem diagram page.
     """
-    return render_template('ecosystem-simple.html', active_page='ecosystem')
+    return render_template('ecosystem-image.html', active_page='ecosystem')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <style>
+    text { font-family: Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: bold; }
+    .node { fill: #bbdefb; stroke: #1976d2; stroke-width: 2px; }
+    .db-node { fill: #c8e6c9; stroke: #388e3c; stroke-width: 2px; }
+    .api-node { fill: #ffecb3; stroke: #ffa000; stroke-width: 2px; }
+    .analytics-node { fill: #e1bee7; stroke: #8e24aa; stroke-width: 2px; }
+    .small-node { fill: #b3e5fc; stroke: #0288d1; stroke-width: 1px; }
+    .link { stroke: #333; stroke-width: 1.5px; }
+    .dashed { stroke-dasharray: 5,5; }
+  </style>
+  
+  <!-- Main Component -->
+  <rect x="350" y="100" width="180" height="70" rx="5" class="node" />
+  <text x="440" y="135" text-anchor="middle" class="title">Portfolio Website</text>
+  <text x="440" y="155" text-anchor="middle">Flask Application</text>
+  
+  <!-- Static Content -->
+  <rect x="150" y="250" width="150" height="60" rx="5" class="node" />
+  <text x="225" y="285" text-anchor="middle" class="title">Static Content</text>
+  
+  <!-- Dynamic Content -->
+  <rect x="450" y="250" width="150" height="60" rx="5" class="node" />
+  <text x="525" y="285" text-anchor="middle" class="title">Dynamic Content</text>
+  
+  <!-- Analytics -->
+  <rect x="650" y="250" width="100" height="60" rx="5" class="analytics-node" />
+  <text x="700" y="285" text-anchor="middle" class="title">GTM + GA4</text>
+  
+  <!-- Database -->
+  <ellipse cx="100" cy="170" rx="40" ry="30" class="db-node" />
+  <text x="100" y="175" text-anchor="middle" class="title">DB</text>
+  
+  <!-- External APIs -->
+  <rect x="650" y="170" width="100" height="50" rx="5" class="api-node" />
+  <text x="700" y="200" text-anchor="middle" class="title">External APIs</text>
+  
+  <!-- Content Details -->
+  <rect x="100" y="350" width="80" height="40" rx="5" class="small-node" />
+  <text x="140" y="375" text-anchor="middle">Templates</text>
+  
+  <rect x="200" y="350" width="80" height="40" rx="5" class="small-node" />
+  <text x="240" y="375" text-anchor="middle">CSS/JS</text>
+  
+  <rect x="300" y="350" width="80" height="40" rx="5" class="small-node" />
+  <text x="340" y="375" text-anchor="middle">Images</text>
+  
+  <rect x="400" y="350" width="80" height="40" rx="5" class="small-node" />
+  <text x="440" y="375" text-anchor="middle">Projects</text>
+  
+  <rect x="500" y="350" width="80" height="40" rx="5" class="small-node" />
+  <text x="540" y="375" text-anchor="middle">Skills</text>
+  
+  <rect x="600" y="350" width="100" height="40" rx="5" class="small-node" />
+  <text x="650" y="375" text-anchor="middle">Experience</text>
+  
+  <!-- Connections -->
+  <!-- Main to Components -->
+  <line x1="440" y1="170" x2="225" y2="250" class="link" />
+  <line x1="440" y1="170" x2="525" y2="250" class="link" />
+  <line x1="440" y1="170" x2="700" y2="250" class="link" />
+  <line x1="440" y1="170" x2="700" y2="195" class="link" />
+  
+  <!-- DB to Main -->
+  <line x1="140" y1="170" x2="350" y2="130" class="link dashed" />
+  
+  <!-- Static Content to Details -->
+  <line x1="200" y1="310" x2="140" y2="350" class="link" />
+  <line x1="200" y1="310" x2="240" y2="350" class="link" />
+  <line x1="200" y1="310" x2="340" y2="350" class="link" />
+  
+  <!-- Dynamic Content to Details -->
+  <line x1="500" y1="310" x2="440" y2="350" class="link" />
+  <line x1="500" y1="310" x2="540" y2="350" class="link" />
+  <line x1="500" y1="310" x2="640" y2="350" class="link" />
+</svg>
