@@ -4,7 +4,7 @@
 
 {% block content %}
     <!-- Hero Section -->
-    <section class="hero-section bg-dark text-white py-5">
+    <section class="hero-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -28,33 +28,37 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-5">
+    <section>
         <div class="container">
-    <h2 class="section-header">About Me</h2>
-    <p class="lead">
-        I am a Senior Data Analyst with expertise in translating business questions into data-driven solutions. 
-        My analytical approach combines technical skills with business acumen to deliver impactful insights.
-    </p>
-    <p>
-        With extensive experience across retail, transportation, and finance sectors, I specialise in:
-    </p>
-    <ul>
-        <li>Building predictive models for customer behaviour and operational optimisation</li>
-        <li>Developing comprehensive dashboards and visualisation solutions</li>
-        <li>Leading data-driven initiatives that deliver tangible business value</li>
-        <li>Transforming complex datasets into actionable insights for stakeholders</li>
-    </ul>
-    <p>
-        My approach combines technical excellence with strong communication skills, ensuring
-        that insights are not only accurate but also accessible and actionable for business stakeholders.
-    </p>
+            <h2 class="section-header">About Me</h2>
+            <div class="card content-card">
+                <div class="card-body">
+                    <p class="lead">
+                        I am a Senior Data Analyst with expertise in translating business questions into data-driven solutions. 
+                        My analytical approach combines technical skills with business acumen to deliver impactful insights.
+                    </p>
+                    <p>
+                        With extensive experience across retail, transportation, and finance sectors, I specialise in:
+                    </p>
+                    <ul class="feature-list">
+                        <li>Building predictive models for customer behaviour and operational optimisation</li>
+                        <li>Developing comprehensive dashboards and visualisation solutions</li>
+                        <li>Leading data-driven initiatives that deliver tangible business value</li>
+                        <li>Transforming complex datasets into actionable insights for stakeholders</li>
+                    </ul>
+                    <p>
+                        My approach combines technical excellence with strong communication skills, ensuring
+                        that insights are not only accurate but also accessible and actionable for business stakeholders.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Featured Projects Section -->
-    <section class="py-5 bg-dark">
+    <section>
         <div class="container">
-            <h2 class="section-header text-center mb-5">Featured Projects</h2>
+            <h2 class="section-header-center">Featured Projects</h2>
             <div class="row">
                 <!-- Project 1 -->
                 <div class="col-md-6 col-lg-4 mb-4">
@@ -84,7 +88,6 @@
                                 </div>
                                 <small class="text-muted">Data Engineering</small>
                             </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,13 +115,13 @@
     </section>
 
     <!-- Skills Highlight Section -->
-    <section class="py-5">
+    <section>
         <div class="container">
-            <h2 class="section-header text-center mb-5">Core Competencies</h2>
+            <h2 class="section-header-center">Core Competencies</h2>
             <div class="row">
                 <!-- Technical Skills -->
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="card content-card h-100">
                         <div class="card-body">
                             <h3 class="card-title text-center mb-4">Technical Skills</h3>
                             <div class="d-flex flex-wrap justify-content-center">
@@ -139,7 +142,7 @@
                 
                 <!-- Domain Expertise -->
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="card content-card h-100">
                         <div class="card-body">
                             <h3 class="card-title text-center mb-4">Domain Expertise</h3>
                             <div class="d-flex flex-wrap justify-content-center">
@@ -164,47 +167,51 @@
     </section>
 
     <!-- Experience Highlight Section -->
-    <section class="py-5 bg-dark">
+    <section>
         <div class="container">
-            <h2 class="section-header text-center mb-5">Professional Experience</h2>
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="timeline">
-                        <!-- WooliesX -->
-                        <div class="timeline-item">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h4 class="card-title">Senior Performance & Optimisation Analyst</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">WooliesX</h5>
-                                    <p class="card-text">Led data analysis initiatives to optimise marketing campaigns and improve customer engagement metrics across digital channels.</p>
+            <h2 class="section-header-center">Professional Experience</h2>
+            <div class="card content-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-10 mx-auto">
+                            <div class="timeline">
+                                <!-- WooliesX -->
+                                <div class="timeline-item">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Senior Performance & Optimisation Analyst</h4>
+                                            <h5 class="card-subtitle mb-2 text-muted">WooliesX</h5>
+                                            <p class="card-text">Led data analysis initiatives to optimise marketing campaigns and improve customer engagement metrics across digital channels.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Sydney Trains -->
+                                <div class="timeline-item">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Senior Data Analyst</h4>
+                                            <h5 class="card-subtitle mb-2 text-muted">Sydney Trains</h5>
+                                            <p class="card-text">Developed analytical models to improve operational efficiency and service reliability across the rail network.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Woolworths Group -->
+                                <div class="timeline-item">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Senior Tableau Developer</h4>
+                                            <h5 class="card-subtitle mb-2 text-muted">Woolworths Group</h5>
+                                            <p class="card-text">Created enterprise-level dashboards and visualisations to support decision-making across multiple business units.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Sydney Trains -->
-                        <div class="timeline-item">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h4 class="card-title">Senior Data Analyst</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">Sydney Trains</h5>
-                                    <p class="card-text">Developed analytical models to improve operational efficiency and service reliability across the rail network.</p>
-                                </div>
+                            <div class="text-center mt-4">
+                                <a href="{{ url_for('experience') }}" class="btn btn-primary">View Full Experience</a>
                             </div>
                         </div>
-                        
-                        <!-- Woolworths Group -->
-                        <div class="timeline-item">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Senior Tableau Developer</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">Woolworths Group</h5>
-                                    <p class="card-text">Created enterprise-level dashboards and visualisations to support decision-making across multiple business units.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-4">
-                        <a href="{{ url_for('experience') }}" class="btn btn-primary">View Full Experience</a>
                     </div>
                 </div>
             </div>
@@ -212,13 +219,17 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="py-5">
+    <section>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="mb-4">Interested in working together?</h2>
-                    <p class="lead mb-4">Whether you need data analysis expertise, dashboard development, or predictive modelling, I'm here to help.</p>
-                    <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">Get in Touch</a>
+            <div class="card content-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h2 class="mb-4">Interested in working together?</h2>
+                            <p class="lead mb-4">Whether you need data analysis expertise, dashboard development, or predictive modelling, I'm here to help.</p>
+                            <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">Get in Touch</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
