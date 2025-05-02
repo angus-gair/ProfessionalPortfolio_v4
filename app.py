@@ -303,5 +303,12 @@ def ecosystem():
     """
     return render_template('ecosystem-image.html', active_page='ecosystem')
 
+@app.route('/ecosystem-diagram')
+def ecosystem_diagram():
+    """
+    Serve the ecosystem diagram HTML.
+    """
+    return send_from_directory('static/images', 'ecosystem-diagram.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
