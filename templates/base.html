@@ -70,6 +70,10 @@
                            href="{{ url_for('architecture') }}">Architecture</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if active_page == 'ecosystem' %}active{% endif %}" 
+                           href="{{ url_for('ecosystem') }}">Ecosystem</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if active_page == 'contact' %}active{% endif %}" 
                            href="{{ url_for('contact') }}">Contact</a>
                     </li>
