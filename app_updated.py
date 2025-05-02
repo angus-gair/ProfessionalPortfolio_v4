@@ -1,7 +1,6 @@
 import os
 import json
 import requests
-import time
 from flask import Flask, render_template, redirect, url_for, request, jsonify, send_from_directory, abort
 from pathlib import Path
 import logging
