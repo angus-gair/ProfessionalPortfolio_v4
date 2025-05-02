@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio Ecosystem Diagram - Angus Gair{% endblock %}
+{% block page_category %}ecosystem{% endblock %}
+
+{% block extra_css %}
+<style>
+  .ecosystem-section {
+    margin-bottom: 5rem;
+  }
+  .diagram-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    margin-top: 1.5rem;
+  }
+  .ecosystem-section ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    font-size: 1.05rem;
+  }
+  .ecosystem-section ul li {
+    margin-bottom: 1rem;
+  }
+  .ecosystem-section ul li strong {
+    font-size: 1.1rem;
+  }
+  .ecosystem-section ul li .text-muted {
+    font-size: 1rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <!-- Header section -->
+  <header class="text-center mb-5">
+    <h1 class="display-4 fw-bold mb-4">Portfolio Ecosystem</h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <p class="lead text-muted">
+          This diagram illustrates the current ecosystem of the portfolio website,
+          showcasing how different components interact with each other to create
+          a comprehensive and functional system. It includes both current implementations
+          and potential future integrations.
+        </p>
+      </div>
+    </div>
+  </header>
+  
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- Ecosystem Diagram Section -->
+      <section class="ecosystem-section">
+        <h2 class="h2 fw-bold mb-3">Current Ecosystem</h2>
+        <p class="text-muted mb-4">
+          The portfolio website implements a Flask-based web application that integrates with
+          external APIs (GitHub, Tableau) and utilizes Google Tag Manager for advanced analytics tracking.
+          The diagram below shows how these components are connected and interact with each other.
+        </p>
+        <div class="diagram-container">
+          <div class="mermaid">
+            graph TD
+                %% Main Components
+                A[Main Portfolio Website\nFlask Application] --> B[Static Content]
+                A --> C[Dynamic Content]
+                
+                %% Integration with SuiteCRM
+                M[SuiteCRM Integration] -.-> |Future/Planned|A
+                M --> N[(SuiteCRM Database\nMySQL)]
+                M --- O[SuiteCRM API\nPHP/REST]
+                
+                %% Database
+                D[(Database)] -.-> |Not currently used|A
+                D -.-> |Potential future use for\nblog/contact submissions|A
+                
+                %% External APIs
+                A --> E[GitHub API Integration]
+                A --> F[Tableau Public API Integration]
+                
+                %% Analytics & Tracking
+                A --> G[Google Tag Manager Integration]
+                G --> H[Google Analytics 4]
+                
+                %% User Types
+                I[Web Users] --> A
+                I1[Admin Users] -.-> M
+                I2[End Users] --> A
+                
+                %% Static Asset Storage
+                P[Static Asset Storage] --> A
+                P -.-> |Potential future implementation|Q[AWS S3 or similar]
+                
+                %% Content Management
+                J[Content Management] --> A
+                
+                %% Communication Channels
+                R[Email Notifications] -.-> |Future/Planned|A
+                R -.-> S[Email Service\nSendGrid/AWS SES]
+                
+                %% API Flows
+                E --> K[GitHub Repositories]
+                F --> L[Tableau Public Dashboards]
+                
+                %% Static Content Details
+                B --> B1[HTML Templates\nJinja2]
+                B --> B2[CSS Styles\nBootstrap 5]
+                B --> B3[JavaScript\nInteractive Elements]
+                B --> B4[Static Assets\nImages, Files]
+                
+                %% Dynamic Content Details
+                C --> C1[Projects Display]
+                C --> C2[Skills Visualization]
+                C --> C3[Experience Timeline]
+                C --> C4[Architecture Diagrams]
+                C --> C5[Contact Form]
+                
+                %% Analytics Details
+                G --> G1[Event Tracking\nUser Interactions]
+                G --> G2[DataLayer Implementation]
+                G --> G3[Custom Events]
+                
+                %% GitHub Integration Details
+                E --> E1[Repository List]
+                E --> E2[Repo Metadata]
+                E --> E3[Languages & Stats]
+                
+                %% Tableau Integration Details
+                F --> F1[Embedded Dashboards]
+                F --> F2[Visualization Metadata]
+                
+                %% DevOps
+                T[CI/CD Pipeline] -.-> |Future/Planned|A
+                T -.-> U[Deployment\nPlatform]
+                
+                %% Style definitions
+                classDef mainComponent fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+                classDef database fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+                classDef api fill:#ffecb3,stroke:#ffa000,stroke-width:2px
+                classDef analytics fill:#e1bee7,stroke:#8e24aa,stroke-width:2px
+                classDef user fill:#d1c4e9,stroke:#5e35b1,stroke-width:2px
+                classDef content fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+                classDef staticContent fill:#b3e5fc,stroke:#0288d1,stroke-width:1px
+                classDef dynamicContent fill:#ffccbc,stroke:#e64a19,stroke-width:1px
+                classDef future fill:#f5f5f5,stroke:#757575,stroke-width:1px,stroke-dasharray: 5 5
+                classDef crm fill:#ffcdd2,stroke:#d32f2f,stroke-width:2px
+                
+                %% Apply styles
+                class A,B,C mainComponent
+                class D,N database
+                class E,F,K,L,O api
+                class G,H,G1,G2,G3 analytics
+                class I,I1,I2 user
+                class J content
+                class B1,B2,B3,B4 staticContent
+                class C1,C2,C3,C4,C5,E1,E2,E3,F1,F2 dynamicContent
+                class P,Q,R,S,T,U future
+                class M,N,O crm
+          </div>
+        </div>
+      </section>
+      
+      <!-- Components Description Section -->
+      <section class="ecosystem-section">
+        <h2 class="h2 fw-bold mb-3">Key Components & Technical Details</h2>
+        <p class="text-muted mb-4">
+          The ecosystem incorporates several critical components that work together to provide a comprehensive 
+          portfolio website. Each component has been selected for its technical capabilities, scalability, and 
+          integration potential.
+        </p>
+        <ul class="mt-4">
+          <li class="mb-3">
+            <strong>Core Application:</strong> Flask web application framework
+            <div class="text-muted ms-3">Serves the entire portfolio website with routes for different sections</div>
+          </li>
+          <li class="mb-3">
+            <strong>Static Content:</strong> HTML, CSS, JavaScript, Images
+            <div class="text-muted ms-3">Jinja2 templates, Bootstrap 5 styling, interactive JavaScript elements</div>
+          </li>
+          <li class="mb-3">
+            <strong>External APIs:</strong> GitHub, Tableau Public
+            <div class="text-muted ms-3">Server-side API integration to fetch data dynamically</div>
+          </li>
+          <li class="mb-3">
+            <strong>Analytics & Tracking:</strong> GTM + GA4
+            <div class="text-muted ms-3">Comprehensive event tracking for user interactions and engagement</div>
+          </li>
+          <li class="mb-3">
+            <strong>Future Integrations:</strong> SuiteCRM, Email Services, Cloud Storage
+            <div class="text-muted ms-3">Planned additions to enhance functionality and user experience</div>
+          </li>
+        </ul>
+      </section>
+      
+      <!-- Additional Information -->
+      <section class="ecosystem-section">
+        <h2 class="h2 fw-bold mb-3">Development & Implementation Notes</h2>
+        <p class="text-muted mb-4">
+          The portfolio website follows a modular architecture for maintainability and extensibility.
+          Below are some key implementation details that help understand how the system was built.
+        </p>
+        <ul class="mt-4">
+          <li class="mb-3">
+            <strong>API Integration Strategy:</strong>
+            <div class="text-muted ms-3">Server-side API calls with appropriate authentication and error handling</div>
+          </li>
+          <li class="mb-3">
+            <strong>Analytics Implementation:</strong>
+            <div class="text-muted ms-3">DataLayer-based event tracking with custom event definitions</div>
+          </li>
+          <li class="mb-3">
+            <strong>Design Patterns:</strong>
+            <div class="text-muted ms-3">MVC architecture with separation of routes, templates, and static assets</div>
+          </li>
+          <li class="mb-3">
+            <strong>Security Considerations:</strong>
+            <div class="text-muted ms-3">API tokens stored as environment variables, path validation for file access</div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Include Mermaid JS for diagram rendering -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Mermaid with custom theme
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      themeVariables: {
+        primaryColor: '#e6f7ff',
+        primaryTextColor: '#006699',
+        primaryBorderColor: '#00537e',
+        lineColor: '#00537e',
+        secondaryColor: '#f4f4f4',
+        tertiaryColor: '#f9f9f9'
+      },
+      flowchart: {
+        htmlLabels: true,
+        curve: 'basis'
+      },
+      securityLevel: 'loose'
+    });
+  });
+</script>
+{% endblock %}
