@@ -1,0 +1,26 @@
+def get_notebook_content(notebook_path):
+    """Get the content of a Jupyter notebook file."""
+    try:
+        # Construct the full path to the notebook
+        notebook_file = Path(f'static/historical_projects/{notebook_path}')
+        
+        # Check if the notebook exists
+        if not notebook_file.exists():
+            # Try the archived location
+            archived_notebook_file = Path(f'archive/historical_projects/{notebook_path}')
+            if archived_notebook_file.exists():
+                notebook_file = archived_notebook_file
+            else:
+                app.logger.error(f"Notebook not found at either location: {notebook_path}")
+                return jsonify({"error": "Notebook not found"}), 404
+        
+        # For security reasons, validate that the path doesn't try to access files outside the intended directory
+        if '../' in notebook_path or notebook_path.startswith('/'):
+            app.logger.error(f"Invalid notebook path: {notebook_path}")
+            return jsonify({"error": "Invalid notebook path"}), 403
+        
+        # Read the notebook content
+        with open(notebook_file, 'r') as f:
+            notebook_content = json.load(f)
+        
+        return jsonify(notebook_content)
