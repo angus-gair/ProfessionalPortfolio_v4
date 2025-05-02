@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ job_title }}{% endblock %}
+
+{% block page_category %}resources{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0">Data Analyst Job in Canberra at Charterhouse</h2>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-secondary">SEEK Job Listing</span>
+                        <small class="text-muted">Job ID: 83942112</small>
+                    </div>
+
+                    <h3 class="h5 mb-3">Senior Data Analyst- Long-Term Federal Contract | Hybrid</h3>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-building me-2"></i>
+                            <strong>Company:</strong>&nbsp;Charterhouse
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-geo-alt me-2"></i>
+                            <strong>Location:</strong>&nbsp;Canberra ACT
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-briefcase me-2"></i>
+                            <strong>Work type:</strong>&nbsp;Contract/Temp
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-clock me-2"></i>
+                            <strong>Classification:</strong>&nbsp;Information & Communication Technology
+                        </div>
+                    </div>
+
+                    <h4 class="h5 border-bottom pb-2 mb-3">Job Description</h4>
+                    
+                    <div class="job-description mb-4">
+                        <p>We're seeking an experienced <strong>Senior Data Analyst</strong> to join a large-scale digital transformation program focused on enhancing enterprise data capabilities within a federal government department.</p>
+                        
+                        <p><strong>Key Responsibilities:</strong></p>
+                        <ul>
+                            <li>Analyze complex datasets to extract actionable insights</li>
+                            <li>Develop and maintain data models and reporting solutions</li>
+                            <li>Collaborate with stakeholders to understand business requirements</li>
+                            <li>Transform raw data into meaningful visualizations and reports</li>
+                            <li>Identify opportunities for process improvement through data analysis</li>
+                            <li>Support data-driven decision making across the organization</li>
+                        </ul>
+                        
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Proven experience as a Data Analyst in enterprise environments</li>
+                            <li>Strong SQL skills and experience with data visualization tools</li>
+                            <li>Experience with statistical analysis and data modeling</li>
+                            <li>Ability to obtain and maintain an Australian Government security clearance</li>
+                            <li>Experience working in Agile environments</li>
+                            <li>Excellent communication and stakeholder management skills</li>
+                        </ul>
+                        
+                        <p>This is a long-term contract position with the potential for extension, offering competitive rates and hybrid working arrangements.</p>
+                    </div>
+
+                    <div class="alert alert-info" role="alert">
+                        <i class="bi bi-info-circle me-2"></i> This job listing is presented for demonstration purposes only. Visit <a href="https://www.seek.com.au/job/83942112" class="alert-link" target="_blank">SEEK</a> for the complete listing and application details.
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="https://www.seek.com.au/job/83942112" class="btn btn-primary" target="_blank">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> View on SEEK
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="{{ url_for('projects') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i> Back to Projects
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .job-description p {
+        margin-bottom: 1rem;
+    }
+    .job-description ul {
+        margin-bottom: 1.5rem;
+    }
+</style>
+{% endblock %}

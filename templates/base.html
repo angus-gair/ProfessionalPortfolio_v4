@@ -77,6 +77,10 @@
                            href="{{ url_for('ecosystem') }}">Ecosystem</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if active_page == 'resources' %}active{% endif %}" 
+                           href="{{ url_for('job_listing') }}">Resources</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if active_page == 'contact' %}active{% endif %}" 
                            href="{{ url_for('contact') }}">Contact</a>
                     </li>
