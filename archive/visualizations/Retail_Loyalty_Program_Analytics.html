@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Loyalty Program Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        h1 {
+            color: #0f172a;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        h2 {
+            color: #1e40af;
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            color: #1e40af;
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            font-weight: 500;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .mermaid {
+            margin: 30px 0;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .mermaid .node rect {
+            rx: 8;
+            ry: 8;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        .mermaid .edgePath path {
+            stroke-width: 2;
+        }
+        .mermaid .cluster rect {
+            rx: 12;
+            ry: 12;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+        .mermaid .cluster-label {
+            font-weight: 600;
+        }
+        .table-description {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .table-card {
+            padding: 24px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .table-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .metrics-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .metrics-category {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .metrics-category h4 {
+            color: #1e40af;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .metrics-category ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .metrics-category li {
+            margin-bottom: 8px;
+            color: #334155;
+        }
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #475569;
+            font-size: 1.1rem;
+        }
+        .note {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Retail Loyalty Program Analytics Dashboard</h1>
+        
+        <div class="intro">
+            <p>A comprehensive data pipeline for monitoring and analyzing the performance of a retail loyalty program, providing insights into customer behavior, program effectiveness, and business impact.</p>
+        </div>
+
+        <div class="section">
+            <h2>Data Pipeline Overview</h2>
+            <div class="note">
+                This diagram illustrates the data flow and transformation stages from raw data sources to final KPI metrics.
+            </div>
+            <div class="mermaid">
+                flowchart TB
+                    linkStyle default stroke-width:1px;
+                    
+                    subgraph "Data Sources"
+                        A1["Transaction Data"]
+                        A2["Customer Data"]
+                        A3["Campaign Data"]
+                        A4["Subscription Data"]
+                        A5["Fiscal Calendar"]
+                    end
+                    
+                    subgraph "Helper Tables"
+                        B1["Fiscal Calendar Mapping"]
+                        B2["Member Type Classification"]
+                    end
+                    
+                    subgraph "Transaction Processing"
+                        C1["Basket Analysis"]
+                        C2["Frequency Analysis"]
+                        C3["Scan Rates"]
+                    end
+                    
+                    subgraph "Membership Metrics"
+                        D1["Premium Subscription Members"]
+                        D2["Engaged Members"]
+                        D3["Offer Redemption Analysis"]
+                        D4["Acquisition from Group"]
+                    end
+                    
+                    subgraph "Campaign Analysis"
+                        E1["Targeted Product Offers"]
+                        E2["Loyalty Program Metrics"]
+                    end
+                    
+                    subgraph "Output Tables"
+                        F1["Performance Trends"]
+                        F2["KPI Metrics"]
+                    end
+                    
+                    A1 & A2 & A3 & A4 & A5 --> B1 & B2
+                    B1 & B2 --> C1 & C2 & C3
+                    C1 & C2 & C3 --> D1 & D2 & D3 & D4
+                    D1 & D2 & D3 & D4 --> E1 & E2
+                    E1 & E2 --> F1 & F2
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Table Relationships and Structure</h2>
+            <div class="note">
+                Entity relationship diagram showing the core tables and their relationships in the KPI pipeline.
+            </div>
+            <div class="mermaid">
+                %%{ init: { 
+                    "theme": "base",
+                    "themeVariables": {
+                        "primaryColor": "#E3F2FD",
+                        "primaryTextColor": "#1565C0",
+                        "primaryBorderColor": "#90CAF9",
+                        "lineColor": "#1565C0",
+                        "nodeBorder": "#1565C0",
+                        "mainBkg": "#FFFFFF",
+                        "clusterBkg": "#F8F9FA",
+                        "edgeLabelBackground": "#FFFFFF"
+                    },
+                    "er": { 
+                        "linkStyle": { "stroke-width": 1 } 
+                    }
+                } }%%
+                erDiagram
+                    time_period_mapping ||--o{ transaction_baskets : "time periods"
+                    member_classification ||--o{ transaction_baskets : "member classification"
+                    transaction_baskets ||--|{ frequency_metrics : "frequency"
+                    transaction_baskets }|--|| scan_metrics : "scan metrics"
+                    transaction_baskets }|--|| subscription_metrics : "subscription data"
+                    marketing_offers }|--|| loyalty_metrics : "campaign metrics"
+                    scan_metrics }|--|| performance_trends : "contributes to"
+                    subscription_metrics }|--|| performance_trends : "contributes to"
+                    loyalty_metrics }|--|| performance_trends : "contributes to"
+                    additional_metrics }|--|| performance_trends : "contributes to"
+                    performance_trends }|--|| performance_dashboard : "formatted for"
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Detailed ETL Process Flow</h2>
+            <div class="note">
+                Step-by-step data processing and transformation pipeline showing dependencies between operations.
+            </div>
+            <div class="mermaid">
+                flowchart TD
+                    linkStyle default stroke-width:1px;
+                    
+                    A["Start"] --> B["Create Fiscal Period Mapping"]
+                    B --> C["Identify Member Types"]
+                    C --> D["Process Baskets & Transactions"]
+                    D --> E["Calculate Frequency Metrics"]
+                    D --> F["Analyze Scan Rates"]
+                    D --> G["Process Premium Subscription Data"]
+                    
+                    F --> H["Calculate Customer Annual Value"]
+                    G --> I["Calculate Subscription Metrics"]
+                    
+                    E & H & I --> J["Process Loyalty Program Metrics"]
+                    J --> K["Identify Targeted Product Offers"]
+                    K --> L["Calculate Loyalty Program Metrics"]
+                    
+                    D --> M["Calculate Acquisition from Group"]
+                    
+                    L & M --> N["Generate Performance Trends"]
+                    N --> O["Create Final KPI Dashboard"]
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Metrics Calculation Framework</h2>
+            <div class="note">
+                Transformation logic showing how raw data becomes actionable KPI metrics.
+            </div>
+            <div class="mermaid">
+                flowchart LR
+                    linkStyle default stroke-width:1px;
+                    
+                    subgraph "Raw Metrics"
+                        R1["Transaction Data"]
+                        R2["Member Status"]
+                        R3["Campaign Data"]
+                    end
+                    
+                    subgraph "Calculated Metrics"
+                        C1["AOV Calculations"]
+                        C2["Frequency Metrics"]
+                        C3["Redemption Metrics"]
+                        C4["Subscription Metrics"]
+                    end
+                    
+                    subgraph "Business KPIs"
+                        K1["Value per Member"]
+                        K2["Acquisition Metrics"]
+                        K3["Annual Member Spend"]
+                        K4["Scan Rate Performance"]
+                    end
+                    
+                    R1 --> C1 & C2
+                    R2 --> C2 & C3
+                    R3 --> C3 & C4
+                    
+                    C1 & C2 & C3 & C4 --> K1 & K2 & K3 & K4
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Key Metrics</h2>
+            <div class="metrics-list">
+                <div class="metrics-category">
+                    <h4>OKR Metrics</h4>
+                    <ul>
+                        <li>Value per member</li>
+                        <li>Acquisition from Group</li>
+                        <li>Annual Member Spend</li>
+                        <li>Scan rate (Overall)</li>
+                        <li>Active members (26 weeks)</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-category">
+                    <h4>Loyalty Program Metrics</h4>
+                    <ul>
+                        <li>Active member shops</li>
+                        <li>Active member shop frequency</li>
+                        <li>Active member transaction value</li>
+                        <li>Campaign Responders</li>
+                        <li>Engaged member shop frequency</li>
+                        <li>Engaged member transaction value</li>
+                        <li>Marketing offer redemptions</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-category">
+                    <h4>Premium Subscription Metrics</h4>
+                    <ul>
+                        <li>Total paying subscribers</li>
+                        <li>Monthly new sign-ups</li>
+                        <li>Subscriber transaction value</li>
+                        <li>Subscriber shop frequency</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-category">
+                    <h4>Member Offers Metrics</h4>
+                    <ul>
+                        <li>Number of offers redeemed</li>
+                        <li>New & reactivated members</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Core Data Components</h2>
+            <div class="table-description">
+                <div class="table-card">
+                    <h3>Helper Tables</h3>
+                    <p>Foundation tables that provide structure for time periods and member classification.</p>
+                    <p><strong>Key tables:</strong> time_period_mapping, member_classification</p>
+                </div>
+
+                <div class="table-card">
+                    <h3>Transaction Processing</h3>
+                    <p>Tables that process basket-level transactions and calculate frequency metrics.</p>
+                    <p><strong>Key tables:</strong> transaction_baskets, frequency_metrics, scan_metrics</p>
+                </div>
+
+                <div class="table-card">
+                    <h3>Premium Subscription Processing</h3>
+                    <p>Tables focused on subscription program metrics and performance.</p>
+                    <p><strong>Key tables:</strong> subscription_metrics</p>
+                </div>
+
+                <div class="table-card">
+                    <h3>Loyalty & Campaign Analysis</h3>
+                    <p>Tables analyzing loyalty program engagement and campaign effectiveness.</p>
+                    <p><strong>Key tables:</strong> marketing_offers, loyalty_metrics, additional_metrics</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            theme: 'base',
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            },
+            themeVariables: {
+                primaryColor: '#E3F2FD',
+                primaryTextColor: '#1565C0',
+                primaryBorderColor: '#90CAF9',
+                lineColor: '#1565C0',
+                secondaryColor: '#F3E5F5',
+                tertiaryColor: '#FFF3E0',
+                mainBkg: '#FFFFFF',
+                nodeBorder: '#1565C0',
+                clusterBkg: '#F8F9FA',
+                clusterBorder: '#E3F2FD',
+                titleColor: '#1565C0',
+                edgeLabelBackground: '#FFFFFF',
+                link: {
+                    stroke: '#1565C0',
+                    'stroke-width': 1
+                }
+            },
+            securityLevel: 'loose',
+            fontFamily: 'Inter',
+        });
+    </script>
+</body>
+</html> 
