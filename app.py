@@ -48,6 +48,7 @@ def architecture():
     return render_template('architecture.html', active_page='architecture')
 
 @app.route('/optimisation')
+
 def optimisation():
     """Serve the Christmas budget optimisation HTML file directly with collapsible sections."""
     try:
@@ -55,8 +56,13 @@ def optimisation():
         file_path = "static/historical_projects/WooliesX-CampaignOptimisation/xmas_budget_optimisation2_collapsible.html"
         
         if not os.path.exists(file_path):
-            app.logger.error(f"Optimisation file not found at: {file_path}")
-            abort(404)
+            # Try the archived location
+            archived_path = "archive/historical_projects/WooliesX-CampaignOptimisation/xmas_budget_optimisation2_collapsible.html"
+            if os.path.exists(archived_path):
+                file_path = archived_path
+            else:
+                app.logger.error(f"Optimisation file not found at: {file_path} or {archived_path}")
+                abort(404)
                 
         return send_file(file_path)
     except Exception as e:
