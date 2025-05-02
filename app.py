@@ -215,12 +215,18 @@ def interactive_chart():
 def retail_loyalty_analytics():
     """Serve the Retail Loyalty Analytics visualization page."""
     try:
-        # Path to the HTML file
+        # Path to the HTML file - archived but kept in place for app functionality
         file_path = "attached_assets/Retail_Loyalty_Program_Analytics.html"
         
+        # Check if the file is in the current location
         if not os.path.exists(file_path):
-            app.logger.error(f"Retail loyalty analytics file not found at: {file_path}")
-            abort(404)
+            # Try the archived location
+            archived_path = "archive/visualizations/Retail_Loyalty_Program_Analytics.html"
+            if os.path.exists(archived_path):
+                file_path = archived_path
+            else:
+                app.logger.error(f"Retail loyalty analytics file not found at: {file_path} or {archived_path}")
+                abort(404)
                 
         return send_file(file_path)
     except Exception as e:
