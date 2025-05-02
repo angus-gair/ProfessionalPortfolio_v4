@@ -159,8 +159,11 @@
                 class P,Q,R,S,T,U future
                 class M,N,O crm
           </div>
-          <div class="text-center mt-4">
-            <button id="enlarge-diagram" class="btn btn-primary">Enlarge Diagram</button>
+          <!-- Button outside the mermaid diagram -->
+          <div class="text-center mt-4" style="margin-top: 30px !important; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
+            <button id="enlarge-diagram" class="btn btn-primary btn-lg" style="font-size: 1.2rem; padding: 12px 25px;">
+              <i class="bi bi-arrows-fullscreen me-2"></i> Enlarge Diagram
+            </button>
           </div>
         </div>
       </section>
@@ -324,6 +327,9 @@
     // Create modal element for enlarged diagram
     const modal = document.createElement('div');
     modal.className = 'diagram-modal';
+    modal.style.display = 'none';
+    modal.style.alignItems = 'center'; 
+    modal.style.justifyContent = 'center';
     modal.innerHTML = `
       <div class="diagram-modal-content">
         <span class="diagram-close">&times;</span>
