@@ -288,3 +288,10 @@ def test_analytics_event():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
+@app.route('/ecosystem')
+def ecosystem():
+    """
+    Serve the ecosystem diagram page.
+    """
+    return render_template('ecosystem.html', active_page='ecosystem')
