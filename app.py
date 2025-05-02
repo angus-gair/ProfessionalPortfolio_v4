@@ -204,12 +204,44 @@ def get_notebook_content(notebook_path):
 @app.route("/mmm-viz")
 def mmm_viz():
     """Serve the Marketing Mix Modeling visualization page."""
-    return render_template("mmm_viz.html", active_page="projects")
+    try:
+        # Try to find the file in both possible locations
+        file_path = "templates/mmm_viz.html"  # Original location
+        
+        if not os.path.exists(file_path):
+            # Try the archived location
+            archived_path = "archive/visualizations/mmm-viz.html"
+            if os.path.exists(archived_path):
+                file_path = archived_path
+            else:
+                app.logger.error(f"MMM visualization file not found at: {file_path} or {archived_path}")
+                abort(404)
+                
+        return send_file(file_path)
+    except Exception as e:
+        app.logger.error(f"Error serving MMM visualization file: {str(e)}")
+        abort(500)
 
 @app.route("/interactive-chart")
 def interactive_chart():
     """Serve the Interactive Chart page for the XGBoost project."""
-    return render_template("interactive_chart.html", active_page="projects")
+    try:
+        # Try to find the file in both possible locations
+        file_path = "templates/interactive_chart.html"  # Original location
+        
+        if not os.path.exists(file_path):
+            # Try the archived location
+            archived_path = "archive/visualizations/interactive_chart.html"
+            if os.path.exists(archived_path):
+                file_path = archived_path
+            else:
+                app.logger.error(f"Interactive chart file not found at: {file_path} or {archived_path}")
+                abort(404)
+                
+        return send_file(file_path)
+    except Exception as e:
+        app.logger.error(f"Error serving interactive chart file: {str(e)}")
+        abort(500)
 
 @app.route("/retail-loyalty-analytics")
 def retail_loyalty_analytics():
