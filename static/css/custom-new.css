@@ -1,0 +1,232 @@
+/* Custom styles for the portfolio - Standardized */
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Standardized section styling */
+section {
+    padding: 5rem 0; /* Standardized py-5 padding */
+}
+
+/* Header sections standardization */
+.page-header {
+    background-color: var(--bs-dark);
+    color: white;
+    padding: 5rem 0;
+    margin-bottom: 0;
+}
+
+/* Hero section styling */
+.hero-section {
+    padding: 5rem 0;
+    background-color: var(--bs-dark);
+    color: white;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.profile-image {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--bs-info);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: transparent;
+    padding: 0;
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.hero-image:hover {
+    transform: scale(1.02);
+}
+
+/* Card standardization */
+.content-card {
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    height: 100%;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card {
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Skill badges standardization */
+.skill-badge {
+    margin: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+/* Timeline styling for experience */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 100%;
+}
+
+/* Project cards */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 2rem;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Tableau and visualization containers */
+.tableau-container, .visualization-container {
+    min-height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+/* Mermaid diagram standardization */
+.mermaid {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer styling */
+.footer {
+    padding: 2rem 0;
+    margin-top: 2rem;
+    background-color: var(--bs-dark);
+    color: white;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--bs-info) !important;
+}
+
+/* Section headers standardization */
+.section-header {
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+}
+
+/* Centered version of section header */
+.section-header-center {
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.section-header::after, .section-header-center::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background-color: var(--bs-info);
+    bottom: -10px;
+    left: 0;
+}
+
+.section-header-center::after {
+    left: 25%;
+}
+
+/* Standardized spacing */
+.standard-spacing-bottom {
+    margin-bottom: 2rem;
+}
+
+/* List styling standardization */
+ul.feature-list {
+    padding-left: 1.5rem;
+}
+
+ul.feature-list li {
+    margin-bottom: 0.75rem;
+}
+
+/* Notebook styles */
+.notebook-container {
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+/* Button standardization */
+.btn {
+    border-radius: 0.375rem;
+    padding: 0.5rem 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 992px) {
+    .hero-section {
+        text-align: center;
+    }
+    
+    .section-header::after {
+        left: 25%;
+        width: 50%;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+}
