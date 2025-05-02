@@ -26,7 +26,7 @@ logger = logging.getLogger('gtm-configurator')
 # GTM and GA4 configuration
 GTM_CONTAINER_ID = 'GTM-PC9Q9VC3'
 GA4_MEASUREMENT_ID = 'G-3P8MK7MHQF'
-SERVICE_ACCOUNT_FILE = 'GoogleAnalytics/gair-com-au-153c7f6062f4.json'
+SERVICE_ACCOUNT_FILE = '../GoogleAnalytics/gair-com-au-153c7f6062f4.json'
 API_SCOPES = ['https://www.googleapis.com/auth/tagmanager.edit.containers',
               'https://www.googleapis.com/auth/tagmanager.publish']
 

@@ -18,7 +18,7 @@ logger = logging.getLogger('gtm-verifier')
 
 # GTM configuration
 GTM_CONTAINER_ID = 'GTM-PC9Q9VC3'
-SERVICE_ACCOUNT_FILE = 'GoogleAnalytics/gair-com-au-153c7f6062f4.json'
+SERVICE_ACCOUNT_FILE = '../GoogleAnalytics/gair-com-au-153c7f6062f4.json'
 API_SCOPES = ['https://www.googleapis.com/auth/tagmanager.readonly']
 
 def get_credentials():
