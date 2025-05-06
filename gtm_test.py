@@ -37,9 +37,12 @@ URLS_TO_CHECK = [
     '/retail_loyalty_analytics'
 ]
 
-# Regular expressions for GTM code patterns
-GTM_HEAD_PATTERN = re.compile(r"googletagmanager\.com/gtm\.js\?id=['\"]" + GTM_CONTAINER_ID + r"['\"]")
-GTM_BODY_PATTERN = re.compile(r"googletagmanager\.com/ns\.html\?id=['\"]" + GTM_CONTAINER_ID + r"['\"]")
+# Regular expressions for GTM code patterns - updated for more flexible matching
+GTM_HEAD_PATTERN = re.compile(r"googletagmanager\.com/gtm\.js.*?id=['\"]?" + GTM_CONTAINER_ID + r"['\"]?")
+GTM_BODY_PATTERN = re.compile(r"googletagmanager\.com/ns\.html.*?id=['\"]?" + GTM_CONTAINER_ID + r"['\"]?")
+
+# Alternative detection patterns
+GTM_HEAD_ALT_PATTERN = re.compile(r"GTM-PC9Q9VC3")
 
 def print_colored(text, color):
     """Print text with color"""
@@ -55,13 +58,37 @@ def check_gtm_implementation(url):
         # Parse the HTML content
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # Check for GTM in head
-        head_scripts = soup.find('head').find_all('script')
-        head_gtm_found = any(GTM_HEAD_PATTERN.search(str(script)) for script in head_scripts)
+        # Check for GTM in head or anywhere in the document
+        all_scripts = soup.find_all('script')
         
-        # Check for GTM noscript in body
-        body_noscript = soup.find('body').find_all('noscript')
-        body_gtm_found = any(GTM_BODY_PATTERN.search(str(noscript)) for noscript in body_noscript)
+        # Safely get scripts in head
+        head_scripts = []
+        head = soup.find('head')
+        if head and hasattr(head, 'find_all'):
+            head_scripts = head.find_all('script')
+        
+        # Direct check for GTM in the HTML content
+        html_content = response.text
+        head_gtm_found = GTM_HEAD_PATTERN.search(html_content) is not None or GTM_HEAD_ALT_PATTERN.search(html_content) is not None
+        body_gtm_found = GTM_BODY_PATTERN.search(html_content) is not None
+        
+        # Fallback checks with specific tag structures if direct checks fail
+        if not head_gtm_found:
+            head_gtm_found = (any(GTM_HEAD_PATTERN.search(str(script)) for script in head_scripts) or
+                            any(GTM_HEAD_PATTERN.search(str(script)) for script in all_scripts) or
+                            any(GTM_HEAD_ALT_PATTERN.search(str(script)) for script in all_scripts))
+        
+        if not body_gtm_found:
+            all_noscript = soup.find_all('noscript')
+            
+            body_noscript = []
+            body = soup.find('body')
+            if body and hasattr(body, 'find_all'):
+                body_noscript = body.find_all('noscript')
+            
+            body_gtm_found = (any(GTM_BODY_PATTERN.search(str(noscript)) for noscript in body_noscript) or
+                             any(GTM_BODY_PATTERN.search(str(noscript)) for noscript in all_noscript) or
+                             any(GTM_HEAD_ALT_PATTERN.search(str(noscript)) for noscript in all_noscript))
         
         # Check for consolidated script
         consolidated_script_found = bool(soup.find('script', {'src': re.compile(r'gtm-consolidated\.js')}))

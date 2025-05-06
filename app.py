@@ -50,13 +50,10 @@ def optimisation():
         with open(optimization_path, 'r') as f:
             content = f.read()
         
-        # Inject Bootstrap and jQuery for collapsible sections
-        content = content.replace('</head>', 
-                                '<link rel="stylesheet" href="/static/css/collapsible.css">\n</head>')
-        content = content.replace('</body>', 
-                                '<script src="/static/js/collapsible.js"></script>\n</body>')
-        
-        return content
+        # Use the base template with GTM implementation
+        return render_template('visualization_wrapper.html', 
+                           active_page='projects',
+                           visualization_content=content)
     except Exception as e:
         app.logger.error(f"Error serving optimization page: {str(e)}")
         return f"Error: {str(e)}", 500
@@ -236,12 +233,14 @@ def retail_loyalty_analytics():
                     app.logger.error("Retail loyalty analytics file not found in any location")
                     return "Retail loyalty analytics visualization not found", 404
         
-        # Read the HTML content directly
+        # Read the HTML content
         with open(viz_path, 'r') as f:
             html_content = f.read()
-            
-        # Return the HTML content directly
-        return html_content
+        
+        # Instead of returning HTML directly, use the base template
+        return render_template('visualization_wrapper.html', 
+                               active_page='projects',
+                               visualization_content=html_content)
     except Exception as e:
         app.logger.error(f"Error serving retail loyalty analytics: {str(e)}")
         return str(e), 500
