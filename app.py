@@ -38,14 +38,25 @@ def architecture():
 def optimisation():
     """Serve the Christmas budget optimisation HTML file directly with collapsible sections."""
     try:
-        # Check if file exists in the primary location
-        optimization_path = os.path.join('static', 'historical_projects', 'WooliesX-ChristmasCampaign', 'budget_optimisation.html')
-        if not os.path.exists(optimization_path):
-            # Try the archived location
-            optimization_path = os.path.join('archive', 'historical_projects', 'WooliesX-ChristmasCampaign', 'budget_optimisation.html')
-            if not os.path.exists(optimization_path):
-                app.logger.error("Optimization HTML file not found in any location")
-                return "Optimization visualization not found", 404
+        # Check all possible locations for the optimization HTML
+        possible_paths = [
+            # Original paths that were not found
+            os.path.join('static', 'historical_projects', 'WooliesX-ChristmasCampaign', 'budget_optimisation.html'),
+            os.path.join('archive', 'historical_projects', 'WooliesX-ChristmasCampaign', 'budget_optimisation.html'),
+            # New paths based on found files
+            os.path.join('static', 'historical_projects', 'WooliesX-CampaignOptimisation', 'xmas_budget_optimisation2_collapsible.html'),
+            os.path.join('archive', 'historical_projects', 'WooliesX-CampaignOptimisation', 'xmas_budget_optimisation2.html')
+        ]
+        
+        optimization_path = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                optimization_path = path
+                break
+                
+        if optimization_path is None:
+            app.logger.error("Optimization HTML file not found in any location")
+            return "Optimization visualization not found", 404
         
         with open(optimization_path, 'r') as f:
             content = f.read()
