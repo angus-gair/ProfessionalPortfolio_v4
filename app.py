@@ -313,6 +313,26 @@ def ecosystem():
     """
     return render_template('ecosystem.html', active_page='projects')
 
+@app.route('/marketing_cost_forecast')
+def marketing_cost_forecast():
+    """
+    Serve the Marketing Cost Forecast project visualization page.
+    Displays detailed architecture of the points cost forecasting pipeline.
+    """
+    try:
+        # Check if the visualization content exists
+        viz_path = 'attached_assets/marketing-cost-forecast/visual_representations/2_Data_Model_Diagram.md'
+        
+        if not os.path.exists(viz_path):
+            app.logger.error("Marketing Cost Forecast visualization file not found")
+            return "Marketing Cost Forecast visualization not found", 404
+                
+        # Use render_template for the marketing_cost_forecast.html which will include the visualization
+        return render_template('marketing_cost_forecast.html', active_page='projects')
+    except Exception as e:
+        app.logger.error(f"Error serving Marketing Cost Forecast visualization: {str(e)}")
+        return str(e), 500
+
 @app.route('/listing.html')
 def job_listing():
     """

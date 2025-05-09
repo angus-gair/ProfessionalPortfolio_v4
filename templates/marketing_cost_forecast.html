@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+
+{% block title %}Marketing Cost Forecast Pipeline - Angus Gair{% endblock %}
+
+{% block page_category %}projects{% endblock %}
+
+{% block content %}
+    <!-- Header Section -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Points Cost Forecast Pipeline</h1>
+            <p class="lead">A sophisticated financial data pipeline that processes transaction data, financial forecasts, and campaign budgets to deliver accurate cost forecasting at multiple levels of granularity.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="lead text-center mb-4">
+                                This system integrates financial forecasts with campaign budgets to provide accurate cost forecasting for business planning and performance tracking.
+                            </p>
+
+                            <!-- System Architecture Section -->
+                            <h2 class="card-title mt-5 mb-4">System Architecture Overview</h2>
+                            <div class="alert alert-info">
+                                This diagram shows the high-level data flow from source systems through transformation stages to final analytics output.
+                            </div>
+                            <div class="mermaid">
+                                flowchart TD
+                                    A[Raw Data Sources\n(Finance, Sales, Campaigns)] --> B[SQL/bqsql ETL Scripts\n(e.g., 2_FInaceTables.sql)]
+                                    B --> C[Aggregated Finance & Forecast Tables]
+                                    C --> D[JSON/CSV Export\n(bigw_cost_model_forecast_fy25.json)]
+                                    C --> E[PDF Dashboards]
+                                    D --> F[Dashboard/BI Tool]
+                                    E --> F
+                                    F[Stakeholder Insights\nForecast vs Actuals]
+                            </div>
+
+                            <!-- Data Model Section -->
+                            <h2 class="card-title mt-5 mb-4">Data Model Relationships</h2>
+                            <div class="alert alert-info">
+                                Entity relationship diagram showing the core data model and key relationships between components.
+                            </div>
+                            <div class="mermaid">
+                                erDiagram
+                                    DIM_DATE {
+                                        date CalendarDay PK
+                                        string FiscalWeekYear
+                                        int FiscalWeek
+                                        date FiscalWeekEndDate
+                                        int FiscalYear
+                                        string Fiscal_Period
+                                        date FiscalWeekStartDate
+                                        int BigWFiscalYear
+                                        int BigWFiscalYearPeriod
+                                        int BigWFiscalWeek
+                                        string DayOfWeek
+                                        int WeekDayNumber
+                                    }
+
+                                    DIM_BUSINESS_CATEGORY {
+                                        string Business
+                                        string Category
+                                        string SubCategory
+                                    }
+
+                                    DIM_DAY_OF_WEEK_WEIGHTS {
+                                        string DayOfWeek PK
+                                        float daily_weight
+                                    }
+
+                                    FINANCE_ACTUALS {
+                                        int FiscalYear
+                                        string FiscalWeekYear
+                                        int FiscalWeek
+                                        date FiscalWeekStartDate
+                                        string Fiscal_Period
+                                        string Business_profit_v
+                                        string Category
+                                        string CategoryWithoutCompanyCode
+                                        string Category_Description_profit_v
+                                        string SalesChannel_Cat
+                                        float Sales_InclGST
+                                        float Net_Sales
+                                        float Scanback
+                                        float Total_Discounts_And_Rewards
+                                        float COGS
+                                        float Gross_Profit
+                                        timestamp data_extraction_timestamp
+                                    }
+
+                                    FINANCE_FORECAST {
+                                        int FiscalYear
+                                        string FiscalWeekYear
+                                        int FiscalWeek
+                                        date FiscalWeekStartDate
+                                        string Fiscal_Period
+                                        string Category_Description_profit_v
+                                        float Sales_InclGST
+                                        float Net_Sales
+                                        float Scanback
+                                        timestamp data_extraction_timestamp
+                                    }
+
+                                    DIM_DATE ||--o{ FINANCE_ACTUALS : "defines time periods"
+                                    DIM_DATE ||--o{ FINANCE_FORECAST : "defines time periods"
+                                    DIM_DATE ||--o{ CAMPAIGN_COSTS_FORECAST : "applies to"
+                                    DIM_DATE ||--o{ CAMPAIGN_COSTS_ACTUALS : "records daily"
+                                    DIM_BUSINESS_CATEGORY ||--o{ FINANCE_ACTUALS : "categorizes"
+                                    DIM_BUSINESS_CATEGORY ||--o{ FINANCE_FORECAST : "categorizes"
+                            </div>
+
+                            <!-- ETL Process Flow Section -->
+                            <h2 class="card-title mt-5 mb-4">ETL Process Flow</h2>
+                            <div class="alert alert-info">
+                                Detailed transformation pipeline showing data processing stages and dependencies.
+                            </div>
+                            <div class="mermaid">
+                                flowchart TD
+                                    linkStyle default stroke-width:1px;
+                                    subgraph "Data Integration"
+                                        S1["Finance Actuals Processing"] --> S2["Finance Forecast Integration"]
+                                        S2 --> S3["Campaign Cost Extraction"]
+                                        S3 --> S4["Business/Category Mapping"]
+                                    end
+
+                                    subgraph "Transformation"
+                                        T1["Daily Cost Distribution"] --> T2["Fiscal Calendar Mapping"]
+                                        T2 --> T3["Business/Category Aggregation"]
+                                        T3 --> T4["Variance Calculation"]
+                                    end
+
+                                    subgraph "Output"
+                                        O1["Dashboard Tables"] --> O2["Visualization Data"]
+                                        O2 --> O3["Reporting Exports"]
+                                    end
+
+                                    S4 --> T1
+                                    T4 --> O1
+                            </div>
+
+                            <!-- Technical Relationships Section -->
+                            <h2 class="card-title mt-5 mb-4">Technical Table Relationships</h2>
+                            <div class="alert alert-info">
+                                This diagram highlights the key technical relationships and join strategies in the data model.
+                            </div>
+                            <div class="mermaid">
+                                erDiagram
+                                    dim_date ||--o{ transaction_data : "time periods"
+                                    dim_business_category ||--o{ finance_data : "business hierarchy"
+                                    dim_day_of_week_weights ||--o{ daily_costs : "distribution weights"
+                                    finance_actuals }|--|| dashboard_data : "provides actuals"
+                                    finance_forecast }|--|| dashboard_data : "provides forecasts"
+                                    campaign_details }|--|| campaign_costs_forecast : "defines campaigns"
+                                    campaign_costs_forecast }|--|| dashboard_data : "forecasted costs"
+                                    campaign_costs_actuals }|--|| dashboard_data : "actual costs"
+                                    everyday_extra_costs }|--|| dashboard_data : "subscription costs"
+                                    dashboard_data }|--|| dashboard_summary_tables : "aggregated for reporting"
+                            </div>
+
+                            <!-- Key Components Section -->
+                            <h2 class="card-title mt-5 mb-4">Key Components</h2>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Source Layer</h3>
+                                            <p class="card-text">Extracts raw financial data, campaign details, and budget forecasts from multiple systems and formats them for integration.</p>
+                                            <p class="card-text"><strong>Key processes:</strong> Source system extraction, format standardization, data validation</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Transformation Layer</h3>
+                                            <p class="card-text">Aggregates financial metrics by business, category, and time dimensions while applying business rules for cost forecasting.</p>
+                                            <p class="card-text"><strong>Key functions:</strong> Time-series aggregation, business hierarchies, cost distribution, variance calculation</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Output Layer</h3>
+                                            <p class="card-text">Generates multi-level reports, dashboards, and exports for business stakeholders with configurable views.</p>
+                                            <p class="card-text"><strong>Focus areas:</strong> Executive metrics, business-level reporting, category performance, campaign effectiveness</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Core Metrics Section -->
+                            <h2 class="card-title mt-5 mb-4">Core Metrics</h2>
+                            <div class="row">
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Financial Metrics</h4>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Sales (Forecast vs Actual)</li>
+                                                <li class="list-group-item">Loyalty Costs (50bps, 70bps)</li>
+                                                <li class="list-group-item">Campaign Performance</li>
+                                                <li class="list-group-item">Cost Variance Analysis</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Business Metrics</h4>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Category Performance</li>
+                                                <li class="list-group-item">Campaign Effectiveness</li>
+                                                <li class="list-group-item">Channel ROI</li>
+                                                <li class="list-group-item">Cost Distribution</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Operational Metrics</h4>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Daily Tracking</li>
+                                                <li class="list-group-item">Weekly Reporting</li>
+                                                <li class="list-group-item">Month-to-Date Analysis</li>
+                                                <li class="list-group-item">Year-on-Year Comparisons</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 text-center">
+                                <a href="{{ url_for('projects') }}" class="btn btn-primary">Back to Projects</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        mermaid.initialize({
+            theme: 'base',
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            },
+            themeVariables: {
+                primaryColor: '#E3F2FD',
+                primaryTextColor: '#1565C0',
+                primaryBorderColor: '#90CAF9',
+                lineColor: '#1565C0',
+                secondaryColor: '#F3E5F5',
+                tertiaryColor: '#FFF3E0',
+                mainBkg: '#FFFFFF',
+                nodeBorder: '#1565C0',
+                clusterBkg: '#F8F9FA',
+                clusterBorder: '#E3F2FD',
+                titleColor: '#1565C0',
+                edgeLabelBackground: '#FFFFFF',
+                link: {
+                    stroke: '#1565C0',
+                    'stroke-width': 1
+                }
+            },
+            securityLevel: 'loose',
+            fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial'
+        });
+    });
+</script>
+{% endblock %}
