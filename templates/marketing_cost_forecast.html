@@ -30,6 +30,7 @@
                                 This diagram shows the high-level data flow from source systems through transformation stages to final analytics output.
                             </div>
                             <div class="mermaid">
+                                %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#E3F2FD', 'primaryTextColor': '#1565C0', 'lineColor': '#1565C0', 'secondaryColor': '#F3E5F5' }}}%%
                                 flowchart TD
                                     A[Raw Data Sources\n(Finance, Sales, Campaigns)] --> B[SQL/bqsql ETL Scripts\n(e.g., 2_FInaceTables.sql)]
                                     B --> C[Aggregated Finance & Forecast Tables]
@@ -46,6 +47,22 @@
                                 Entity relationship diagram showing the core data model and key relationships between components.
                             </div>
                             <div class="mermaid">
+                                %%{ init: { 
+                                    "theme": "base",
+                                    "themeVariables": {
+                                        "primaryColor": "#E3F2FD",
+                                        "primaryTextColor": "#1565C0",
+                                        "primaryBorderColor": "#90CAF9",
+                                        "lineColor": "#1565C0",
+                                        "nodeBorder": "#1565C0",
+                                        "mainBkg": "#FFFFFF",
+                                        "clusterBkg": "#F8F9FA",
+                                        "edgeLabelBackground": "#FFFFFF"
+                                    },
+                                    "er": { 
+                                        "linkStyle": { "stroke-width": 1 } 
+                                    }
+                                } }%%
                                 erDiagram
                                     DIM_DATE {
                                         date CalendarDay PK
@@ -120,6 +137,7 @@
                                 Detailed transformation pipeline showing data processing stages and dependencies.
                             </div>
                             <div class="mermaid">
+                                %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#E3F2FD', 'primaryTextColor': '#1565C0', 'lineColor': '#1565C0', 'secondaryColor': '#F3E5F5' }}}%%
                                 flowchart TD
                                     linkStyle default stroke-width:1px;
                                     subgraph "Data Integration"
@@ -149,6 +167,22 @@
                                 This diagram highlights the key technical relationships and join strategies in the data model.
                             </div>
                             <div class="mermaid">
+                                %%{ init: { 
+                                    "theme": "base",
+                                    "themeVariables": {
+                                        "primaryColor": "#E3F2FD",
+                                        "primaryTextColor": "#1565C0",
+                                        "primaryBorderColor": "#90CAF9",
+                                        "lineColor": "#1565C0",
+                                        "nodeBorder": "#1565C0",
+                                        "mainBkg": "#FFFFFF",
+                                        "clusterBkg": "#F8F9FA",
+                                        "edgeLabelBackground": "#FFFFFF"
+                                    },
+                                    "er": { 
+                                        "linkStyle": { "stroke-width": 1 } 
+                                    }
+                                } }%%
                                 erDiagram
                                     dim_date ||--o{ transaction_data : "time periods"
                                     dim_business_category ||--o{ finance_data : "business hierarchy"
